@@ -30,8 +30,8 @@ public class ApplicationTest {
 
     @Test
     public void simpleCheck() {
-        int a = 1 + 1;
-        assertEquals(2, a);
+        int a = 1 + 2;
+        assertEquals(3, a);
     }
 
     @Test
