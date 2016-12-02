@@ -1,9 +1,9 @@
 language: scala
 sudo: true
 scala:
-- 2.10.2
+- 2.10.0
 jdk:
 - oraclejdk8
 
-sbt.version=0.13.0
+sbt.version=0.12.5
 script: sbt test
