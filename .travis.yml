@@ -1,4 +1,5 @@
 language: scala
+sudo: true
 scala:
 - 2.11.5
 jdk:
@@ -13,5 +14,3 @@ before_cache:
 
 sbt.version=0.13.13
 script: sbt test
-
-
