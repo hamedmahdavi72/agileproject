@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
  *
  */
 public class ApplicationTest {
-
+    //salam haji
     @Test
     public void simpleCheck() {
         int a = 1 + 2;
