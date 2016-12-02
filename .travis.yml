@@ -3,7 +3,7 @@ sudo: true
 scala:
 - 2.10.0
 env:
-  - PLAY_VERSION=2.4.0
+  - PLAY_VERSION=2.3.5
 jdk:
 - oraclejdk8
 
