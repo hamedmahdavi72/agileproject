@@ -6,4 +6,8 @@ env:
   - PLAY_VERSION=2.4.2
 jdk:
 - oraclejdk8
+
+services:
+  - mongodb
+
 script: sbt test
