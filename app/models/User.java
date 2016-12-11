@@ -29,7 +29,7 @@ public class User {
 
     public User(){
         id = new ObjectId();
-        name = "hamed";
+        name = "Hamed";
     }
     public User insert() {
         users().save(this);
