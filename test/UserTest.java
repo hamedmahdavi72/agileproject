@@ -1,3 +1,8 @@
+/**
+ * Created by HamedMahdavi on 12/11/2016.
+ */
+
+import models.User;
 import org.junit.*;
 
 import play.mvc.*;
@@ -9,18 +14,15 @@ import static org.junit.Assert.*;
 
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 
-public class IntegrationTest {
 
-    /**
-     * add your integration test here
-     * in this example we just check if the welcome page is being shown
-     */
+public class UserTest {
     @Test
-    public void test() {
-        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
-            browser.goTo("http://localhost:3333");
-            assertTrue(browser.pageSource().contains("Your new application is ready."));
-        });
-    }
+    public void testSave(){
 
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
+            User user = new User();
+            user.insert();
+        });
+
+    }
 }
