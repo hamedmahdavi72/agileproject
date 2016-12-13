@@ -21,7 +21,7 @@ public class UserTest {
 
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
             User user = new User();
-            user.insert();
+            user.save();
         });
 
     }
