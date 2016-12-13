@@ -19,7 +19,7 @@ public abstract class JongoModel {
     protected ObjectId id;
 
     public  MongoCollection getCollection() {
-        return jongo.getCollection(this.getClass().getSimpleName());
+        return jongo.getCollection(this.getClass().getName());
     }
 
     public void save() {

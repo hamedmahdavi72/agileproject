@@ -20,7 +20,7 @@ public class User extends JongoModel {
     private String firstName;
     private String lastName;
     private Date registrationDate;
-    private static final String collectionName = User.class.getSimpleName();
+    private static final String collectionName = User.class.getName();
 
     public User(){
 
