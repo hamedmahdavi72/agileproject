@@ -5,6 +5,7 @@ package models;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
 import org.jongo.marshall.jackson.oid.MongoId;
@@ -12,36 +13,26 @@ import org.jongo.marshall.jackson.oid.MongoId;
 import java.util.Date;
 
 
-public class User extends JongoModel {
+public abstract class User extends JongoModel {
 
     @MongoId
     private String username;
     private String password;
+    private String mobileNumber;
+    private String nationalId;
     private String firstName;
     private String lastName;
+    private String email;
     private Date registrationDate;
-    private static final String collectionName = User.class.getName();
+
+
+
 
     public User(){
 
     }
 
 
-
-
-    //queries
-    public  static MongoCursor<User> findByFirstName(String firstName) {
-
-        return jongo.getCollection(collectionName).find("{firstName: #}", firstName).as(User.class);
-    }
-    public  static MongoCursor<User> findByLastName(String lastName) {
-
-        return jongo.getCollection(collectionName).find("{lastName: #}", lastName).as(User.class);
-    }
-    public  static User findByUsername(String username) {
-
-        return jongo.getCollection(collectionName).findOne("{username: #}", username).as(User.class);
-    }
 
 
     //getters and setters
@@ -85,9 +76,27 @@ public class User extends JongoModel {
         this.registrationDate = registrationDate;
     }
 
-    public static String getCollectionName() {
-        return collectionName;
+    public String getEmail() {
+        return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
 }

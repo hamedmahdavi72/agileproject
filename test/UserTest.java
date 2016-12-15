@@ -20,8 +20,7 @@ public class UserTest {
     public void testSave(){
 
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, browser -> {
-            User user = new User();
-            user.save();
+
         });
 
     }
