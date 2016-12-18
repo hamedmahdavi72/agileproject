@@ -1,5 +1,7 @@
-package models;
+package dao;
 
+import models.JongoInstanceProvider;
+import models.JongoModel;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import uk.co.panaxiom.playjongo.PlayJongo;
@@ -30,9 +32,9 @@ public class GenericDAO<T extends JongoModel> {
     }
 
 
-    public   MongoCursor<T> findByFieldName(String fieldName,String firstName) {
+    public   MongoCursor<T> findByFieldName(String fieldName,String fieldValue) {
 
-        return jongo.getCollection(getTypeName()).find("{#: #}", fieldName, firstName).as(type);
+        return jongo.getCollection(getTypeName()).find("{#: #}", fieldName, fieldValue).as(type);
     }
 
     public   T findOneByFieldName(String fieldName, String fieldValue) {

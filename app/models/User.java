@@ -16,14 +16,14 @@ import java.util.Date;
 public abstract class User extends JongoModel {
 
     @MongoId
-    private String username;
-    private String password;
-    private String mobileNumber;
-    private String nationalId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Date registrationDate;
+    protected String username;
+    protected String password;
+    protected String mobileNumber;
+    protected String nationalId;
+    protected String firstName;
+    protected String lastName;
+    protected String email;
+    protected Date registrationDate;
 
 
 

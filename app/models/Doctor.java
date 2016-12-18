@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by HamedMahdavi on 12/13/2016.
  */
-public class Doctor extends JongoModel {
+public class Doctor extends User {
 
     private String clinicAddress;
     private String clinicPhoneNumber;

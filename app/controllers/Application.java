@@ -8,6 +8,7 @@ import play.*;
 import play.libs.Json;
 import play.mvc.*;
 
+import play.twirl.api.Content;
 import views.html.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,8 +19,8 @@ public class Application extends Controller {
 
     public static Result index() {
 
-
-        return ok(Json.toJson("Hello World!"));
+        Content html = views.html.index.render("salam");
+        return ok(html);
     }
 
 }
