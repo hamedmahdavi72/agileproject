@@ -79,4 +79,11 @@ public class UserRequest extends Controller {
         Content html = views.html.user.signup.render();
         return ok(html);
     }
+
+
+    public static Result doctorSignup() {
+        Content html = views.html.user.doctorSignup.render();
+        return ok(html);
+    }
 }
+

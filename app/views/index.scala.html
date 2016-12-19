@@ -1,7 +1,126 @@
-@(message: String)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>بین وقت</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-@main("Welcome to Play") {
+            <!-- Le styles -->
+        <link href="../assets/css/bootstrap.css" rel="stylesheet">
+        <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        </style>
+        <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
-    @play20.welcome(message, style = "Java")
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
 
-}
+            <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    </head>
+
+    <body class="body-prop">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="#">بین وقت</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">صفحه اصلی</a></li>
+                            <li><a href="#about">درباره ما</a></li>
+                            <li><a href="#contact">تماس با ما</a></li>
+                        </ul>
+
+                        <a href="#" class="btn btn-success pull-left">ورود</a>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="container">
+
+                <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="hero-unit">
+                <h1>بین وقت</h1>
+                <p>بین وقت یک سیستم رزرو وقت ملاقات با پزشک آنلاین است. با استفاده از این سامانه به راحتی از پزشک مورد نظر خود وقت بگیرید</p>
+                <p><a href= "#" class="btn btn-success btn-large">اطلاعات بیشتر &raquo;</a></p>
+            </div>
+
+                <!-- Example row of columns -->
+            <div class="row">
+                <div class="span4 sticky">
+                    <h2>جست و جوی پزشک</h2>
+                    <p> با استفاده از این سامانه می‌توانید به راحتی پزشکان مورد نظر خود را جست و جو کنید. به طور مثال می‌توانید بر اساس تخصص، نزدیکی به محل مشخص، بیماری، وقت‌های خالی، پزشکان مورد نظر خود را بیابید.</p>
+
+
+                </div>
+                <div class="span4 sticky">
+                    <h2>رزرو اتوماتیک</h2>
+                    <p>با استفاده از این سیستم می‌توانید با وارد کردن وقت های خالی خود در طول یک بازه‌ی مشخص، از پزشک مورد نظر خود وقت بگیرید. کافی است وقت های مورد نظر خود را در یک تقویم مشخص کنید. </p>
+
+                </div>
+                <div class="span4 sticky">
+                    <h2>ثبت نام پزشک</h2>
+                    <p>پزشکان علاقمند به همکاری می‌توانند با فرم درخواست همکاری با سامانه را کامل کنند و به سامانه بفرستند. پس از تایید درخواست آنها در سامانه توسط مدیر، بیماران می‌توانند از پزشک جدید وقت بگیرند.</p>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <footer>
+                <div class="row">
+                    <div class="span4 text-center footer-title"><h4 class="">آیا می‌خواهید به عنوان یک پزشک به ما بپیوندید ؟</h4>
+                        <a class = "footer-link" href="@routes.UserRequest.doctorSignup()"> به عنوان یک پزشک ثبت نام کنید.</a>
+
+                    </div>
+                    <div class="span4"><h3></h3></div>
+
+                    <div class="span4"><h3></h3></div>
+
+
+                </div>
+            </footer>
+
+        </div> <!-- /container -->
+
+        <!-- Le javascript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="../assets/js/jquery.js"></script>
+        <script src="../assets/js/bootstrap-transition.js"></script>
+        <script src="../assets/js/bootstrap-alert.js"></script>
+        <script src="../assets/js/bootstrap-modal.js"></script>
+        <script src="../assets/js/bootstrap-dropdown.js"></script>
+        <script src="../assets/js/bootstrap-scrollspy.js"></script>
+        <script src="../assets/js/bootstrap-tab.js"></script>
+        <script src="../assets/js/bootstrap-tooltip.js"></script>
+        <script src="../assets/js/bootstrap-popover.js"></script>
+        <script src="../assets/js/bootstrap-button.js"></script>
+        <script src="../assets/js/bootstrap-collapse.js"></script>
+        <script src="../assets/js/bootstrap-carousel.js"></script>
+        <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+    </body>
+</html>

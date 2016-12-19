@@ -19,7 +19,7 @@ public class Application extends Controller {
 
     public static Result index() {
 
-        Content html = views.html.index.render("salam");
+        Content html = views.html.index.render();
         return ok(html);
     }
 
