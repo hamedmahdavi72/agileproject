@@ -18,11 +18,16 @@
                             <input type="text" class="form-control" placeholder="Username" required autofocus ng-model="username">
                             <p ng-model="usernameError" ng-Hide="hideError" style="color: red">{{Errorvalue}}</p>
                             <input type="password" class="form-control" placeholder="Password" required ng-model="pass">
+                            <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
                             <input type="text" class="form-control" placeholder="Mobile Number" required ng-model="mobileNumber">
                             <input type="text" class="form-control" placeholder="National ID" required ng-model="nationalId">
+                            <p ng-model="nationaldError" ng-Hide="hideErrorNationalId" style="color: red">{{ErrorvalueNationalId}}</p>
                             <input type="text" class="form-control" placeholder="First Name" required ng-model="firstName">
+                            <p ng-model="firstNameError" ng-Hide="hideErrorFirstName" style="color: red">{{ErrorvalueFirstName}}</p>
                             <input type="text" class="form-control" placeholder="Last Name" required ng-model="lastName">
+                            <p ng-model="lastNameError" ng-Hide="hideErrorLastName" style="color: red">{{ErrorvalueLastName}}</p>
                             <input type="text" class="form-control" placeholder="E-Mail" required ng-model="email">
+                            <p ng-model="emailError" ng-Hide="hideErrorEmail" style="color: red">{{ErrorvalueEmail}}</p>
                             <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="send()">
                     Sign Up</button>
                         </form>
@@ -37,6 +42,12 @@
         var app = angular.module('signup', []);
         app.controller('signupapp', function($scope, $http) {
             $scope.hideError = true;
+            $scope.hideErrorPassword = true;
+            $scope.hideErrorNationalId = true;
+            $scope.hideErrorFirstName = true;
+            $scope.hideErrorLastName = true;
+            $scope.hideErrorEmail = true;
+
             $scope.send = function () {
 
                 $scope.user = new Object();
@@ -50,6 +61,14 @@
 
                 //console.log($scope.user);
 
+
+                $scope.hideError = true;
+                $scope.hideErrorPassword = true;
+                $scope.hideErrorNationalId = true;
+                $scope.hideErrorFirstName = true;
+                $scope.hideErrorLastName = true;
+                $scope.hideErrorEmail = true;
+
                 $http({
                     url: '/signup/',
                     method: "POST",
@@ -57,6 +76,39 @@
                 })
                         .then(function(response) {
                                     //console.log(response.data);
+                                    if(response.data != null){
+                                            //console.log(response.data);
+
+                                            if(response.data.username != null){
+                                                $scope.hideError = false;
+                                                $scope.Errorvalue = response.data.username[0];
+                                            }
+
+                                        if(response.data.password != null){
+                                            $scope.hideErrorPassword = false;
+                                            $scope.ErrorvaluePassword = response.data.password[0];
+                                        }
+
+                                        if(response.data.nationalId != null){
+                                            $scope.hideErrorNationalId = false;
+                                            $scope.ErrorvalueNationalId = response.data.nationalId[0];
+                                        }
+
+                                        if(response.data.firstName != null){
+                                            $scope.hideErrorFirstName = false;
+                                            $scope.ErrorvalueFirstName = response.data.firstName[0];
+                                        }
+
+                                        if(response.data.lastName != null){
+                                            $scope.hideErrorLastName = false;
+                                            $scope.ErrorvalueLastName = response.data.lastName[0];
+                                        }
+
+                                        if(response.data.email != null){
+                                            $scope.hideErrorEmail = false;
+                                            $scope.ErrorvalueEmail = response.data.email[0];
+                                        }
+                                    }
                                 },
                                 function(response) { // optional
                                     // failed

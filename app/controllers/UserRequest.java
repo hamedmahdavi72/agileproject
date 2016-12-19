@@ -1,24 +1,19 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import config.MessageConstants;
+import config.Messages;
 import dao.CustomerDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.UserForm;
 import forms.UserSignUpForm;
 import models.Customer;
 import models.User;
-import org.h2.engine.Session;
-import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.twirl.api.Content;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ARYA on 12/17/2016.
@@ -43,16 +38,14 @@ public class UserRequest extends Controller {
                 if(user != null){
                     session().clear();
                     session("username",userForm.getUsername());
-                    Map<String , String > msg = new HashMap<>();
-                    msg.put("loginmsg", "redirect");
-                    return ok(Json.toJson(msg));
+                    Messages msg = new Messages(MessageConstants.getInstance().getRedirectLoginPageField());
+                    msg.addMessagesToFieldName(MessageConstants.getInstance().getRedirectLoginPageField(), MessageConstants.getInstance().getRedirectMessage());
+                    return ok(msg.toJsonResponse());
                 }
                 else {
-                    Map<String, List<String>> errorMap = new HashMap<>();
-                    List<String> messages = new ArrayList<>();
-                    messages.add("Username Invalid");
-                    errorMap.put("username", messages);
-                    return ok(Json.toJson(errorMap));
+                    Messages msg = new Messages(MessageConstants.getInstance().getUsernameField());
+                    msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(), MessageConstants.getInstance().getInvalidUsernameMessage());
+                    return ok(Json.toJson(msg.toJsonResponse()));
                 }
 
             }
@@ -73,11 +66,9 @@ public class UserRequest extends Controller {
                 UserSignUpForm userSignUpForm = signUpForm.get();
                 Customer customer = new Customer(userSignUpForm);
                 if(CustomerDAOWrapper.getInstance().findByUsername(userSignUpForm.getUsername()) != null){
-                    Map<String, List<String>> errorMap = new HashMap<>();
-                    List<String> messages = new ArrayList<>();
-                    messages.add("Username Already Taken!");
-                    errorMap.put("username", messages);
-                    return ok(Json.toJson(errorMap));
+                   Messages msg = new Messages(MessageConstants.getInstance().getUsernameField());
+                   msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(), MessageConstants.getInstance().getUsernameAlreadyTakenMessage());
+                    return ok(msg.toJsonResponse());
                 }
                 CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
             }
