@@ -9,12 +9,12 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
 
-GET     /login/                     controllers.UserRequest.login()
+GET     /login                     controllers.UserRequest.loginController()
 
-POST    /login/                     controllers.UserRequest.login()
+POST    /login                     controllers.UserRequest.loginController()
 
-POST    /signup/                    controllers.UserRequest.signUp()
+POST    /signup                    controllers.UserRequest.signUpController()
 
-GET    /signup/                     controllers.UserRequest.signUp()
+GET    /signup                     controllers.UserRequest.signUpController()
 
-GET     /doctorSignup               controllers.UserRequest.doctorSignup()
+GET     /doctorSignup               controllers.UserRequest.doctorSignupController()
