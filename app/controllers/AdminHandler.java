@@ -21,12 +21,13 @@ import java.util.Map;
 public class AdminHandler extends Controller {
 
     static UserRequest userRequest = new UserRequest();
+    static Admin admin;
     public static Result adminLoginController(){
         if(request().method().equalsIgnoreCase("post")){
             Form<UserForm> form = Form.form(UserForm.class).bindFromRequest();
             try{
                 UserForm userForm = form.get();
-                Admin admin = AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername());
+                admin = AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername());
                 return ok(userRequest.loginUserToSystem(admin, userForm).toJsonResponse());
 
             }catch (IllegalStateException e){
@@ -35,7 +36,9 @@ public class AdminHandler extends Controller {
         }
         if(SessionIdPool.getUsername(session().get("sessionId")) != null
                 &&
-           SessionIdPool.getUsername(session().get("sessionId")).equals("sysadmin"))
+                admin != null
+                &&
+           SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername()))
 
             return redirect(routes.AdminHandler.adminPanelController());
         Content html = views.html.admin.adminLogin.render();
@@ -45,7 +48,8 @@ public class AdminHandler extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result adminPanelController(){
-        if(SessionIdPool.getUsername(session().get("sessionId")).equals("sysadmin")){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())){
 
             Content html = views.html.admin.admin.render();
             return ok(html);
