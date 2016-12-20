@@ -9,6 +9,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.data.Form;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.twirl.api.Content;
 
 import java.util.HashMap;
@@ -32,16 +33,27 @@ public class AdminHandler extends Controller {
                 return ok(form.errorsAsJson());
             }
         }
+        if(SessionIdPool.getUsername(session().get("sessionId")) != null
+                &&
+           SessionIdPool.getUsername(session().get("sessionId")).equals("sysadmin"))
+
+            return redirect(routes.AdminHandler.adminPanelController());
         Content html = views.html.admin.adminLogin.render();
         return ok(html);
 
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result adminPanelController(){
-        Content html = views.html.admin.admin.render();
-        return ok(html);
+        if(SessionIdPool.getUsername(session().get("sessionId")).equals("sysadmin")){
+
+            Content html = views.html.admin.admin.render();
+            return ok(html);
+        }
+        else return redirect(routes.UserRequest.loginController());
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result loadAdmin(){
         Map<String, Iterable<Doctor>> obj = new HashMap<>();
         obj.put("accepted", DoctorDAOWrapper.getInstance().findByAccepted(true));
