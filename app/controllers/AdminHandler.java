@@ -1,12 +1,20 @@
 package controllers;
 
 import dao.AdminDAOWrapper;
+import dao.DoctorDAOWrapper;
 import forms.UserForm;
+import models.Doctor;
+import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.data.Form;
 import play.mvc.Result;
 import play.twirl.api.Content;
 import config.Messages;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by hamed on 12/20/16 AD.
  */
@@ -35,7 +43,12 @@ public class AdminHandler extends Controller {
         return ok(html);
     }
 
-
+    public static Result loadAdmin(){
+        Map<String, Iterable<Doctor>> obj = new HashMap<>();
+        obj.put("accepted", DoctorDAOWrapper.getInstance().findByAccepted(true));
+        obj.put("pending", DoctorDAOWrapper.getInstance().findByAccepted(false));
+        return ok(Json.toJson(obj));
+    }
 
 
 }
