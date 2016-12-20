@@ -17,9 +17,9 @@ public class AdminHandler extends Controller {
             Form<UserForm> form = Form.form(UserForm.class).bindFromRequest();
             try{
                 UserForm userForm = form.get();
-                if(AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername())!= null){
+                //if(AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername())!= null){
                     return ok(Messages.generateSuccessfulAdminLoginMessage().toJsonResponse());
-                }
+                //}
 
             }catch (IllegalStateException e){
                 return ok(form.errorsAsJson());
