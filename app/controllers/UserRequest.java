@@ -87,6 +87,7 @@ public class UserRequest extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result logout() {
         session().clear();
+        SessionIdPool.removeUser(session().get("sessionId"));
         return redirect(routes.Application.index());
     }
 }

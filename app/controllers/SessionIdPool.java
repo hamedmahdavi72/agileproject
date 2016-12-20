@@ -47,5 +47,11 @@ public class SessionIdPool {
         }
     }
 
+    public static void removeUser(String sessionId){
+        String username = getUsername(sessionId);
+        sessionIdMap.remove(sessionId);
+        usernameMap.remove(username);
+    }
+
 
 }
