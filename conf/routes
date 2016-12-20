@@ -18,3 +18,5 @@ POST    /signup                    controllers.UserRequest.signUpController()
 GET    /signup                     controllers.UserRequest.signUpController()
 
 GET     /doctorSignup               controllers.UserRequest.doctorSignupController()
+
+GET     /logout                     controllers.UserRequest.logout()

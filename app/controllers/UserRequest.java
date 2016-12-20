@@ -1,10 +1,8 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import config.MessageConstants;
 import config.Messages;
 import dao.CustomerDAOWrapper;
-import dao.DoctorDAOWrapper;
 import forms.UserForm;
 import forms.UserSignUpForm;
 import models.Customer;
@@ -12,6 +10,7 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.twirl.api.Content;
 
 /**
@@ -19,67 +18,35 @@ import play.twirl.api.Content;
  */
 public class UserRequest extends Controller {
 
-    public static Messages loginUserToSystem(User user,UserForm userForm){
+    public static Messages loginUserToSystem(User user, UserForm userForm) {
 
-        if(user != null && user.getPassword() == userForm.getPassword()){
+        if (user != null && user.getPassword().equals(userForm.getPassword())) {
+
             session().clear();
-            session("username",user.getUsername());
-             return generateSuccessfulLoginMessages();
+            session("sessionId", SessionIdPool.addUser(user.getUsername()));
+            return Messages.generateSuccessfulLoginMessages();
+
+        } else if (user != null && !user.getPassword().equals(userForm.getPassword())) {
+
+            return Messages.generateWrongPasswordMessages();
+        } else {
+
+            return Messages.generateInvalidUsernameMessages();
         }
-        else if(user != null && user.getPassword() != userForm.getPassword()){
-            return generateWrongPasswordMessages();
-        }
-        else {
-            return generateInvalidUsernameMessages();
-        }
 
-    }
-
-    private static Messages generateInvalidUsernameMessages() {
-        Messages msg;
-        msg = new Messages(MessageConstants.getInstance().getUsernameField());
-        msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(),
-                MessageConstants.getInstance().getInvalidUsernameMessage());
-        return msg;
-    }
-
-    private static Messages generateWrongPasswordMessages(){
-        Messages msg;
-        msg = new Messages(MessageConstants.getInstance().getPasswordField());
-        msg.addMessagesToFieldName(MessageConstants.getInstance().getPasswordField(),
-                MessageConstants.getInstance().getWrongPasswordMessage());
-        return msg;
-    }
-
-    private static Messages generateSuccessfulLoginMessages() {
-        Messages msg;
-        msg = new Messages(MessageConstants.getInstance().getRedirectLoginPageField());
-        msg.addMessagesToFieldName(MessageConstants.getInstance().getRedirectLoginPageField(),
-                MessageConstants.getInstance().getRedirectMessage());
-        return msg;
     }
 
 
     public static Result loginController() {
 
         JsonNode info;
-        if(request().method().equalsIgnoreCase("post")){
+        if (request().method().equalsIgnoreCase("post")) {
             Form<UserForm> loginForm = Form.form(UserForm.class).bindFromRequest();
-            User user = null;
             try {
                 UserForm userForm = loginForm.get();
-                if(isCustomer(userForm)){
-                    user = CustomerDAOWrapper.getInstance().findByUsername(userForm.getUsername());
-                }
-                else if(isDoctor(userForm)){
-                        user = DoctorDAOWrapper.getInstance().findByUsername(userForm.getUsername());
-                    }
+                return ok(loginUserToSystem(User.getUser(userForm), userForm).toJsonResponse());
 
-
-                return ok(loginUserToSystem(user,userForm).toJsonResponse());
-
-            }
-            catch (IllegalStateException e){
+            } catch (IllegalStateException e) {
                 System.out.println(loginForm.errorsAsJson());
                 return ok(loginForm.errorsAsJson());
             }
@@ -88,52 +55,39 @@ public class UserRequest extends Controller {
         return ok(html);
     }
 
-    private static boolean isDoctor(UserForm userForm) {
-        return DoctorDAOWrapper.getInstance().findByUsername(userForm.getUsername()) != null;
-    }
+    public static Result signUpController() {
 
-    private static boolean isCustomer(UserForm userForm) {
-        return CustomerDAOWrapper.getInstance().findByUsername(userForm.getUsername()) != null;
-    }
-
-    public static Result signUpController(){
-
-        if(request().method().equalsIgnoreCase("post")){
+        if (request().method().equalsIgnoreCase("post")) {
             Form<UserSignUpForm> signUpForm = Form.form(UserSignUpForm.class).bindFromRequest();
-            try{
+            try {
                 UserSignUpForm userSignUpForm = signUpForm.get();
-                if(isUsernameTaken(userSignUpForm)){
-                    Messages msg = generateTakenUsernameMessage();
+                if (User.isUsernameTaken(userSignUpForm)) {
+                    Messages msg = Messages.generateTakenUsernameMessage();
                     return ok(msg.toJsonResponse());
-                }
-                else {
+                } else {
                     Customer customer = new Customer(userSignUpForm);
                     CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
                 }
+            } catch (IllegalStateException e) {
+                return ok(signUpForm.errorsAsJson());
             }
-            catch (IllegalStateException e){
-                    return ok(signUpForm.errorsAsJson());
-            }
+        } else {
+            Content html = views.html.user.signup.render();
+            return ok(html);
         }
-        Content html = views.html.user.signup.render();
-        return ok(html);
-    }
-
-    private static Messages generateTakenUsernameMessage() {
-        Messages msg = new Messages(MessageConstants.getInstance().getUsernameField());
-        msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(),
-                MessageConstants.getInstance().getUsernameAlreadyTakenMessage());
-        return msg;
-    }
-
-    private static boolean isUsernameTaken(UserSignUpForm userSignUpForm) {
-        return isCustomer(userSignUpForm)||isDoctor(userSignUpForm);
+        return null;
     }
 
 
     public static Result doctorSignupController() {
         Content html = views.html.user.doctorSignup.render();
         return ok(html);
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result logout() {
+        session().clear();
+        return redirect(routes.Application.index());
     }
 }
 

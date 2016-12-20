@@ -16,6 +16,8 @@ public class Messages {
     private String message;
     private Map<String, ArrayList<String>> response;
 
+
+
     public ArrayList<String> getMessagesByFieldName(String fieldName){
         if(response.get(fieldName) != null)
             return response.get(fieldName);
@@ -48,6 +50,41 @@ public class Messages {
             response.computeIfAbsent(fieldName, k -> new ArrayList<>());
         }
     }
+
+
+
+    public static Messages generateInvalidUsernameMessages() {
+        Messages msg;
+        msg = new Messages(MessageConstants.getInstance().getUsernameField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(),
+                MessageConstants.getInstance().getInvalidUsernameMessage());
+        return msg;
+    }
+
+    public static Messages generateWrongPasswordMessages(){
+        Messages msg;
+        msg = new Messages(MessageConstants.getInstance().getPasswordField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getPasswordField(),
+                MessageConstants.getInstance().getWrongPasswordMessage());
+        return msg;
+    }
+
+    public static Messages generateSuccessfulLoginMessages() {
+        Messages msg;
+        msg = new Messages(MessageConstants.getInstance().getRedirectLoginPageField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getRedirectLoginPageField(),
+                MessageConstants.getInstance().getRedirectMessage());
+        return msg;
+    }
+
+    public static Messages generateTakenUsernameMessage() {
+        Messages msg = new Messages(MessageConstants.getInstance().getUsernameField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getUsernameField(),
+                MessageConstants.getInstance().getUsernameAlreadyTakenMessage());
+        return msg;
+    }
+
+
 
     public JsonNode toJsonResponse(){
         return Json.toJson(response);
