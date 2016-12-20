@@ -1,5 +1,6 @@
 package models;
 
+import forms.DoctorSignUpForm;
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -17,6 +18,16 @@ public class Doctor extends User {
     public Doctor(){
 
     }
+
+    public Doctor(DoctorSignUpForm doctorSignUpForm){
+        this.password = doctorSignUpForm.getPassword();
+        this.clinicAddress = doctorSignUpForm.getClinicAddress();
+        this.mobileNumber = doctorSignUpForm.getMobileNumber();
+        this.firstName = doctorSignUpForm.getFirstName();
+        this.lastName = doctorSignUpForm.getLastName();
+        this.email = doctorSignUpForm.getEmail();
+    }
+
     public String getClinicAddress() {
         return clinicAddress;
     }

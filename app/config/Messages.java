@@ -84,7 +84,12 @@ public class Messages {
         return msg;
     }
 
-
+    public static Messages generateSuccessfulSignUpMessage(){
+        Messages msg = new Messages(MessageConstants.getInstance().getRedirectDoctorSignUpPageField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getRedirectDoctorSignUpPageField(),
+                MessageConstants.getInstance().getRedirectMessage());
+        return msg;
+    }
 
     public JsonNode toJsonResponse(){
         return Json.toJson(response);

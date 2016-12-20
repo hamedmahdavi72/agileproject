@@ -60,38 +60,42 @@
 
 
 
-<div  class = "row">
+<div  class = "row" ng-app="drSignUp" ng-controller="drSignUpController">
     <div class="span2"></div>
-    <form class="form-area span10">
+    <form class="form-area span10 farsi">
         <div class="form-group">
-            <label ><strong>نام و نام خانوادگی*:</strong></label>
-            <input placeholder="نام و نام خانوادگی کامل خود را وارد کنید." type="text" class="form-control" id="lastName">
+            <label><strong style="color: red"> * </strong> <strong style="font-size: large;">نام و نام خانوادگی</strong></label>
+            <input ng-model="lastName" class="farsi" required placeholder="نام [فاصله] نام خانوادگی." type="text" class="form-control" id="lastName">
         </div>
 
         <div class="form-group">
-            <label for="pwd"><strong>رمز عبور*</strong></label>
-            <input placeholder="رمز عبور با بیش از 6 کاراکتر وارد کنید." type="password" class="form-control" id="pwd">
+            <label for="pwd"><span style="color: red"> * </span><strong style="font-size: large;">رمز عبور</strong></label>
+            <input ng-model="password" class="farsi" required placeholder="رمز عبور با بیش از 6 کاراکتر وارد کنید." type="password" class="form-control" id="pwd">
         </div>
         <div class="form-group">
-            <label ><strong>شماره موبایل*:</strong></label>
-            <input placeholder="09xxxxxxxxx" type="text" class="form-control" id="mobileNumber">
+            <label ><span style="color: red"> * </span><strong style="font-size: large;">شماره موبایل</strong></label>
+            <input ng-model="mobileNumber" class="farsi" required placeholder="09xxxxxxxxx" type="text" class="form-control" id="mobileNumber">
         </div>
         <div class="form-group">
-            <label ><strong>شماره‌ی نظام پزشکی*:</strong></label>
-            <input placeholder="شماره‌ی نظام پزشکی خود را وارد کنید." type="text" class="form-control" id="speciality">
+            <label ><span style="color: red"> * </span><strong style="font-size: large;">پست الکترونیکی</strong></label>
+            <input ng-model="email" class="farsi" required placeholder="example[at]example.com" type="text" class="form-control" id="email">
         </div>
         <div class="form-group">
-            <label ><strong>تخصص*:</strong></label>
-            <input placeholder="تخصص خود را وارد کنید." type="text" class="form-control" id="medicalOrgId">
+            <label ><span style="color: red"> * </span><strong style="font-size: large;">شماره‌ی نظام پزشکی</strong></label>
+            <input ng-model="speciality" class="farsi" required placeholder="شماره‌ی نظام پزشکی خود را وارد کنید." type="text" class="form-control" id="speciality">
+        </div>
+        <div class="form-group">
+            <label ><span style="color: red"> * </span><strong style="font-size: large;">تخصص</strong></label>
+            <input ng-model="medicalOrgId" class="farsi" required placeholder="تخصص خود را وارد کنید." type="text" class="form-control" id="medicalOrgId">
         </div>
 
         <div class="form-group">
-            <label><strong>آدرس مطب*:</strong></label>
-            <input placeholder="آدرس مطب خود را وارد کنید." type="text" class="form-control" id="clinicAddress">
+            <label><span style="color: red"> * </span><strong style="font-size: large;">آدرس مطب</strong></label>
+            <input ng-model="clinicAddress" class="farsi" required placeholder="آدرس مطب خود را وارد کنید." type="text" class="form-control" id="clinicAddress">
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> ارسال</button>
+        <div class="form-group farsi">
+            <button class="btn btn-success" type="submit" ng-click="send()"><i class="fa fa-check"></i> ارسال</button>
         </div>
     </form>
 </div>
@@ -101,7 +105,7 @@
     <hr>
 
     <footer>
-        <div class="row">
+        <div class="row farsi">
             <div class="span4 text-center footer-title"><h4 class="">آیا می‌خواهید به عنوان یک پزشک به ما بپیوندید ؟</h4>
                 <a class = "footer-link" href="@routes.UserRequest.doctorSignupController()"> به عنوان یک پزشک ثبت نام کنید.</a>
 
@@ -119,19 +123,9 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/assets/js/jquery.js"></script>
-<script src="/assets/js/bootstrap-transition.js"></script>
-<script src="/assets/js/bootstrap-alert.js"></script>
-<script src="/assets/js/bootstrap-modal.js"></script>
-<script src="/assets/js/bootstrap-dropdown.js"></script>
-<script src="/assets/js/bootstrap-scrollspy.js"></script>
-<script src="/assets/js/bootstrap-tab.js"></script>
-<script src="/assets/js/bootstrap-tooltip.js"></script>
-<script src="/assets/js/bootstrap-popover.js"></script>
-<script src="/assets/js/bootstrap-button.js"></script>
-<script src="/assets/js/bootstrap-collapse.js"></script>
-<script src="/assets/js/bootstrap-carousel.js"></script>
-<script src="/assets/js/bootstrap-typeahead.js"></script>
+<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script src="@routes.Assets.at("javascripts/angular.min.js")"></script>
+<script src="@routes.Assets.at("js/doctorSignUp.js")"></script>
 
 </body>
 </html>

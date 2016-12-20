@@ -5633,6 +5633,11 @@ a.thumbnail:focus {
   margin-left: 10px;
 }
 
+.farsi{
+    font-family: "IRLotus";
+    font-size: large;
+}
+
 .media-list {
   margin-right: 0;
   list-style: none;

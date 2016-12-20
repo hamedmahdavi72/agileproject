@@ -13,6 +13,7 @@ public class MessageConstants {
 
     //Fields
     private final String RedirectLoginPageField = "loginmsg";
+    private final String RedirectDoctorSignUpPageField = "signupmsg";
     private final String UsernameField = "username";
     private final String PasswordField = "password";
     private final String EmailField = "email";
@@ -71,5 +72,9 @@ public class MessageConstants {
 
     public String getWrongPasswordMessage() {
         return WrongPasswordMessage;
+    }
+
+    public String getRedirectDoctorSignUpPageField() {
+        return RedirectDoctorSignUpPageField;
     }
 }

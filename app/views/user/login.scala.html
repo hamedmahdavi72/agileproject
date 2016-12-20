@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <script src="@routes.Assets.at("javascripts/angular.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/userLogin.js")" type="text/javascript"></script>
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <title>Log In</title>
@@ -35,41 +36,4 @@
         </div>
 
     </body>
-    <script>
-        var app = angular.module('login', []);
-        app.controller('app', function($scope, $http, $location, $window) {
-            $scope.hideError = true;
-            $scope.send = function () {
-                $scope.user = new Object();
-                $scope.user.username = $scope.username;
-                $scope.user.password = $scope.pass;
-                //console.log($scope.user);
-                $http({
-                    url: '/login',
-                    method: "POST",
-                    data: $scope.user
-                })
-                        .then(function(response) {
-                                    if(response.data != null){
-                                        if(response.data.username != null && response.data.username.length > 0){
-                                            $scope.hideError = false;
-                                            //console.log(response.data.username[0])
-                                            $scope.Errorvalue = response.data.username[0];
-                                        }
-                                        if(response.data.loginmsg != null){
-                                            console.log(response.data)
-                                            if(response.data.loginmsg == 'redirect'){
-                                                console.log("redirecting... ")
-                                                $window.location.href = '/';
-                                            }
-                                        }
-                                    }
-                                },
-                                function(response) { // optional
-                                    // failed
-                                });
-            }
-        });
-    </script>
-
 </html>

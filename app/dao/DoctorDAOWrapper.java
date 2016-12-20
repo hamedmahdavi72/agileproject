@@ -26,6 +26,10 @@ public class DoctorDAOWrapper {
         return doctorDAO.findByFieldName("speciality",specialityValue);
     }
 
+    public GenericDAO<Doctor> getDoctorDAO() {
+        return doctorDAO;
+    }
+
     public Doctor findByUsername(String username){
         return doctorDAO.findOneByFieldName("_id", username);
     }

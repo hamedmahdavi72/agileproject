@@ -3,9 +3,12 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import config.Messages;
 import dao.CustomerDAOWrapper;
+import dao.DoctorDAOWrapper;
+import forms.DoctorSignUpForm;
 import forms.UserForm;
 import forms.UserSignUpForm;
 import models.Customer;
+import models.Doctor;
 import models.User;
 import play.data.Form;
 import play.mvc.Controller;
@@ -80,6 +83,19 @@ public class UserRequest extends Controller {
 
 
     public static Result doctorSignupController() {
+        if(request().method().equalsIgnoreCase("post")){
+            Form<DoctorSignUpForm> doctorSignUpFormForm = Form.form(DoctorSignUpForm.class).bindFromRequest();
+            try {
+                DoctorSignUpForm drSignUpForm = doctorSignUpFormForm.get();
+                Doctor doctor = new Doctor(drSignUpForm);
+                DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+                Messages msg = Messages.generateSuccessfulSignUpMessage();
+                return ok(msg.toJsonResponse());
+            }
+            catch (IllegalStateException e){
+                return ok(doctorSignUpFormForm.errorsAsJson());
+            }
+        }
         Content html = views.html.user.doctorSignup.render();
         return ok(html);
     }
