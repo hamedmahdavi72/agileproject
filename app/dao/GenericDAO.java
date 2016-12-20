@@ -42,6 +42,11 @@ public class GenericDAO<T extends JongoModel> {
         return jongo.getCollection(getTypeName()).findOne("{#: #}",fieldName, fieldValue).as(type);
     }
 
+    public   MongoCursor<T> findByFieldName(String fieldName, boolean fieldValue) {
+
+        return jongo.getCollection(getTypeName()).find("{#: #}",fieldName, fieldValue).as(type);
+    }
+
     private String getTypeName() {
         return type.getName();
     }

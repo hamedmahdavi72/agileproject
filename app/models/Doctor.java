@@ -14,6 +14,7 @@ public class Doctor extends User {
     private String clinicPhoneNumber;
     private DegreeInfo degree;
     private List<ObjectId> appointmentsList;
+    private boolean accepted = false;
 
     public Doctor(){
 
@@ -26,6 +27,7 @@ public class Doctor extends User {
         this.firstName = doctorSignUpForm.getFirstName();
         this.lastName = doctorSignUpForm.getLastName();
         this.email = doctorSignUpForm.getEmail();
+        this.accepted = false;
     }
 
     public String getClinicAddress() {
@@ -58,5 +60,13 @@ public class Doctor extends User {
 
     public void setAppointmentsList(List<ObjectId> appointmentsList) {
         this.appointmentsList = appointmentsList;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean getAccepted(){
+        return accepted;
     }
 }

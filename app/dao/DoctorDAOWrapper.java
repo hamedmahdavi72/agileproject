@@ -5,6 +5,8 @@ import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 
 import javax.print.Doc;
+import javax.validation.constraints.AssertFalse;
+import java.util.List;
 
 /**
  * Created by ARYA on 12/18/2016.
@@ -32,5 +34,10 @@ public class DoctorDAOWrapper {
 
     public Doctor findByUsername(String username){
         return doctorDAO.findOneByFieldName("_id", username);
+    }
+
+    public Iterable<Doctor> findByAccepted(boolean value){
+        Iterable<Doctor> doctors = doctorDAO.findByFieldName("accepted", value);
+        return doctors;
     }
 }

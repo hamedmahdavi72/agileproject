@@ -28,3 +28,5 @@ GET     /admin                      controllers.AdminHandler.adminLoginControlle
 POST    /admin/                     controllers.AdminHandler.adminLoginController()
 
 GET     /adminPanel                 controllers.AdminHandler.adminPanelController()
+
+GET     /getDoctors                 controllers.AdminHandler.loadAdmin()
