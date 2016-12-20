@@ -14,6 +14,7 @@ public class MessageConstants {
     //Fields
     private final String RedirectLoginPageField = "loginmsg";
     private final String RedirectDoctorSignUpPageField = "signupmsg";
+    private final String RedirectAdminLoginPageField = "adminmsg";
     private final String UsernameField = "username";
     private final String PasswordField = "password";
     private final String EmailField = "email";
@@ -76,5 +77,9 @@ public class MessageConstants {
 
     public String getRedirectDoctorSignUpPageField() {
         return RedirectDoctorSignUpPageField;
+    }
+
+    public String getRedirectAdminLoginPageField() {
+        return RedirectAdminLoginPageField;
     }
 }

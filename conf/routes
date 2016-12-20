@@ -22,3 +22,9 @@ GET     /doctorSignup              controllers.UserRequest.doctorSignupControlle
 POST     /doctorSignup/            controllers.UserRequest.doctorSignupController()
 
 GET     /logout                    controllers.UserRequest.logout()
+
+GET     /admin                      controllers.AdminHandler.adminLoginController()
+
+POST    /admin/                     controllers.AdminHandler.adminLoginController()
+
+GET     /adminPanel                 controllers.AdminHandler.adminPanelController()

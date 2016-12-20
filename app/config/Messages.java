@@ -91,6 +91,13 @@ public class Messages {
         return msg;
     }
 
+    public static Messages generateSuccessfulAdminLoginMessage(){
+        Messages msg = new Messages(MessageConstants.getInstance().getRedirectAdminLoginPageField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getRedirectAdminLoginPageField(),
+                MessageConstants.getInstance().getRedirectMessage());
+        return msg;
+    }
+
     public JsonNode toJsonResponse(){
         return Json.toJson(response);
     }

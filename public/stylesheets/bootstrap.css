@@ -6755,3 +6755,10 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.centrize {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 150px;
+  margin-right: auto;
+  margin-left: auto;
+}
