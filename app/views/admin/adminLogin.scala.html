@@ -20,6 +20,7 @@
                         <input type="text" class="form-control" placeholder="Username" required autofocus ng-model="username">
                           <p ng-model="usernameError" ng-Hide="hideError" style="color: red">{{Errorvalue}}</p>
                         <input type="password" class="form-control" placeholder="Password" required ng-model="pass">
+                        <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
                         <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="send()">
                             Log in</button>
                         <label class="checkbox pull-left">

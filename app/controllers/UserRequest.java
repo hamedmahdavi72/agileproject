@@ -7,6 +7,7 @@ import dao.DoctorDAOWrapper;
 import forms.DoctorSignUpForm;
 import forms.UserForm;
 import forms.UserSignUpForm;
+import models.Admin;
 import models.Customer;
 import models.Doctor;
 import models.User;
@@ -37,6 +38,20 @@ public class UserRequest extends Controller {
             return Messages.generateInvalidUsernameMessages();
         }
 
+    }
+
+    public static Messages loginUserToSystem(Admin admin, UserForm userForm){
+        if(admin != null && admin.getPassword().equals(userForm.getPassword())){
+            session().clear();
+            session("sessionId", SessionIdPool.addUser(admin.getUsername()));
+            return Messages.generateSuccessfulAdminLoginMessage();
+        } else if (admin != null && !admin.getPassword().equals(userForm.getPassword())){
+
+            return Messages.generateWrongPasswordMessages();
+        } else{
+
+            return Messages.generateInvalidUsernameMessages();
+        }
     }
 
 

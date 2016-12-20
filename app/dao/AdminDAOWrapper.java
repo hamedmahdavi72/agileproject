@@ -10,14 +10,14 @@ public class AdminDAOWrapper {
     private static AdminDAOWrapper instance = new AdminDAOWrapper();
 
     private AdminDAOWrapper(){
-        adminDAO = new GenericDAO<Admin>(Admin.class);
+        adminDAO = new GenericDAO<>(Admin.class);
     }
 
     public static AdminDAOWrapper getInstance(){
         return instance;
     }
 
-    public GenericDAO<Admin> getCustomerDAO() {
+    public GenericDAO<Admin> getAdminDAO() {
         return adminDAO;
     }
 

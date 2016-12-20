@@ -4,13 +4,17 @@
 var app = angular.module('login', []);
 app.controller('app', function($scope, $http, $location, $window) {
     $scope.hideError = true;
+    $scope.hideErrorPassword = true;
     $scope.send = function () {
+
+        $scope.hideError = true;
+        $scope.hideErrorPassword = true;
 
         $scope.user = new Object();
         $scope.user.username = $scope.username;
         $scope.user.password = $scope.pass;
 
-        console.log($scope.user);
+        //console.log($scope.user);
 
         $http({
             url: '/admin/',
@@ -24,8 +28,14 @@ app.controller('app', function($scope, $http, $location, $window) {
                             //console.log(response.data.username[0])
                             $scope.Errorvalue = response.data.username[0];
                         }
+
+                        if(response.data.password != null && response.data.password.length > 0){
+                            $scope.hideErrorPassword = false;
+                            $scope.ErrorvaluePassword = response.data.password[0];
+                        }
+
                         if(response.data.adminmsg != null){
-                            console.log(response.data);
+                            //console.log(response.data);
                             if(response.data.adminmsg == 'redirect'){
                                 console.log("redirecting... ");
                                 $window.location.href = '/adminPanel';

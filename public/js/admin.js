@@ -5,5 +5,6 @@ var app = angular.module('admin',[]);
 app.controller('admin-ctr',function($scope,$http){
    $scope.objects = [];
     $http.get("/getDoctors")
-        .then(function (response) {console.log(response.data);$scope.objects = response.data.pending ;});
+        .then(function (response) {$scope.objects = response.data.pending ;});
+    //console.log(response.data);
 });

@@ -4,7 +4,12 @@
 var app = angular.module('login', []);
 app.controller('app', function($scope, $http, $location, $window) {
     $scope.hideError = true;
+    $scope.hideErrorPassword = true;
     $scope.send = function () {
+
+        $scope.hideError = true;
+        $scope.hideErrorPassword = true;
+
         $scope.user = new Object();
         $scope.user.username = $scope.username;
         $scope.user.password = $scope.pass;
@@ -21,6 +26,12 @@ app.controller('app', function($scope, $http, $location, $window) {
                             //console.log(response.data.username[0])
                             $scope.Errorvalue = response.data.username[0];
                         }
+
+                        if(response.data.password != null && response.data.password.length > 0){
+                            $scope.hideErrorPassword = false;
+                            $scope.ErrorvaluePassword = response.data.password[0];
+                        }
+
                         if(response.data.loginmsg != null){
                             console.log(response.data)
                             if(response.data.loginmsg == 'redirect'){
