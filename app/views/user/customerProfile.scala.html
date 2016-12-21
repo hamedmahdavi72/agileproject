@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>صفحه شخصی</title>
+    <link rel="stylesheet" media="screen" href="/assets/css/bootstrap.css">
+  </head>
+  <body>
+    <div class="container" style="padding-top: 60px;">
+      <h1 class="page-header">ویرایش صفحه شخصی</h1>
+      <div class="row">
+          <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+          <div class="alert alert-info alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-coffee"></i>
+            This is an <strong>.alert</strong>. Use this to show important messages to the user.
+          </div>
+          <h3>مشخصات فردی</h3>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-lg-3 control-label">نام</label>
+              <div class="col-lg-8">
+                <input class="form-control" required value="{{firstNameValue}}" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">نام خانوادگی</label>
+              <div class="col-lg-8">
+                <input class="form-control" required value="Bishop" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">شماره تلفن همراه</label>
+              <div class="col-lg-8">
+                <input class="form-control" required value="" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">کد ملی</label>
+              <div class="col-lg-8">
+                <input class="form-control" required value="" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">گذرواژه</label>
+              <div class="col-md-8">
+                <input class="form-control" required value="11111122333" type="password">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">تکرار گذرواژه</label>
+              <div class="col-md-8">
+                <input class="form-control" required value="11111122333" type="password">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
+              <div class="col-md-8">
+                <input class="btn btn-primary" value="ذخیره تغییرات" type="button">
+                <span></span>
+                <input class="btn btn-default" value="لغو" type="reset">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
