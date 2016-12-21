@@ -2,6 +2,8 @@ package forms;
 
 import play.data.validation.Constraints;
 
+import javax.validation.Constraint;
+
 /**
  * Created by ARYA on 12/20/2016.
  */
@@ -32,6 +34,9 @@ public class DoctorSignUpForm{
 
     @Constraints.Required
     private String clinicAddress;
+
+    @Constraints.Required
+    private String clinicPhoneNumber;
 
 
     public String getFirstName() {
@@ -96,5 +101,13 @@ public class DoctorSignUpForm{
 
     public String getClinicAddress() {
         return clinicAddress;
+    }
+
+    public void setClinicPhoneNumber(String clinicPhoneNumber) {
+        this.clinicPhoneNumber = clinicPhoneNumber;
+    }
+
+    public String getClinicPhoneNumber() {
+        return clinicPhoneNumber;
     }
 }

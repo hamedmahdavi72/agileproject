@@ -14,6 +14,7 @@ app.controller('drSignUpController', function($scope, $http, $window) {
         $scope.doctor.medicalOrgId = $scope.medicalOrgId;
         $scope.doctor.speciality = $scope.speciality;
         $scope.doctor.clinicAddress = $scope.clinicAddress;
+        $scope.doctor.clinicPhoneNumber = $scope.clinicPhoneNumber;
 
 
         console.log($scope.doctor);
@@ -47,6 +48,11 @@ app.controller('drSignUpController', function($scope, $http, $window) {
                         if(response.data.email != null){
                             $scope.hideErrorEmail = false;
                             $scope.ErrorvalueEmail = response.data.email[0];
+                        }
+
+                        if(response.data.clinicPhoneNumber != null){
+                            $scope.hideErrorClinicPhoneNumber = false;
+                            $scope.ErrorvalueClinicPhoneNumber = response.data.clinicPhoneNumber[0];
                         }
 
                         if(response.data.signupmsg !=null){
