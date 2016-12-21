@@ -2,7 +2,7 @@
  * Created by ARYA on 12/20/2016.
  */
 var app = angular.module('signup', []);
-app.controller('signupapp', function($scope, $http) {
+app.controller('signupapp', function($scope, $http, $window) {
     $scope.hideError = true;
     $scope.hideErrorPassword = true;
     $scope.hideErrorNationalId = true;
@@ -69,6 +69,12 @@ app.controller('signupapp', function($scope, $http) {
                         if(response.data.email != null){
                             $scope.hideErrorEmail = false;
                             $scope.ErrorvalueEmail = response.data.email[0];
+                        }
+
+                        if(response.data.signupmsg != null){
+                            if(response.data.signupmsg[0] == "redirect"){
+                                $window.location.href = "/profile";
+                            }
                         }
                     }
                 },

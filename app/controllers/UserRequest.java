@@ -87,6 +87,8 @@ public class UserRequest extends Controller {
                     CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
                     session().clear();
                     session("sessionId", SessionIdPool.addUser(customer.getUsername()));
+                    Messages msg = Messages.generateSuccessfulSignUpMessage();
+                    return ok(msg.toJsonResponse());
                 }
             } catch (IllegalStateException e) {
                 return ok(signUpForm.errorsAsJson());
@@ -95,7 +97,6 @@ public class UserRequest extends Controller {
             Content html = views.html.user.signup.render();
             return ok(html);
         }
-        return null;
     }
 
 
@@ -114,6 +115,11 @@ public class UserRequest extends Controller {
             }
         }
         Content html = views.html.user.doctorSignup.render();
+        return ok(html);
+    }
+
+    public static Result customerEditProfileController(){
+        Content html = views.html.user.customerProfile.render();
         return ok(html);
     }
 
