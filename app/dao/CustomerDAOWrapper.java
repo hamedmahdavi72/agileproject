@@ -22,6 +22,6 @@ public class CustomerDAOWrapper {
     }
 
     public Customer findByUsername(String username){
-        return  customerDAO.findOneByFieldName("_id", username);
+        return  customerDAO.findOneByFieldName("username", username);
     }
 }

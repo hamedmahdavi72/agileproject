@@ -19,7 +19,7 @@ import java.util.Date;
 
 public abstract class User extends JongoModel {
 
-    @MongoId
+
     protected String username;
     protected String password;
     protected String mobileNumber;

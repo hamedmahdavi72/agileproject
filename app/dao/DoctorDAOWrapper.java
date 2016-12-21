@@ -33,7 +33,7 @@ public class DoctorDAOWrapper {
     }
 
     public Doctor findByUsername(String username){
-        return doctorDAO.findOneByFieldName("_id", username);
+        return doctorDAO.findOneByFieldName("username", username);
     }
 
     public Iterable<Doctor> findByAccepted(boolean value){

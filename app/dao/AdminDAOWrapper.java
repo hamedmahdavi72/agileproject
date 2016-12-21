@@ -22,7 +22,7 @@ public class AdminDAOWrapper {
     }
 
     public Admin findByUsername(String username){
-        return  adminDAO.findOneByFieldName("_id", username);
+        return  adminDAO.findOneByFieldName("username", username);
     }
 
 }

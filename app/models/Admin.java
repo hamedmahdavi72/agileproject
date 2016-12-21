@@ -6,7 +6,7 @@ import org.jongo.marshall.jackson.oid.MongoId;
  * Created by Ala on 12/20/16 AD.
  */
 public class Admin extends JongoModel {
-    @MongoId
+
     private String username;
     private String password;
 

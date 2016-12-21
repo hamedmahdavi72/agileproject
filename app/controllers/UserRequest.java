@@ -65,7 +65,6 @@ public class UserRequest extends Controller {
                 return ok(loginUserToSystem(User.getUser(userForm), userForm).toJsonResponse());
 
             } catch (IllegalStateException e) {
-                System.out.println(loginForm.errorsAsJson());
                 return ok(loginForm.errorsAsJson());
             }
         }
@@ -76,6 +75,7 @@ public class UserRequest extends Controller {
     public static Result signUpController() {
 
         if (request().method().equalsIgnoreCase("post")) {
+
             Form<UserSignUpForm> signUpForm = Form.form(UserSignUpForm.class).bindFromRequest();
             try {
                 UserSignUpForm userSignUpForm = signUpForm.get();
@@ -85,6 +85,8 @@ public class UserRequest extends Controller {
                 } else {
                     Customer customer = new Customer(userSignUpForm);
                     CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
+                    session().clear();
+                    session("sessionId", SessionIdPool.addUser(customer.getUsername()));
                 }
             } catch (IllegalStateException e) {
                 return ok(signUpForm.errorsAsJson());
@@ -117,8 +119,8 @@ public class UserRequest extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result logout() {
-        session().clear();
         SessionIdPool.removeUser(session().get("sessionId"));
+        session().clear();
         return redirect(routes.Application.index());
     }
 }
