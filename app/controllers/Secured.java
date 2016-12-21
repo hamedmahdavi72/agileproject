@@ -1,6 +1,8 @@
 package controllers;
 
 
+import play.mvc.Http;
+import play.mvc.Http.Session;
 import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -28,8 +30,8 @@ public class Secured extends Security.Authenticator {
     }
 
 
-    public static boolean isLoggedIn(Context ctx) {
-        String sessionId = ctx.session().get("sessionId");
+    public static boolean isLoggedIn(Session session) {
+        String sessionId = session.get("sessionId");
         return (SessionIdPool.getUsername(sessionId) != null);
     }
 

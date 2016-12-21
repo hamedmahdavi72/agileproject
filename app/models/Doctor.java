@@ -3,6 +3,8 @@ package models;
 import forms.DoctorSignUpForm;
 import org.bson.types.ObjectId;
 
+import java.nio.file.Path;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,9 +14,9 @@ public class Doctor extends User {
 
     private String clinicAddress;
     private String clinicPhoneNumber;
-    private DegreeInfo degree;
     private List<ObjectId> appointmentsList;
     private boolean accepted = false;
+    private String speciality;
 
     public Doctor(){
 
@@ -46,13 +48,7 @@ public class Doctor extends User {
         this.clinicPhoneNumber = clinicPhoneNumber;
     }
 
-    public DegreeInfo getDegree() {
-        return degree;
-    }
 
-    public void setDegree(DegreeInfo degree) {
-        this.degree = degree;
-    }
 
     public List<ObjectId> getAppointmentsList() {
         return appointmentsList;
@@ -68,5 +64,13 @@ public class Doctor extends User {
 
     public boolean getAccepted(){
         return accepted;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 }

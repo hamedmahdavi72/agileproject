@@ -145,7 +145,6 @@ public class UserRequestTest {
 
         RequestBuilder request = fakeRequest(POST,"/signup/").bodyJson(Json.toJson(signUpForm));
         route(request);
-        Thread.sleep(3000);
         Customer customer = CustomerDAOWrapper.getInstance().findByUsername(signUpForm.getUsername());
         assertNotNull(customer);
         CustomerDAOWrapper.getInstance().getCustomerDAO().remove(customer);
