@@ -9,10 +9,6 @@ app.controller('drSignUpController', function($scope, $http, $window) {
     $scope.hideErrorLastName = true;
     $scope.hideErrorEmail = true;
     $scope.hideErrorMedicalOrgId = true;
-    $scope.hideErrorSpeciality = true;
-    $scope.hideErrorClinicAddress = true;
-    $scope.hideErrorClinicPhoneNumber = true;
-
     $scope.send = function () {
 
 
@@ -31,12 +27,11 @@ app.controller('drSignUpController', function($scope, $http, $window) {
             $scope.hideErrorLastName = false;
             $scope.hideErrorFirstName = false;
         }
-        else if($scope.lastName.split(" ").length > 0){
+        else if($scope.lastName.split(" ").length >= 2){
             $scope.doctor.firstName = $scope.lastName.split(" ")[0];
+            $scope.doctor.lastName = $scope.lastName.split(" ")[1];
         }
-        else if($scope.lastName.split(" ").length >= 1){
-            $scope.doctor.lastName = $scope.lastName.split(" ")[1];;
-        }
+
         $scope.doctor.password = $scope.password;
         $scope.doctor.mobileNumber = $scope.mobileNumber;
         $scope.doctor.email = $scope.email;
@@ -58,22 +53,22 @@ app.controller('drSignUpController', function($scope, $http, $window) {
             .then(function(response) {
                     //console.log(response.data);
                     if(response.data != null){
-                       // console.log(response.data);
+                        // console.log(response.data);
                         if(response.data.password != null){
                             $scope.hideErrorPassword = false;
                             $scope.ErrorvaluePassword = response.data.password[0];
                         }
-                    //
+                        //
                         if(response.data.firstName != null){
                             $scope.hideErrorFirstName = false;
                             $scope.ErrorvalueFirstName = response.data.firstName[0];
                         }
-                    //
+                        //
                         if(response.data.lastName != null){
                             $scope.hideErrorLastName = false;
                             $scope.ErrorvalueLastName = response.data.lastName[0];
                         }
-                    //
+                        //
                         if(response.data.email != null){
                             $scope.hideErrorEmail = false;
                             $scope.ErrorvalueEmail = response.data.email[0];
@@ -112,5 +107,9 @@ app.controller('drSignUpController', function($scope, $http, $window) {
 
 
     }
+    $scope.hideErrorSpeciality = true;
+    $scope.hideErrorClinicAddress = true;
+
+    $scope.hideErrorClinicPhoneNumber = true;
 
 });
