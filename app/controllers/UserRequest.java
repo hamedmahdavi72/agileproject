@@ -120,11 +120,13 @@ public class UserRequest extends Controller {
         return ok(html);
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result customerEditProfileController(){
         Content html = views.html.user.customerProfile.render();
         return ok(html);
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result getCustomer(){
         String username = SessionIdPool.getUsername(session().get("sessionId"));
         Customer customer = CustomerDAOWrapper.getInstance().findByUsername(username);
@@ -139,6 +141,7 @@ public class UserRequest extends Controller {
         else return ok(Json.toJson("object is null"));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result editCustomer(){
         Form<CustomerProfileForm> form = Form.form(CustomerProfileForm.class).bindFromRequest();
         String username = SessionIdPool.getUsername(session().get("sessionId"));
