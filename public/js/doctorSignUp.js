@@ -4,10 +4,39 @@
 var app = angular.module('drSignUp', []);
 app.controller('drSignUpController', function($scope, $http, $window) {
 
+    $scope.hideErrorPassword = true;
+    $scope.hideErrorFirstName = true;
+    $scope.hideErrorLastName = true;
+    $scope.hideErrorEmail = true;
+    $scope.hideErrorMedicalOrgId = true;
+    $scope.hideErrorSpeciality = true;
+    $scope.hideErrorClinicAddress = true;
+    $scope.hideErrorClinicPhoneNumber = true;
+
     $scope.send = function () {
+
+
+        $scope.hideErrorPassword = true;
+        $scope.hideErrorFirstName = true;
+        $scope.hideErrorLastName = true;
+        $scope.hideErrorEmail = true;
+        $scope.hideErrorMedicalOrgId = true;
+        $scope.hideErrorSpeciality = true;
+        $scope.hideErrorClinicAddress = true;
+        $scope.hideErrorClinicPhoneNumber = true;
+
         $scope.doctor = new Object();
-        $scope.doctor.firstName = $scope.lastName.split(" ")[0];
-        $scope.doctor.lastName = $scope.lastName.split(" ")[1];;
+        if($scope.lastName == null){
+
+            $scope.hideErrorLastName = false;
+            $scope.hideErrorFirstName = false;
+        }
+        else if($scope.lastName.split(" ").length > 0){
+            $scope.doctor.firstName = $scope.lastName.split(" ")[0];
+        }
+        else if($scope.lastName.split(" ").length >= 1){
+            $scope.doctor.lastName = $scope.lastName.split(" ")[1];;
+        }
         $scope.doctor.password = $scope.password;
         $scope.doctor.mobileNumber = $scope.mobileNumber;
         $scope.doctor.email = $scope.email;
@@ -17,7 +46,7 @@ app.controller('drSignUpController', function($scope, $http, $window) {
         $scope.doctor.clinicPhoneNumber = $scope.clinicPhoneNumber;
 
 
-        console.log($scope.doctor);
+        //console.log($scope.doctor);
 
 
 
@@ -29,7 +58,7 @@ app.controller('drSignUpController', function($scope, $http, $window) {
             .then(function(response) {
                     //console.log(response.data);
                     if(response.data != null){
-                        console.log(response.data);
+                       // console.log(response.data);
                         if(response.data.password != null){
                             $scope.hideErrorPassword = false;
                             $scope.ErrorvaluePassword = response.data.password[0];
@@ -53,6 +82,21 @@ app.controller('drSignUpController', function($scope, $http, $window) {
                         if(response.data.clinicPhoneNumber != null){
                             $scope.hideErrorClinicPhoneNumber = false;
                             $scope.ErrorvalueClinicPhoneNumber = response.data.clinicPhoneNumber[0];
+                        }
+
+                        if(response.data.clinicAddress != null){
+                            $scope.hideErrorClinicAddress = false;
+                            $scope.ErrorvalueClinicAddress = response.data.clinicAddress[0];
+                        }
+
+                        if(response.data.speciality != null){
+                            $scope.hideErrorSpeciality = false;
+                            $scope.ErrorvalueSpeciality = response.data.speciality[0];
+                        }
+
+                        if(response.data.medicalOrgId != null){
+                            $scope.hideErrorMedicalOrgId = false;
+                            $scope.ErrorvalueMedicalOrgId = response.data.medicalOrgId[0];
                         }
 
                         if(response.data.signupmsg !=null){
