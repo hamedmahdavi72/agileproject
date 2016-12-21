@@ -10,11 +10,13 @@ public class MessageConstants {
     private final String UsernameAlreadyTakenMessage = "Username is Already Taken!";
     private final String WrongPasswordMessage = "Wrong Password!";
     private final String RedirectMessage = "redirect";
+    private final String SuccessfulEdit = "Edits Successfully Applied!";
 
     //Fields
     private final String RedirectLoginPageField = "loginmsg";
     private final String RedirectDoctorSignUpPageField = "signupmsg";
     private final String RedirectAdminLoginPageField = "adminmsg";
+    private final String CustomerEditProfileField = "cusedit";
     private final String UsernameField = "username";
     private final String PasswordField = "password";
     private final String EmailField = "email";
@@ -77,6 +79,14 @@ public class MessageConstants {
 
     public String getRedirectDoctorSignUpPageField() {
         return RedirectDoctorSignUpPageField;
+    }
+
+    public String getSuccessfulEdit() {
+        return SuccessfulEdit;
+    }
+
+    public String getCustomerEditProfileField() {
+        return CustomerEditProfileField;
     }
 
     public String getRedirectAdminLoginPageField() {

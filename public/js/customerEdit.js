@@ -5,12 +5,22 @@
  * Created by ARYA on 12/20/2016.
  */
 var app = angular.module('edit', []);
-app.controller('editapp', function($scope, $http) {
+app.controller('editapp', function($scope, $http, $window) {
 
     $scope.hideErrorPassword = true;
     $scope.hideErrorNationalId = true;
     $scope.hideErrorFirstName = true;
     $scope.hideErrorLastName = true;
+
+    $scope.slist =[];
+    $http.get("/getCustomer")
+        .then(function (response) {$scope.slist = response.data;
+            $scope.firstNameValue = $scope.slist.firstName;
+            $scope.lastNameValue = $scope.slist.lastName;
+            $scope.mobileNumberValue = $scope.slist.mobileNumber;
+            $scope.nationalIdValue = $scope.slist.nationalId;
+            }
+        );
 
     $scope.canSend = false;
 
@@ -38,7 +48,21 @@ app.controller('editapp', function($scope, $http) {
         }
         else $scope.canSend = true;
 
-        if (canSend) {
+        if($scope.confirmPassword == null && $scope.password != null)
+            alert("Please Confirm your Password!");
+
+        if($scope.confirmPassword != null && $scope.password == null)
+            alert("Please Enter your Current Password!");
+
+        if($scope.confirmPassword == null && $scope.password == null)
+            $scope.canSend = true;
+
+        if($scope.confirmPassword != null && $scope.password != null){
+            if( $scope.confirmPassword == $scope.password)
+                $scope.canSend = true;
+        }
+
+        if ($scope.canSend) {
             $http({
                 url: '/edit/',
                 method: "POST",
@@ -67,6 +91,14 @@ app.controller('editapp', function($scope, $http) {
                             if (response.data.lastName != null) {
                                 $scope.hideErrorLastName = false;
                                 $scope.ErrorvalueLastName = response.data.lastName[0];
+                            }
+
+                            if(response.data.cusedit != null){
+                                var x = response.data.cusedit;
+                                //console.log(x[0]);
+                                if(x[0] == "Edits Successfully Applied!"){
+                                    $window.location.href = "/profile";
+                                }
                             }
                         }
                     },

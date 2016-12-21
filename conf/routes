@@ -34,3 +34,7 @@ GET     /getDoctors                 controllers.AdminHandler.loadAdmin()
 GET     /profile                    controllers.UserRequest.customerEditProfileController()
 
 POST    /profile/                   controllers.UserRequest.customerEditProfileController()
+
+GET     /getCustomer                controllers.UserRequest.getCustomer()
+
+POST    /edit/                      controllers.UserRequest.editCustomer()

@@ -98,6 +98,13 @@ public class Messages {
         return msg;
     }
 
+    public static Messages generateSuccessfulCustomerEditMessage(){
+        Messages msg = new Messages(MessageConstants.getInstance().getCustomerEditProfileField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getCustomerEditProfileField(),
+                MessageConstants.getInstance().getSuccessfulEdit());
+        return msg;
+    }
+
     public JsonNode toJsonResponse(){
         return Json.toJson(response);
     }
