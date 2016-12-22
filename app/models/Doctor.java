@@ -3,8 +3,7 @@ package models;
 import forms.DoctorSignUpForm;
 import org.bson.types.ObjectId;
 
-import java.nio.file.Path;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,19 +16,26 @@ public class Doctor extends User {
     private List<ObjectId> appointmentsList;
     private boolean accepted = false;
     private String speciality;
+    private ArrayList<String> supportedInsuranceCompanies;
+    private MongoLocation geoLocation;
+    private String medicalOrgId;
 
     public Doctor(){
 
     }
 
     public Doctor(DoctorSignUpForm doctorSignUpForm){
+        supportedInsuranceCompanies = new ArrayList<>();
         this.password = doctorSignUpForm.getPassword();
         this.clinicAddress = doctorSignUpForm.getClinicAddress();
         this.mobileNumber = doctorSignUpForm.getMobileNumber();
         this.firstName = doctorSignUpForm.getFirstName();
         this.lastName = doctorSignUpForm.getLastName();
+        this.speciality = doctorSignUpForm.getSpeciality();
+        this.medicalOrgId = doctorSignUpForm.getMedicalOrgId();
         this.email = doctorSignUpForm.getEmail();
         this.accepted = false;
+        geoLocation = new MongoLocation();
     }
 
     public String getClinicAddress() {
@@ -72,5 +78,30 @@ public class Doctor extends User {
 
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
+    }
+
+    public ArrayList<String> getSupportedInsuranceCompanies() {
+        return supportedInsuranceCompanies;
+    }
+
+    public void setSupportedInsuranceCompanies(ArrayList<String> supportedInsuranceCompanies) {
+        this.supportedInsuranceCompanies = supportedInsuranceCompanies;
+    }
+
+    public void setGeoLocation(MongoLocation geoLocation) {
+        this.geoLocation = geoLocation;
+    }
+
+    public MongoLocation getGeoLocation() {
+        return geoLocation;
+    }
+
+
+    public void setMedicalOrgId(String medicalOrgId) {
+        this.medicalOrgId = medicalOrgId;
+    }
+
+    public String getMedicalOrgId() {
+        return medicalOrgId;
     }
 }
