@@ -104,7 +104,6 @@ public class UserRequestTest {
         assertEquals(false, SessionIdPool.isLoggedIn(userForm.getUsername()));
 
 
-
     }
 
     @Test
