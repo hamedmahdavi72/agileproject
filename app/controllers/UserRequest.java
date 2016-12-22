@@ -187,6 +187,11 @@ public class UserRequest extends Controller {
         }
     }
 
+    public static Result doctorProfile(){
+        Content html = views.html.user.doctorPage.render();
+        return ok(html);
+    }
+
     @Security.Authenticated(Secured.class)
     public static Result logout() {
         SessionIdPool.removeUser(session().get("sessionId"));
