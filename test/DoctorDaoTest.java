@@ -38,10 +38,7 @@ public class DoctorDaoTest {
 
     }
 
-    @Before
-    public void buildIndex(){
-        DoctorDAOWrapper.getInstance().getDoctorDAO().getCollection().ensureIndex("{geoLocation : \"2dsphere\"}");
-    }
+
 
     @AfterClass
     public static void cleanDatabase(){
