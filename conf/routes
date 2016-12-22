@@ -40,3 +40,7 @@ GET     /getCustomer                controllers.UserRequest.getCustomer()
 POST    /edit/                      controllers.UserRequest.editCustomer()
 
 GET     /doctor                     controllers.UserRequest.doctorProfile()
+
+GET     /search                     controllers.Search.search()
+
+POST    /search/                     controllers.Search.search()
