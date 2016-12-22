@@ -35,8 +35,8 @@ app.controller('app', function($scope, $http, $location, $window) {
                         if(response.data.loginmsg != null){
                             console.log(response.data)
                             if(response.data.loginmsg == 'redirect'){
-                                console.log("redirecting... ")
-                                $window.location.href = '/';
+                                //console.log("redirecting... ")
+                                $window.location.href = '/profile';
                             }
                         }
                     }

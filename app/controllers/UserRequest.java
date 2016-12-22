@@ -169,7 +169,13 @@ public class UserRequest extends Controller {
                     customerProfileForm.getConfirmPassword() != null &&
                     customerProfileForm.getPassword().equals(customerProfileForm.getPassword()) &&
                     !customerProfileForm.getPassword().equals(customer.getPassword())){
-                customer.setPassword(customerProfileForm.getPassword());
+                if(customerProfileForm.getPassword().length() >= 6){
+                    customer.setPassword(customerProfileForm.getPassword());
+                }
+                else {
+                    Messages msg = Messages.generateWrongPasswordMessages();
+                    return ok(msg.toJsonResponse());
+                }
             }
             CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
 
@@ -177,7 +183,6 @@ public class UserRequest extends Controller {
             return ok(Json.toJson(msg.toJsonResponse()));
 
         } catch (IllegalStateException e){
-            System.out.println("exception");
             return ok(form.errorsAsJson());
         }
     }

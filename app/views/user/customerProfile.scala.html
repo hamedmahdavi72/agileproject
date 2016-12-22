@@ -42,6 +42,7 @@
               <label class="col-lg-3 control-label">کد ملی</label>
               <div class="col-lg-8">
                 <input class="form-control" ng-model="nationalId" placeholder="{{nationalIdValue}}" type="text">
+                <p ng-model="nationalIdError" ng-Hide="hideErrorNationalId" style="color: red">{{ErrorvalueNationalId}}</p>
               </div>
             </div>
             <div class="form-group">
@@ -54,6 +55,7 @@
               <label class="col-md-3 control-label">تکرار گذرواژه</label>
               <div class="col-md-8">
                 <input class="form-control"  ng-model="confirmPassword" type="password">
+                <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
               </div>
             </div>
             <div class="form-group">

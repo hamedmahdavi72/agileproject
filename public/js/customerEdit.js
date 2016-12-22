@@ -9,8 +9,6 @@ app.controller('editapp', function($scope, $http, $window) {
 
     $scope.hideErrorPassword = true;
     $scope.hideErrorNationalId = true;
-    $scope.hideErrorFirstName = true;
-    $scope.hideErrorLastName = true;
 
     $scope.slist =[];
     $http.get("/getCustomer")
@@ -26,7 +24,7 @@ app.controller('editapp', function($scope, $http, $window) {
 
     $scope.send = function () {
 
-        $scope.user = new Object()
+        $scope.user = new Object();
         $scope.user.password = $scope.password;
         $scope.user.confirmPassword = $scope.confirmPassword;
         $scope.user.mobileNumber = $scope.mobileNumber;
@@ -37,30 +35,15 @@ app.controller('editapp', function($scope, $http, $window) {
         //console.log($scope.user);
 
 
-        $scope.hideError = true;
         $scope.hideErrorPassword = true;
         $scope.hideErrorNationalId = true;
-        $scope.hideErrorFirstName = true;
-        $scope.hideErrorLastName = true;
 
         if ($scope.confirmPassword != $scope.password) {
-            alert("Passwords Do not Match!")
+            $scope.hideErrorPassword = false;
+            $scope.ErrorvaluePassword = "گذرواژه ها یکسان نیستند.";
         }
         else $scope.canSend = true;
 
-        if($scope.confirmPassword == null && $scope.password != null)
-            alert("Please Confirm your Password!");
-
-        if($scope.confirmPassword != null && $scope.password == null)
-            alert("Please Enter your Current Password!");
-
-        if($scope.confirmPassword == null && $scope.password == null)
-            $scope.canSend = true;
-
-        if($scope.confirmPassword != null && $scope.password != null){
-            if( $scope.confirmPassword == $scope.password)
-                $scope.canSend = true;
-        }
 
         if ($scope.canSend) {
             $http({
@@ -81,16 +64,6 @@ app.controller('editapp', function($scope, $http, $window) {
                             if (response.data.nationalId != null) {
                                 $scope.hideErrorNationalId = false;
                                 $scope.ErrorvalueNationalId = response.data.nationalId[0];
-                            }
-
-                            if (response.data.firstName != null) {
-                                $scope.hideErrorFirstName = false;
-                                $scope.ErrorvalueFirstName = response.data.firstName[0];
-                            }
-
-                            if (response.data.lastName != null) {
-                                $scope.hideErrorLastName = false;
-                                $scope.ErrorvalueLastName = response.data.lastName[0];
                             }
 
                             if(response.data.cusedit != null){
