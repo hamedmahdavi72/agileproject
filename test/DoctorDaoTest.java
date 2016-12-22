@@ -4,6 +4,7 @@ import forms.DoctorSignUpForm;
 import models.Customer;
 import models.Doctor;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,7 +27,6 @@ public class DoctorDaoTest {
     public static void prepareDatabase() {
         fakeApp = Helpers.fakeApplication();
         Helpers.start(fakeApplication());
-        DoctorDAOWrapper.getInstance().getDoctorDAO().getCollection().ensureIndex("{geoLocation : \"2dsphere\"}");
         DoctorSignUpForm signUpForm = new DoctorSignUpForm();
         signUpForm.setLastName("mahdavi");
         signUpForm.setSpeciality("دندان پزشکی ارتودنسی");
@@ -34,6 +34,13 @@ public class DoctorDaoTest {
         doctor.getGeoLocation().setCoordinates(new double[]{40,70});
         doctor.setAccepted(true);
         DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+        DoctorDAOWrapper.getInstance().getDoctorDAO().getCollection().ensureIndex("{geoLocation : \"2dsphere\"}");
+
+    }
+
+    @Before
+    public void buildIndex(){
+        DoctorDAOWrapper.getInstance().getDoctorDAO().getCollection().ensureIndex("{geoLocation : \"2dsphere\"}");
     }
 
     @AfterClass
