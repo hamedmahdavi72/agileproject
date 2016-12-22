@@ -49,7 +49,7 @@ public class DoctorDaoTest {
         Helpers.stop(fakeApp);
     }
 
-    //@Test
+    @Test
     public  void testFindNearDoctors(){
         Iterable<Doctor> doctors = DoctorDAOWrapper.getInstance().findNearDoctors(40.001,70.002,1000);
 
@@ -63,7 +63,7 @@ public class DoctorDaoTest {
 
 
     }
-    //@Test
+    @Test
     public  void testSearchdoctors(){
         Iterable<Doctor> doctors = DoctorDAOWrapper.getInstance().
                 searchDoctorsBySpecialityAndLocation("دندان پزشکی",40.001,70.002,1000);
