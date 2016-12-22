@@ -26,7 +26,7 @@ public class DoctorDaoTest {
     public static void prepareDatabase() {
         fakeApp = Helpers.fakeApplication();
         Helpers.start(fakeApplication());
-
+        DoctorDAOWrapper.getInstance().getDoctorDAO().getCollection().ensureIndex("{geoLocation : \"2dsphere\"}");
         DoctorSignUpForm signUpForm = new DoctorSignUpForm();
         signUpForm.setLastName("mahdavi");
         signUpForm.setSpeciality("دندان پزشکی ارتودنسی");
