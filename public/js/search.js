@@ -4,6 +4,12 @@
 var app = angular.module('search',[]);
 app.controller('searchapp',function($scope,$http){
 
+    $scope.places= [];
+
+    for(var i = 0 ; i < 22 ; i++){
+        $scope.places[i] = i+1;
+    }
+
     $scope.search = function () {
 
         $scope.searchQuery = new Object();
@@ -32,7 +38,7 @@ app.controller('searchapp',function($scope,$http){
             $scope.searchQuery.areaName = $scope.areaName;
         }
 
-       // console.log($scope.searchQuery);
+        console.log($scope.searchQuery);
 
         if($scope.canSearch){
             $http({
