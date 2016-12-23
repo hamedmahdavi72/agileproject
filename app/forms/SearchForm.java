@@ -16,6 +16,8 @@ public class SearchForm {
 
     private String areaName;
 
+    private String email;
+
     public SearchForm(){
 
     }
@@ -89,6 +91,7 @@ public class SearchForm {
 
     }
 
-
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
