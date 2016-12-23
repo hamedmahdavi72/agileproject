@@ -10,6 +10,33 @@
     </head>
     <body class="body-prop">
 
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="#">بین وقت</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="@routes.Application.index()">صفحه اصلی</a></li>
+                            <li><a href="#about">درباره ما</a></li>
+                            <li><a href="#contact">تماس با ما</a></li>
+                            <li><a href="@routes.Search.search()">جست‌وجوی پزشکان</a></li>
+                        </ul>
+                        <div>
+                            <a href="@routes.UserRequest.loginController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ورود</a>
+                            <a href="@routes.UserRequest.signUpController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
+                        </div>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
         <div class="container" ng-app="login" ng-controller="app">
             <div class="row">
                 <div class="span8">
@@ -27,6 +54,28 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="container">
+            <hr>
+
+            <footer>
+                <div class="row">
+                    <div class="span4 text-center footer-title"><h4 class="">آیا می‌خواهید به عنوان یک پزشک به ما بپیوندید ؟</h4>
+                        <a class = "footer-link" href="@routes.UserRequest.doctorSignupController()"> به عنوان یک پزشک ثبت نام کنید.</a>
+
+                    </div>
+                    <div class="span4"><h3></h3></div>
+
+                    <div class="span4"><h3></h3></div>
+
+
+                </div>
+            </footer>
+
+        </div> <!-- /container -->
+
 
     </body>
 </html>
