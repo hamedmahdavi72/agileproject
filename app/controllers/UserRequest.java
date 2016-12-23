@@ -19,6 +19,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
 
+import javax.print.Doc;
+
 /**
  * Created by ARYA on 12/17/2016.
  */
@@ -187,9 +189,15 @@ public class UserRequest extends Controller {
         }
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result doctorProfile(){
-        Content html = views.html.user.doctorPage.render();
-        return ok(html);
+        String username = SessionIdPool.getUsername(session().get("sessionId"));
+        Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(username);
+        if(doctor != null){
+            Content html = views.html.user.doctorPage.render();
+            return ok(html);
+        }
+        else return redirect(routes.Application.index());
     }
 
     @Security.Authenticated(Secured.class)
