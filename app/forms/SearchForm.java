@@ -77,6 +77,18 @@ public class SearchForm {
         return findArea().getLongitude();
     }
 
+    public void eliminateNulls(){
+        if(areaName == null)
+            this.areaName = "";
+        if(speciality == null)
+            this.speciality = "";
+        if(lastName == null)
+            this.lastName = "";
+        if(firstName == null)
+            this.firstName = "";
+
+    }
+
 
 
 }

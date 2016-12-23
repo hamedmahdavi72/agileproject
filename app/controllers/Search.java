@@ -23,6 +23,7 @@ public class Search extends Controller {
             Form<SearchForm> form = Form.form(SearchForm.class).bindFromRequest();
             try {
                 SearchForm searchForm = form.get();
+                searchForm.eliminateNulls();
                 Iterable<Doctor> doctors = DoctorDAOWrapper.getInstance().search(searchForm);
 
                 Map<String, Iterable<Doctor>> obj = new HashMap<>();
