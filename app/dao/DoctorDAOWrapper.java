@@ -17,7 +17,7 @@ public class DoctorDAOWrapper {
             "{geoLocation :{ $near :{ $geometry :{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}}," +
             "{accepted: true}]}";
 
-    private final double MAX_DISTANCE = 2000;
+    private final double MAX_DISTANCE = 3700;
 
     //queries
 
