@@ -10,7 +10,7 @@ app.controller('searchapp',function($scope,$http){
         $scope.searchQuery.firstName = $scope.firstName;
         $scope.searchQuery.lastName = $scope.lastName;
         $scope.searchQuery.speciality = $scope.speciality;
-        $scope.searchQuery.place = $scope.place;
+        $scope.searchQuery.areaName = $scope.areaName;
 
         console.log($scope.searchQuery);
 

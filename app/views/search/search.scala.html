@@ -63,8 +63,8 @@
         <div class="input-group" id="adv-search">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label ng-model="firstName" for="filter">نام</label>
-                        <input class="form-control" type="text">
+                        <label  for="filter">نام</label>
+                        <input ng-model="firstName" class="form-control" type="text">
                     </div>
                     <div class="form-group">
                         <label for="filter">نام خانوادگی</label>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group">
                         <label for="contain">مکان</label>
-                        <input ng-model="place" class="form-control" type="text" />
+                        <input ng-model="areaName" class="form-control" type="text" />
                     </div>
                     <button type="submit" class="btn btn-primary " ng-click="search()">جستجو  </button>
                 </form>

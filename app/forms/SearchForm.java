@@ -1,47 +1,82 @@
 package forms;
 
+import config.Areas;
+import models.MongoLocation;
+
 /**
  * Created by ARYA on 12/23/2016.
  */
 public class SearchForm {
 
-    private String doctorFirstName;
+    private String firstName;
 
-    private String doctorLastName;
+    private String lastName;
 
-    private String doctorSpeciality;
+    private String speciality;
 
-    private String geoLocation;
+    private String areaName;
 
-    public String getDoctorFirstName() {
-        return doctorFirstName;
+    public SearchForm(){
+
     }
 
-    public void setDoctorFirstName(String doctorFirstName) {
-        this.doctorFirstName = doctorFirstName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getDoctorLastName() {
-        return doctorLastName;
+    public void setFirstName(String firstName) {
+        if(firstName == null)
+            this.firstName = "";
+        else
+            this.firstName = firstName;
+
     }
 
-    public void setDoctorLastName(String doctorLastName) {
-        this.doctorLastName = doctorLastName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getDoctorSpeciality() {
-        return doctorSpeciality;
+    public void setLastName(String lastName) {
+        if(lastName == null)
+            this.lastName = "";
+        else
+            this.lastName = lastName;
     }
 
-    public void setDoctorSpeciality(String doctorSpeciality) {
-        this.doctorSpeciality = doctorSpeciality;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public String getGeoLocation() {
-        return geoLocation;
+    public void setSpeciality(String speciality) {
+        if(speciality == null)
+            this.speciality = "";
+        else
+            this.speciality = speciality;
     }
 
-    public void setGeoLocation(String geoLocation) {
-        this.geoLocation = geoLocation;
+    public String getAreaName() {
+        return areaName;
     }
+
+    public void setAreaName(String areaName) {
+        if(areaName == null)
+            this.areaName = "";
+        else
+            this.areaName = areaName;
+    }
+
+    public double findLatitude(){
+        return findArea().getLatitude();
+    }
+
+    public MongoLocation findArea() {
+        return Areas.getInstance().getArea(areaName);
+    }
+
+    public double findLongitude(){
+        return findArea().getLongitude();
+    }
+
+
+
 }

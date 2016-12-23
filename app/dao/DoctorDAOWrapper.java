@@ -1,12 +1,10 @@
 package dao;
 
+import forms.SearchForm;
 import models.Doctor;
-import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 
-import javax.print.Doc;
-import javax.validation.constraints.AssertFalse;
-import java.util.List;
+
 
 /**
  * Created by ARYA on 12/18/2016.
@@ -14,14 +12,12 @@ import java.util.List;
 public class DoctorDAOWrapper {
     private GenericDAO<Doctor> doctorDAO = null;
     private static DoctorDAOWrapper instance = new DoctorDAOWrapper();
-    private final String SEARCH_DOCTORS_QUERY = "{$and: " +
-            "[{speciality : {$regex : #}},{geoLocation :{ $near :{ $geometry : " +
-            "{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}},{accepted: true}]}";
+    private final String SEARCH_DOCTORS_QUERY = "{$and:[{firstName : {$regex : #}},{lastName : {$regex : #}}," +
+            "{speciality : {$regex : #}}," +
+            "{geoLocation :{ $near :{ $geometry :{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}}," +
+            "{accepted: true}]}";
 
-    private final String SEARCH_BY_SPECIALITY_QUERY = "{$and: [{speciality : {$regex : #}}, {accepted: true}]}";
-
-    private final String SEARCH_BY_LOCATION = "{$and: [{geoLocation :{ $near :{ $geometry : " +
-            "{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}},{accepted: true}]}";
+    private final double MAX_DISTANCE = 2000;
 
     //queries
 
@@ -51,18 +47,13 @@ public class DoctorDAOWrapper {
 
     }
 
-    public MongoCursor<Doctor> findNearDoctors(double latitude, double longitude, double maxDistance) {
 
-        return doctorDAO.getCollection().find(SEARCH_BY_LOCATION, latitude, longitude, maxDistance).as(Doctor.class);
-    }
 
-    public MongoCursor<Doctor> searchDoctorsBySpecialityAndLocation(String speciality,
-                                                                    double latitude, double longitude, double maxDistance) {
+    public MongoCursor<Doctor> search(SearchForm searchForm) {
         return doctorDAO.getCollection().find(SEARCH_DOCTORS_QUERY,
-                speciality, latitude, longitude, maxDistance).as(Doctor.class);
+                searchForm.getFirstName(),searchForm.getLastName(),searchForm.getSpeciality(),
+                searchForm.findLatitude(),searchForm.findLongitude(),MAX_DISTANCE
+                ).as(Doctor.class);
     }
 
-    public MongoCursor<Doctor> findBySpeciality(String speciality) {
-        return doctorDAO.getCollection().find(SEARCH_BY_SPECIALITY_QUERY, speciality).as(Doctor.class);
-    }
 }
