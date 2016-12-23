@@ -5,6 +5,7 @@ var app = angular.module('search',[]);
 app.controller('searchapp',function($scope,$http){
 
     $scope.places= [];
+    $scope.noResultsHide = true;
 
     for(var i = 0 ; i < 22 ; i++){
         $scope.places[i] = i+1;
@@ -50,6 +51,12 @@ app.controller('searchapp',function($scope,$http){
                         //console.log(response.data);
                         if (response.data != null) {
                             console.log(response.data.results);
+                            if(response.data.results.length > 0)
+                                $scope.results = response.data.results;
+                            else {
+                                $scope.noResultsHide= false;
+                                $scope.noResults = "موردی یافت نشد.";
+                            }
                         }
                     },
                     function (response) { // optional
