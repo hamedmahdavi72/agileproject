@@ -2,6 +2,15 @@
  * Created by ARYA on 12/20/2016.
  */
 var app = angular.module('drSignUp', []);
+
+app.controller('headerLoginController', function($scope,$http) {
+
+    $http.get("/isLoggedIn").then(function (response) {
+        $scope.isLoggedIn = response.data;
+    });
+});
+
+
 app.controller('drSignUpController', function($scope, $http, $window) {
 
     $scope.hideErrorPassword = true;

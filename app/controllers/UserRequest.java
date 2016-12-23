@@ -198,5 +198,9 @@ public class UserRequest extends Controller {
         session().clear();
         return redirect(routes.Application.index());
     }
+
+    public static Result isLoggedIn() {
+        return ok(Json.toJson(Secured.isLoggedIn(session())));
+    }
 }
 

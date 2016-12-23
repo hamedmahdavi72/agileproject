@@ -5,6 +5,15 @@
  * Created by ARYA on 12/20/2016.
  */
 var app = angular.module('edit', []);
+
+app.controller('headerLoginController', function($scope,$http) {
+
+    $http.get("/isLoggedIn").then(function (response) {
+        $scope.isLoggedIn = response.data;
+    });
+});
+
+
 app.controller('editapp', function($scope, $http, $window) {
 
     $scope.hideErrorPassword = true;
