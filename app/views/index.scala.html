@@ -51,7 +51,7 @@
                         </ul>
                         <div ng-app ="headerLoginApp" ng-controller="headerLoginController">
                             <a href="@routes.UserRequest.loginController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ورود</a>
-                            <a href="@routes.UserRequest.signUpController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
+                            <a href="/signup" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
                             <a href="@routes.UserRequest.customerEditProfileController()" class="btn btn-success pull-left" ng-show="isLoggedIn">حساب کاربری</a>
                         </div>
                     </div><!--/.nav-collapse -->
