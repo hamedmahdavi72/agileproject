@@ -26,5 +26,13 @@ public class MongoLocation  {
         this.coordinates = coordinates;
     }
 
+    public double getLatitude(){
+        return coordinates[0];
+    }
+
+    public double getLongitude(){
+        return coordinates[1];
+    }
+
 
 }
