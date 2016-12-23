@@ -6247,4 +6247,12 @@ a.badge:focus {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
 }
 
-
+.img-profile {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  width:140px;
+  height:140px;
+  margin-right: 50px;
+  margin-top: 40px;
+}
