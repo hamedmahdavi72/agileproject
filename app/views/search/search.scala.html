@@ -63,25 +63,39 @@
         <div class="input-group" id="adv-search">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label  for="filter">نام</label>
+                        <label  for="filter"><strong>نام</strong></label>
                         <input ng-model="firstName" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="filter">نام خانوادگی</label>
+                        <label for="filter"><strong>نام خانوادگی</strong></label>
                         <input ng-model="lastName" class="form-control" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="contain">تخصص</label>
+                        <label for="contain"><strong>تخصص</strong></label>
                         <input ng-model="speciality" class="form-control" type="text" />
                     </div>
                     <div class="form-group">
-                        <label for="contain">مکان</label>
-                        <input ng-model="areaName" class="form-control" type="text" />
+                        <label for="contain"><strong>منطقه</strong></label>
+                        <select ng-model="areaName">
+                            <option ng-repeat="x in places">{{x}}</option>
+                        </select>
                         <p style="color: red;">{{error}}</p>
                     </div>
                     <button type="submit" class="btn btn-primary " ng-click="search()">جستجو  </button>
                 </form>
         </div>
+          <hr>
+          <div style="color: red" class="row" ng-hide="noResultsHide">{{noResults}}</div>
+          <div class="row">
+            <div ng-hide="resulthide" style="width: 300px; height: 180px; border: 1px solid white; margin-bottom: 4px;" class="col-md-4" ng-repeat="x in results">
+                <div style="align-content: center;right:10px; top:5px;position: relative">
+                    <p><strong>{{x.firstName}}</strong></p>
+                    <p><strong>{{x.lastName}}</strong></p>
+                    <p><strong>{{x.speciality}}</strong></p>
+                    <p><strong>{{x.clinicAddress}}</strong></p>
+                </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

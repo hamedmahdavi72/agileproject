@@ -4,7 +4,17 @@
 var app = angular.module('search',[]);
 app.controller('searchapp',function($scope,$http){
 
+    $scope.places= [];
+    $scope.noResultsHide = true;
+    $scope.resulthide = true;
+
+    for(var i = 0 ; i < 22 ; i++){
+        $scope.places[i] = i+1;
+    }
+
     $scope.search = function () {
+
+        $scope.resulthide = true;
 
         $scope.searchQuery = new Object();
         $scope.canSearch = true;
@@ -32,7 +42,7 @@ app.controller('searchapp',function($scope,$http){
             $scope.searchQuery.areaName = $scope.areaName;
         }
 
-       // console.log($scope.searchQuery);
+        console.log($scope.searchQuery);
 
         if($scope.canSearch){
             $http({
@@ -41,10 +51,20 @@ app.controller('searchapp',function($scope,$http){
                 data: $scope.searchQuery
             })
                 .then(function (response) {
-                        //console.log(response.data);
                         if (response.data != null) {
                             console.log(response.data.results);
+                            if(response.data.results.length > 0){
+                                $scope.resulthide = false;
+                                $scope.noResultsHide = true;
+                                $scope.results = response.data.results;
+                            }
+                        else {
+                                $scope.resulthide = true;
+                                $scope.noResultsHide= false;
+                                $scope.noResults = "موردی یافت نشد.";
+                            }
                         }
+                        //console.log(response.data);
                     },
                     function (response) { // optional
                         // failed
