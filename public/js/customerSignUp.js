@@ -3,14 +3,6 @@
  */
 var app = angular.module('signup', []);
 
-app.controller('headerLoginController', function($scope,$http) {
-
-    $http.get("/isLoggedIn").then(function (response) {
-        $scope.isLoggedIn = response.data;
-    });
-});
-
-
 app.controller('signupapp', function($scope, $http, $window) {
     $scope.hideError = true;
     $scope.hideErrorPassword = true;
@@ -18,6 +10,11 @@ app.controller('signupapp', function($scope, $http, $window) {
     $scope.hideErrorFirstName = true;
     $scope.hideErrorLastName = true;
     $scope.hideErrorEmail = true;
+
+    $http.get("/isLoggedIn").then(function (response) {
+        // console.log(response.data);
+        $scope.isLoggedIn = response.data;
+    });
 
     $scope.send = function () {
 

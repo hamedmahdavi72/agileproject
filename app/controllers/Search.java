@@ -9,7 +9,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.twirl.api.Content;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,9 +27,18 @@ public class Search extends Controller {
                 SearchForm searchForm = form.get();
                 searchForm.eliminateNulls();
                 Iterable<Doctor> doctors = DoctorDAOWrapper.getInstance().search(searchForm);
+                List<SearchForm> results = new ArrayList<>();
+                for(Doctor doctor : doctors){
+                    SearchForm searchForm1 = new SearchForm();
+                    searchForm1.setFirstName(doctor.getFirstName());
+                    searchForm1.setLastName(doctor.getLastName());
+                    searchForm1.setSpeciality(doctor.getSpeciality());
+                    searchForm1.setEmail(doctor.getEmail());
+                    results.add(searchForm1);
+                }
 
-                Map<String, Iterable<Doctor>> obj = new HashMap<>();
-                obj.put("results", doctors);
+                Map<String, List<SearchForm>> obj = new HashMap<>();
+                obj.put("results", results);
                 return ok(Json.toJson(obj));
 
             } catch (IllegalStateException e) {

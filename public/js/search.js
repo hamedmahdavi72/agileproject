@@ -19,6 +19,24 @@ app.controller('searchapp',function($scope,$http){
         $scope.places[i] = i+1;
     }
 
+    $scope.goToDoctor = function(id){
+        console.log(id);
+        $http({
+            url: '/doctorPage/',
+            method: "POST",
+            data: id
+        })
+            .then(function (response) {
+                    if (response.data != null) {
+                        console.log(response.data);
+                    }
+                    //console.log(response.data);
+                },
+                function (response) { // optional
+                    // failed
+                });
+    };
+
     $scope.search = function () {
 
         $scope.resulthide = true;
@@ -49,7 +67,7 @@ app.controller('searchapp',function($scope,$http){
             $scope.searchQuery.areaName = $scope.areaName;
         }
 
-        console.log($scope.searchQuery);
+       // console.log($scope.searchQuery);
 
         if($scope.canSearch){
             $http({
@@ -59,7 +77,7 @@ app.controller('searchapp',function($scope,$http){
             })
                 .then(function (response) {
                         if (response.data != null) {
-                            console.log(response.data.results);
+                           // console.log(response.data.results);
                             if(response.data.results.length > 0){
                                 $scope.resulthide = false;
                                 $scope.noResultsHide = true;
