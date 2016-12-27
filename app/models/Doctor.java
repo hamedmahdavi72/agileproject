@@ -34,6 +34,7 @@ public class Doctor extends User {
         this.speciality = doctorSignUpForm.getSpeciality();
         this.medicalOrgId = doctorSignUpForm.getMedicalOrgId();
         this.email = doctorSignUpForm.getEmail();
+        this.setUsername(this.email);
         this.accepted = false;
         geoLocation = new MongoLocation();
     }
