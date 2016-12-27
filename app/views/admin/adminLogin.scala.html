@@ -5,28 +5,27 @@
     <title>صفحه ادمین</title>
     <script src="assets/javascripts/angular.min.js" type="text/javascript"></script>
     <script src="assets/js/adminLogin.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="assets/stylesheets/bootstrap.css">
-    <link rel="shortcut icon" type="image/png" href="assets/javascripts/favicon.png"s>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="assets/javascripts/favicon.png">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 </head>
-<body>
+<body class="body-prop" ng-app="login" ng-controller="app">
 
-
-    <div class="centrize" ng-app="login" ng-controller="app">
+    <div ng-view></div>
+    <div>
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-md-offset-4">
-                <h1 class="text-center login-title">Admin Panel login</h1>
-                <div class="account-wall">
-                    <form class="form-signin">
+            <div class="span8" style="position:absolute;right: 33%;top:10%;width: 600px;height: 20%;border: 2px dashed blue;border-radius: 10%">
+                <h3 class="text-center login-title">ورود مدیریت</h3>
+                <div>
+                    <form class="form-signin" style="position: relative;right: 12%;">
                         <input type="text" class="form-control" placeholder="Username" required autofocus ng-model="username">
                           <p ng-model="usernameError" ng-Hide="hideError" style="color: red">{{Errorvalue}}</p>
                         <input type="password" class="form-control" placeholder="Password" required ng-model="pass">
                         <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="send()">
-                            Log in</button>
-                        <label class="checkbox pull-left">
-                            <input type="checkbox" value="remember-me">
-                            Remember me
-                        </label>
+                        <div>
+                            <button class="btn btn-primary" type="submit" ng-click="send()">
+                            ورود</button>
+                        </div>
                     </form>
                 </div>
             </div>

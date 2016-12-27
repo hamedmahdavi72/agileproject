@@ -4,7 +4,17 @@
 /**
  * Created by ARYA on 12/20/2016.
  */
-var app = angular.module('edit', []);
+var app = angular.module('edit', ["ngRoute"]);
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when("/profile", {
+            templateUrl : "base.scala.html"
+        })
+        .otherwise({
+            templateUrl : "/base"
+        });
+});
 
 app.controller('headerLoginController', function($scope,$http) {
 

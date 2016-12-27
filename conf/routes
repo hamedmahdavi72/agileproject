@@ -46,3 +46,5 @@ GET     /search                     controllers.Search.search()
 POST    /search/                     controllers.Search.search()
 
 GET     /isLoggedIn                   controllers.UserRequest.isLoggedIn()
+
+GET     /base                       controllers.Application.base()

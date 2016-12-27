@@ -1,0 +1,30 @@
+ <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">بین وقت</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="@routes.Application.index()">صفحه اصلی</a></li>
+              <li><a href="#about">درباره ما</a></li>
+              <li><a href="#contact">تماس با ما</a></li>
+              <li><a href="@routes.Search.search()">جست‌وجوی پزشکان</a></li>
+            </ul>
+            <div ng-app ="headerLoginApp" ng-controller="headerLoginController">
+              <a href="@routes.UserRequest.loginController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ورود</a>
+              <a href="/signup" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
+              <a href="@routes.UserRequest.customerEditProfileController()" class="btn btn-success pull-left" ng-show="isLoggedIn">حساب کاربری</a>
+              <a href="@routes.UserRequest.logout()" class="btn btn-success pull-right" ng-show="isLoggedIn">خروج</a>
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div>
+
+    </div> <!-- /container -->

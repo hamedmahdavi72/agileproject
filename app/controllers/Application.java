@@ -23,6 +23,12 @@ public class Application extends Controller {
         return ok(html);
     }
 
+    public static Result base(){
+
+        Content html = views.html.base.base.render();
+        return ok(html);
+    }
+
 }
 
 
