@@ -1,23 +1,8 @@
 /**
  * Created by hamed on 12/20/16 AD.
  */
-var app = angular.module('login', ["ngRoute"]);
-app.config(function($routeProvider) {
-    $routeProvider
-        .when("/admin", {
-            templateUrl : "/base"
-        })
-        .otherwise({
-            templateUrl : "/base"
-        });
-});
+var app = angular.module('login', ["ngRoute","headerModule"]);
 
-app.controller('headerLoginController', function($scope,$http) {
-
-    $http.get("/isLoggedIn").then(function (response) {
-        $scope.isLoggedIn = response.data;
-    });
-});
 
 app.controller('app', function($scope, $http, $location, $window) {
     $scope.hideError = true;

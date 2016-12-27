@@ -1,7 +1,9 @@
 /**
  * Created by ARYA on 12/20/2016.
  */
-var app = angular.module('signup', []);
+var app = angular.module('signup', ["ngRoute","headerModule"]);
+
+
 
 app.controller('signupapp', function($scope, $http, $window) {
     $scope.hideError = true;

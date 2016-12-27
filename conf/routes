@@ -13,9 +13,10 @@ GET     /login                     controllers.UserRequest.loginController()
 
 POST    /login/                     controllers.UserRequest.loginController()
 
+GET    /signup                     controllers.UserRequest.signUpController()
+
 POST    /signup/                  controllers.UserRequest.signUpController()
 
-GET    /signup                     controllers.UserRequest.signUpController()
 
 GET     /doctorSignup              controllers.UserRequest.doctorSignupController()
 

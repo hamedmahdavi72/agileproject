@@ -4,24 +4,9 @@
 /**
  * Created by ARYA on 12/20/2016.
  */
-var app = angular.module('edit', ["ngRoute"]);
+var app = angular.module('edit', ["ngRoute","headerModule"]);
 
-app.config(function($routeProvider) {
-    $routeProvider
-        .when("/profile", {
-            templateUrl : "base.scala.html"
-        })
-        .otherwise({
-            templateUrl : "/base"
-        });
-});
 
-app.controller('headerLoginController', function($scope,$http) {
-
-    $http.get("/isLoggedIn").then(function (response) {
-        $scope.isLoggedIn = response.data;
-    });
-});
 
 
 app.controller('editapp', function($scope, $http, $window) {

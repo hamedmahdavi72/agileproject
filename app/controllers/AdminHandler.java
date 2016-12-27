@@ -29,7 +29,7 @@ public class AdminHandler extends Controller {
             try{
                 UserForm userForm = form.get();
                 admin = AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername());
-                return ok(userRequest.loginUserToSystem(admin, userForm).toJsonResponse());
+                return ok(userRequest.loginAdminToSystem(admin, userForm).toJsonResponse());
 
             }catch (IllegalStateException e){
                 return ok(form.errorsAsJson());

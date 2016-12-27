@@ -1,13 +1,10 @@
 /**
  * Created by ARYA on 12/23/2016.
  */
-var app = angular.module('search',[]);
-app.controller('headerLoginController', function($scope,$http) {
+var app = angular.module('search',["ngRoute","headerModule"]);
 
-    $http.get("/isLoggedIn").then(function (response) {
-        $scope.isLoggedIn = response.data;
-    });
-});
+
+
 
 app.controller('searchapp',function($scope,$http){
 

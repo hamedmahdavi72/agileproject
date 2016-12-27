@@ -30,35 +30,12 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
     </head>
 
-    <body class="body-prop">
+    <body class="body-prop" ng-app="signup">
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="brand" href="#">بین وقت</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="@routes.Application.index()">صفحه اصلی</a></li>
-                            <li><a href="#about">درباره ما</a></li>
-                            <li><a href="#contact">تماس با ما</a></li>
-                            <li><a href="@routes.Search.search()">جست‌وجوی پزشکان</a></li>
-                        </ul>
-                        <div>
-                            <a href="@routes.UserRequest.loginController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ورود</a>
-                            <a href="@routes.UserRequest.signUpController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
-                        </div>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+        <div header></div>
 
         <div class="container">
-            <div  ng-app="signup" ng-controller="signupapp">
+            <div   ng-controller="signupapp">
                 <div class="row" class="container">
                     <div class="span8">
                         <h1>فرم ثبت نام</h1>
@@ -110,6 +87,10 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="@routes.Assets.at("javascripts/angular.min.js")" type="text/javascript"></script>
         <script src="assets/js/customerSignUp.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <script src="assets/js/headerDirective.js" type="text/javascript"></script>
+
+
 
     </body>
 </html>

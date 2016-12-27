@@ -1,14 +1,9 @@
 /**
  * Created by ARYA on 12/20/2016.
  */
-var app = angular.module('login', []);
+var app = angular.module('login', ["ngRoute","headerModule"]);
 
-app.controller('headerLoginController', function($scope,$http) {
 
-    $http.get("/isLoggedIn").then(function (response) {
-        $scope.isLoggedIn = response.data;
-    });
-});
 
 app.controller('app', function($scope, $http, $location, $window) {
     $scope.hideError = true;
@@ -41,7 +36,7 @@ app.controller('app', function($scope, $http, $location, $window) {
                         }
 
                         if(response.data.loginmsg != null){
-                            console.log(response.data)
+                            console.log(response.data);
                             if(response.data.loginmsg == 'redirect'){
                                 //console.log("redirecting... ")
                                 $window.location.href = '/profile';
