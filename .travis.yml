@@ -20,5 +20,4 @@ before_script:
 script: sbt test
 
 after_success:
-  if ([ "$TRAVIS_BRANCH" == "localbranch" ]
-    echo "This will deploy!"
+  sbt stage deployHeroku
