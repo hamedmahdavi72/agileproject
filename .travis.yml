@@ -19,6 +19,5 @@ before_script:
   - mongo --version
 script:
   - sbt test
-  - sbt stage deployHeroku
 
 
