@@ -18,5 +18,7 @@ before_script:
   - sleep 15 #mongo may not be responded directly. See http://docs.travis-ci.com/user/database-setup/#MongoDB
   - mongo --version
 script:
- -sbt test
- -sbt stage deployHeroku
+  - sbt test
+  - sbt stage deployHeroku
+
+
