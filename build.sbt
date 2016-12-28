@@ -11,4 +11,6 @@ libraryDependencies ++= Seq( javaJdbc ,  cache , javaWs, "uk.co.panaxiom" %% "pl
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"  
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+
+herokuAppName in Compile := "quiet-thicket-17503"
