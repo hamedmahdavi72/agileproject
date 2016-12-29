@@ -19,3 +19,12 @@ before_script:
   - mongo --version
 script:
   - sbt test
+  
+deploy:
+  provider: heroku
+  api_key: a12070ee-8fde-4c66-b3f5-14815411d126
+  app: quiet-thicket-17503
+
+
+
+
