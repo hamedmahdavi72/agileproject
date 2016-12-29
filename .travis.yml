@@ -3,7 +3,6 @@ sudo: true
 scala:
 - 2.10.0
 env:
-  - PLAY_VERSION=2.4.2
   - HEROKU_API_KEY=a12070ee-8fde-4c66-b3f5-14815411d126
 jdk:
 - oraclejdk8
