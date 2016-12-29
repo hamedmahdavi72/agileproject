@@ -13,4 +13,4 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
-herokuAppName in Compile := "quiet-thicket-17503"
+herokuAppName in Compile := "calm-castle-63283"

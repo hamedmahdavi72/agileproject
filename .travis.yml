@@ -4,8 +4,16 @@ scala:
 - 2.10.0
 env:
   - PLAY_VERSION=2.4.2
+  - HEROKU_API_KEY=a12070ee-8fde-4c66-b3f5-14815411d126
 jdk:
 - oraclejdk8
+
+cache:
+  directories:
+    - $HOME/.m2/repository
+    - $HOME/.sbt
+    - $HOME/.ivy2
+
 
 services:
   - mongodb
@@ -19,11 +27,13 @@ before_script:
   - mongo --version
 script:
   - sbt test
-
+  
 deploy:
-  provider: heroku
-  api_key: a12070ee-8fde-4c66-b3f5-14815411d126
-  app: quiet-thicket-17503
+  provider: script
+  script: sbt stage deployHeroku
+  on:
+    all_branches: true
+
 
 
 
