@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>صفحه اصلی پزشک</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="UTF-8">
+        <title>صفحه شخصی</title>
+        <link rel="stylesheet" media="screen" href="/assets/css/bootstrap.css">
+        <link href="assets/css/simple-sidebar.css" rel="stylesheet">
+        <script src="/assets/javascripts/angular.min.js" type="text/javascript"></script>
+        <script src="/assets/js/doctorPage.js" type="text/javascript"></script>
+        <script src="assets/js/headerDirective.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
-    <!-- Le styles -->
-    <script src="assets/javascripts/angular.min.js" type="text/javascript"></script>
-    @*<link href="assets/css/bootstrap1.css" rel="stylesheet">*@
+            <!--calendar js-->
+        <Script Language="JavaScript" Src="assets/js/dateScript.js"></Script>
+        <Script Language="JavaScript" Src="assets/js/persianPopupCalendar.js"></Script>
+        <Script Language="JavaScript" Src="assets/js/astro.js"></Script>
+            <!-- Bootstrap Core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
 
-    <!--calendar js-->
-    <Script Language="JavaScript" Src="assets/js/dateScript.js"></Script>
-    <Script Language="JavaScript" Src="assets/js/persianPopupCalendar.js"></Script>
-    <Script Language="JavaScript" Src="assets/js/astro.js"></Script>
-    <!-- Bootstrap Core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+            <!-- Custom CSS -->
+        <link href="assets/css/simple-sidebar.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="assets/css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style type="text/css">
+
+        <style type="text/css">
         body {
             padding-top: 60px;
             padding-bottom: 40px;
@@ -46,152 +46,119 @@
         h2 {
             margin-right: 20%;
         }
-    </style>
+        </style>
 
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+            <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-</head>
+    </head>
+    <body class="body-prop" ng-app="doctorProfile" >
 
-
-
-<body class="body-prop">
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">بین وقت</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#">صفحه اصلی</a></li>
-                    <li><a href="#about">درباره ما</a></li>
-                    <li><a href="#contact">تماس با ما</a></li>
-                </ul>
-
-            </div><!--/.nav-collapse -->
-        </div>
-    </div>
-</div>
+        <div header></div>
 
 
-<div id="wrapper" class="pull-right">
+            <div id="wrapper" class="pull-right">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#" style="color:white">
+                    <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="#" style="color: white">
                     سلام دکتر
-                </a>
-            </li>
-            <li>
-                <a href="#">تقویم کاری</a>
-            </li>
-            <li>
-                <a href="#">قرار ملاقات</a>
-            </li>
-            <li>
-                <a href="#">بیماران</a>
-            </li>
-            <li>
-                <a href="#">درخواست تبلیغ</a>
-            </li>
-            <li>
-                <a href="#">پیام ها</a>
-            </li>
-            <li>
-                <a href="#">گزارش مشکلات</a>
-            </li>
-            <li>
-                <a href="/logout">خروج</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
-</div>
-<!-- /#wrapper -->
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">تقویم کاری</a>
+                        </li>
+                        <li>
+                            <a href="#">قرار ملاقات</a>
+                        </li>
+                        <li>
+                            <a href="#">بیماران</a>
+                        </li>
+                        <li>
+                            <a href="#">درخواست تبلیغ</a>
+                        </li>
+                        <li>
+                            <a href="#">پیام ها</a>
+                        </li>
+                        <li>
+                            <a href="#">گزارش مشکلات</a>
+                        </li>
+                        <li>
+                            <a href="/logout">خروج</a>
+                        </li>
+                    </ul>
+                </div>
+                    <!-- /#sidebar-wrapper -->
+            </div>
 
-<h2>
+
+            <div>
+                <h2>
     تنظیم تقویم مراجعه کنندگان
-</h2>
+                </h2>
 
 
-<hr>
-<P>لطفا بازه ی زمانی که ارائه به مراجعین در نظر دارید و زمانی که به برای هر مراجعه کننده اختصاص می دهید را مشخص
-    کنید.</P>
+                <hr>
+                <P>لطفا بازه ی زمانی که ارائه به مراجعین در نظر دارید و زمانی که به برای هر مراجعه کننده اختصاص می دهید را مشخص
+                    کنید.</P>
 
 
-<Form Name="myForm" Method="Post" Action="">
-    <input type="text" name="myFirstDate" size="30" placeholder="از این تاریخ" >
-         <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calFirstDate'); return false;"
-             HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
-                      alt="Select Date">
-         </a>
-    <input type="text" name="mySecondDate" size="30" placeholder="تا این تاریخ" >
-        <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calSecondDate'); return false;"
-            HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
-                      alt="Select Date">
-        </a>
-    زمان هر ویزیت:          <input type="text" name="visitLength" size="30" placeholder="زمان به دقیقه">
-        <label>
-             <input type="submit" value="Submit">
-        </label>
-</Form>
+                <Form Name="myForm" Method="Post" Action="">
+                    <input type="text" name="myFirstDate" size="30" placeholder="از این تاریخ" >
+                    <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calFirstDate');
+                    return false;"
+                    HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
+                    alt="Select Date">
+                    </a>
+                    <input type="text" name="mySecondDate" size="30" placeholder="تا این تاریخ" >
+                    <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calSecondDate');
+                    return false;"
+                    HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
+                    alt="Select Date">
+                    </a>
+                    زمان هر ویزیت: <input type="text" name="visitLength" size="30" placeholder="زمان به دقیقه">
+                    <label>
+                        <input type="submit" value="Submit">
+                    </label>
+                </Form>
+            </div>
 
+            .
 
-
-<Script Language="JavaScript">
+            <Script Language="JavaScript">
     addCalendar("calFirstDate", "Select Date", "myFirstDate", "");
     addCalendar("calSecondDate", "Select Date", "mySecondDate", "");
 </Script>
 
-<!-- jQuery -->
-<script src="assets/js/jquery-3.1.1.min.js"></script>
+                <!-- jQuery -->
+            <script src="assets/js/jquery-3.1.1.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                <!-- Bootstrap Core JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- Menu Toggle Script -->
-<script>
+                <!-- Menu Toggle Script -->
+            <script>
     $("#menu-toggle").click(function (e) {
+
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
 </script>
 
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!--<script src="assets/js/jquery.js"></script>-->
-<!--<script src="assets/js/bootstrap-transition.js"></script>-->
-<!--<script src="assets/js/bootstrap-alert.js"></script>-->
-<!--<script src="assets/js/bootstrap-modal.js"></script>-->
-<!--<script src="assets/js/bootstrap-dropdown.js"></script>-->
-<!--<script src="assets/js/bootstrap-scrollspy.js"></script>-->
-<!--<script src="assets/js/bootstrap-tab.js"></script>-->
-<!--<script src="assets/js/bootstrap-tooltip.js"></script>-->
-<!--<script src="assets/js/bootstrap-popover.js"></script>-->
-<!--<script src="assets/js/bootstrap-button.js"></script>-->
-<!--<script src="assets/js/bootstrap-collapse.js"></script>-->
-<!--<script src="assets/js/bootstrap-carousel.js"></script>-->
-<!--<script src="assets/js/bootstrap-typeahead.js"></script>-->
 
-</body>
+    </body>
 </html>

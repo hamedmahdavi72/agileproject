@@ -24,6 +24,7 @@
 
 #sidebar-wrapper {
     z-index: 1000;
+    padding-left: 0px;
     position: fixed;
     top: 40px;
     left: 100%;
