@@ -120,6 +120,21 @@ public class UserRequest extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
+    public static Result loadProfile(){
+        String username = SessionIdPool.getUsername(session().get("sessionId"));
+        if(User.isCustomer(username)){
+            Content html = views.html.user.customerProfile.render();
+            return ok(html);
+        }
+        else if(User.isDoctor(username)){
+            Content html = views.html.user.doctorPage.render();
+            return ok(html);
+        }
+        else return ok(Json.toJson("Access Denied!"));
+    }
+
+
+    @Security.Authenticated(Secured.class)
     public static Result customerEditProfileController(){
         Content html = views.html.user.customerProfile.render();
         return ok(html);
@@ -140,6 +155,19 @@ public class UserRequest extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
+    public static Result editProfileController(){
+        String username = SessionIdPool.getUsername(session().get("sessionId"));
+        if(User.isCustomer(username)){
+           return editCustomer();
+        }
+        else if(User.isDoctor(username)){
+            //TODO Doctor edit profile
+        }
+        return ok();
+    }
+
+
+    @Security.Authenticated(Secured.class)
     public static Result editCustomer(){
         Form<CustomerProfileForm> form = Form.form(CustomerProfileForm.class).bindFromRequest();
         String username = SessionIdPool.getUsername(session().get("sessionId"));
@@ -153,7 +181,7 @@ public class UserRequest extends Controller {
             if(validator.isSuccessful()) {
                 CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
             }
-            return ok(Json.toJson(validator.getMessage()));
+            return ok(validator.getMessage().toJsonResponse());
 
         } catch (IllegalStateException e){
             return ok(form.errorsAsJson());

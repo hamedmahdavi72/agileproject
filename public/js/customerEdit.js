@@ -15,7 +15,7 @@ app.controller('editapp', function($scope, $http, $window) {
     $scope.hideErrorNationalId = true;
 
     $scope.slist =[];
-    $http.get("/getCustomer")
+    $http.get("/getUser")
         .then(function (response) {$scope.slist = response.data;
             $scope.firstNameValue = $scope.slist.firstName;
             $scope.lastNameValue = $scope.slist.lastName;

@@ -17,7 +17,7 @@
             <div >
               <a href="@routes.UserRequest.loginController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ورود</a>
               <a href="@routes.UserRequest.signUpController()" class="btn btn-success pull-left" ng-hide="isLoggedIn">ثبت نام</a>
-              <a href="@routes.UserRequest.customerEditProfileController()" class="btn btn-success pull-left" ng-show="isLoggedIn">حساب کاربری</a>
+              <a href="@routes.UserRequest.loadProfile()" class="btn btn-success pull-left" ng-show="isLoggedIn">حساب کاربری</a>
               <a href="@routes.UserRequest.logout()" class="btn btn-success pull-left" ng-show="isLoggedIn">خروج</a>
             </div>
           </div><!--/.nav-collapse -->

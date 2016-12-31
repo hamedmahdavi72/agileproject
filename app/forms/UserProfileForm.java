@@ -21,6 +21,7 @@ public class UserProfileForm {
 
     }
 
+    public UserProfileForm(){}
 
 
     public String getFirstName() {

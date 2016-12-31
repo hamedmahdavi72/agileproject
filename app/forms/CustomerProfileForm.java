@@ -11,5 +11,6 @@ public class CustomerProfileForm extends UserProfileForm {
         super(customer);
     }
 
+    public CustomerProfileForm(){}
 
 }

@@ -31,7 +31,7 @@ public class CustomerEditValidator extends UserEditValidator {
 
     @Override
     protected void validateSpecificFields() {
-        if(message != null){
+        if(message == null){
             message = Messages.generateSuccessfulCustomerEditMessage();
         }
     }

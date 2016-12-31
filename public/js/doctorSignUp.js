@@ -100,7 +100,7 @@ app.controller('drSignUpController', function($scope, $http, $window) {
 
                         if(response.data.signupmsg !=null){
                             if(response.data.signupmsg[0] == "redirect"){
-                                $window.location.href = '/';
+                                $window.location.href = '/doctor';
                             }
                         }
                     }

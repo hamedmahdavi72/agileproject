@@ -32,9 +32,9 @@ GET     /adminPanel                 controllers.AdminHandler.adminPanelControlle
 
 GET     /getDoctors                 controllers.AdminHandler.loadAdmin()
 
-GET     /profile                    controllers.UserRequest.customerEditProfileController()
+GET     /profile                    controllers.UserRequest.loadProfile()
 
-POST    /profile/                   controllers.UserRequest.customerEditProfileController()
+POST    /profile/                   controllers.UserRequest.editProfileController()
 
 GET     /getUser                    controllers.UserRequest.getUser()
 
