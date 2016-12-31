@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import config.Messages;
 import dao.CustomerDAOWrapper;
 import dao.DoctorDAOWrapper;
-import forms.CustomerProfileForm;
-import forms.DoctorSignUpForm;
-import forms.UserForm;
-import forms.UserSignUpForm;
+import forms.*;
 import models.Admin;
 import models.Customer;
 import models.Doctor;
@@ -66,7 +63,7 @@ public class UserRequest extends Controller {
             Form<UserForm> loginForm = Form.form(UserForm.class).bindFromRequest();
             try {
                 UserForm userForm = loginForm.get();
-                return ok(loginUserToSystem(User.getUser(userForm), userForm).toJsonResponse());
+                return ok(loginUserToSystem(User.getUser(userForm.getUsername()), userForm).toJsonResponse());
 
             } catch (IllegalStateException e) {
                 return ok(loginForm.errorsAsJson());
@@ -83,7 +80,7 @@ public class UserRequest extends Controller {
             Form<UserSignUpForm> signUpForm = Form.form(UserSignUpForm.class).bindFromRequest();
             try {
                 UserSignUpForm userSignUpForm = signUpForm.get();
-                if (User.isUsernameTaken(userSignUpForm)) {
+                if (User.isUsernameTaken(userSignUpForm.getUsername())) {
                     Messages msg = Messages.generateTakenUsernameMessage();
                     return ok(msg.toJsonResponse());
                 } else {
@@ -129,16 +126,15 @@ public class UserRequest extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result getCustomer(){
+    public static Result getUser(){
         String username = SessionIdPool.getUsername(session().get("sessionId"));
-        Customer customer = CustomerDAOWrapper.getInstance().findByUsername(username);
-        if(customer != null){
-            CustomerProfileForm customerProfileForm = new CustomerProfileForm();
-            customerProfileForm.setFirstName(customer.getFirstName());
-            customerProfileForm.setLastName(customer.getLastName());
-            customerProfileForm.setNationalId(customer.getNationalId());
-            customerProfileForm.setMobileNumber(customer.getMobileNumber());
-            return ok(Json.toJson(customerProfileForm));
+        if(User.isCustomer(username)){
+            Customer customer = CustomerDAOWrapper.getInstance().findByUsername(username);
+            return ok(Json.toJson( new CustomerProfileForm(customer)));
+        }
+        else if(User.isDoctor(username)){
+            Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(username);
+            return ok(Json.toJson(new DoctorProfileForm(doctor)));
         }
         else return ok(Json.toJson("object is null"));
     }
@@ -151,38 +147,13 @@ public class UserRequest extends Controller {
 
         try{
             CustomerProfileForm customerProfileForm = form.get();
-            if(customerProfileForm.getFirstName() != null &&
-                    !customerProfileForm.getFirstName().equalsIgnoreCase(customer.getFirstName())){
-                customer.setFirstName(customerProfileForm.getFirstName());
-            }
-            if(customerProfileForm.getLastName() != null &&
-                    !customerProfileForm.getLastName().equalsIgnoreCase(customer.getLastName())){
-                customer.setLastName(customerProfileForm.getLastName());
-            }
-            if(customerProfileForm.getMobileNumber() != null &&
-                    !customerProfileForm.getMobileNumber().equals(customer.getMobileNumber())){
-                customer.setMobileNumber(customerProfileForm.getMobileNumber());
-            }
-            if(customerProfileForm.getNationalId() != null &&
-                    !customerProfileForm.getNationalId().equals(customer.getNationalId())){
-                customer.setNationalId(customerProfileForm.getNationalId());
-            }
-            if(customerProfileForm.getPassword() != null &&
-                    customerProfileForm.getConfirmPassword() != null &&
-                    customerProfileForm.getPassword().equals(customerProfileForm.getPassword()) &&
-                    !customerProfileForm.getPassword().equals(customer.getPassword())){
-                if(customerProfileForm.getPassword().length() >= 6){
-                    customer.setPassword(customerProfileForm.getPassword());
-                }
-                else {
-                    Messages msg = Messages.generateWrongPasswordMessages();
-                    return ok(msg.toJsonResponse());
-                }
-            }
-            CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
+            CustomerEditValidator validator= new CustomerEditValidator(customer,customerProfileForm);
+            validator.validate();
 
-            Messages msg = Messages.generateSuccessfulCustomerEditMessage();
-            return ok(Json.toJson(msg.toJsonResponse()));
+            if(validator.isSuccessful()) {
+                CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
+            }
+            return ok(Json.toJson(validator.getMessage()));
 
         } catch (IllegalStateException e){
             return ok(form.errorsAsJson());

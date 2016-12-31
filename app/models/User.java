@@ -108,25 +108,25 @@ public abstract class User extends JongoModel {
 
     //utils
 
-    public static boolean isDoctor(UserForm userForm) {
-        return DoctorDAOWrapper.getInstance().findByUsername(userForm.getUsername()) != null;
+    public static boolean isDoctor(String  username) {
+        return DoctorDAOWrapper.getInstance().findByUsername(username) != null;
     }
 
-    public static boolean isCustomer(UserForm userForm) {
-        return CustomerDAOWrapper.getInstance().findByUsername(userForm.getUsername()) != null;
+    public static boolean isCustomer(String username) {
+        return CustomerDAOWrapper.getInstance().findByUsername(username) != null;
     }
 
-    public static boolean isUsernameTaken(UserSignUpForm userSignUpForm) {
-        return isCustomer(userSignUpForm)|| isDoctor(userSignUpForm);
+    public static boolean isUsernameTaken(String username) {
+        return isCustomer(username)|| isDoctor(username);
     }
 
-    public static User getUser(UserForm userForm){
+    public static User getUser(String username){
         User user = null;
-        if(isCustomer(userForm)){
-            user = CustomerDAOWrapper.getInstance().findByUsername(userForm.getUsername());
+        if(isCustomer(username)){
+            user = CustomerDAOWrapper.getInstance().findByUsername(username);
         }
-        else if(isDoctor(userForm)){
-            user = DoctorDAOWrapper.getInstance().findByUsername(userForm.getUsername());
+        else if(isDoctor(username)){
+            user = DoctorDAOWrapper.getInstance().findByUsername(username);
         }
 
         return user;
