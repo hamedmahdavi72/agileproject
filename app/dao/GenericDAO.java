@@ -10,12 +10,15 @@ import uk.co.panaxiom.playjongo.PlayJongo;
  * Created by HamedMahdavi on 12/13/2016.
  */
 public class GenericDAO<T extends JongoModel> {
-    private  static PlayJongo jongo = JongoInstanceProvider.getInstance();
+    private  PlayJongo jongo ;
     private  Class<T> type;
 
+    public GenericDAO(){
+    }
 
     public GenericDAO(Class<T> type){
         this.type = type;
+        jongo = JongoInstanceProvider.getInstance();
     }
 
 
@@ -34,21 +37,40 @@ public class GenericDAO<T extends JongoModel> {
 
     public   MongoCursor<T> findByFieldName(String fieldName,String fieldValue) {
 
-        return jongo.getCollection(getTypeName()).find("{#: #}", fieldName, fieldValue).as(type);
+        return getCollection().find("{#: #}", fieldName, fieldValue).as(type);
     }
 
     public   T findOneByFieldName(String fieldName, String fieldValue) {
 
-        return jongo.getCollection(getTypeName()).findOne("{#: #}",fieldName, fieldValue).as(type);
+        return getCollection().findOne("{#: #}",fieldName, fieldValue).as(type);
     }
 
     public   MongoCursor<T> findByFieldName(String fieldName, boolean fieldValue) {
 
-        return jongo.getCollection(getTypeName()).find("{#: #}",fieldName, fieldValue).as(type);
+        return getCollection().find("{#: #}",fieldName, fieldValue).as(type);
     }
 
     private String getTypeName() {
         return type.getName();
     }
-    
+
+    public void setJongo(PlayJongo jongo) {
+        this.jongo = jongo;
+    }
+
+    public PlayJongo getJongo() {
+        return jongo;
+    }
+
+    public void setType(Class<T> type) {
+        this.type = type;
+    }
+
+    public Class<T> getType() {
+        return type;
+    }
+
+
 }
+
+
