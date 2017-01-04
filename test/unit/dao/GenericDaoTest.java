@@ -106,5 +106,11 @@ public class GenericDaoTest {
 
     }
 
+    @Test
+    public void testFindOneByFieldName(){
+        Doctor result = daoTestInstance.findOneByFieldName("firstName","Hamed");
+        assertEquals(result.getUsername(),userMock1.getUsername());
+    }
+
 
 }
