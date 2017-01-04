@@ -179,6 +179,7 @@ public class UserRequest extends Controller {
             validator.validate();
 
             if(validator.isSuccessful()) {
+                System.out.println("customer password "+customer.getPassword());
                 CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
             }
             return ok(validator.getMessage().toJsonResponse());

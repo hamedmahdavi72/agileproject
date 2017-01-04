@@ -1,3 +1,5 @@
+package integration;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import config.Messages;
 import controllers.SessionIdPool;

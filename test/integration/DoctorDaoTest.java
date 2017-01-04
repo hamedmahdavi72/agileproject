@@ -1,3 +1,5 @@
+package integration;
+
 import dao.DoctorDAOWrapper;
 import forms.DoctorSignUpForm;
 import forms.SearchForm;

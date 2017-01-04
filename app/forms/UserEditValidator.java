@@ -38,8 +38,7 @@ public abstract class UserEditValidator {
     private void validatePassword() {
         if(getUserProfileForm().getPassword() != null &&
                 getUserProfileForm().getConfirmPassword() != null &&
-                getUserProfileForm().getPassword().equals(getUserProfileForm().getPassword()) &&
-                !getUserProfileForm().getPassword().equals(getUserProfileForm().getPassword())){
+                getUserProfileForm().getPassword().equals(getUserProfileForm().getPassword())){
             if(getUserProfileForm().getPassword().length() >= 6){
                 getUser().setPassword(getUserProfileForm().getPassword());
             }
