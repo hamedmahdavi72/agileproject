@@ -1,6 +1,7 @@
 package dao;
 
 import forms.SearchForm;
+import models.Customer;
 import models.Doctor;
 import org.jongo.MongoCursor;
 
@@ -25,11 +26,18 @@ public class DoctorDAOWrapper {
         doctorDAO = new GenericDAO<>(Doctor.class);
     }
 
+    //just use it for testing
+    public DoctorDAOWrapper(GenericDAO<Doctor> doctorDAO){
+        this.doctorDAO = doctorDAO;
+    }
+
+
+
     public static DoctorDAOWrapper getInstance() {
         return instance;
     }
 
-    public MongoCursor<Doctor> getBySpeciality(String specialityValue) {
+    public MongoCursor<Doctor> findBySpeciality(String specialityValue) {
         return doctorDAO.findByFieldName("speciality", specialityValue);
     }
 
@@ -41,8 +49,8 @@ public class DoctorDAOWrapper {
         return doctorDAO.findOneByFieldName("username", username);
     }
 
-    public Iterable<Doctor> findByAccepted(boolean value) {
-        Iterable<Doctor> doctors = doctorDAO.findByFieldName("accepted", value);
+    public MongoCursor<Doctor> findByAccepted(boolean value) {
+        MongoCursor<Doctor> doctors = doctorDAO.findByFieldName("accepted", value);
         return doctors;
 
     }

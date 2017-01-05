@@ -23,12 +23,12 @@ import static play.test.Helpers.fakeApplication;
 
 public class GenericDaoTest {
 
-    PlayJongo jongoMock;
-    MongoCollection collectionMock;
-    MongoCursor<Doctor> cursor;
-    Doctor userMock1;
-    Doctor userMock2;
-    GenericDAO<Doctor> daoTestInstance;
+
+    private MongoCollection collectionMock;
+    private MongoCursor<Doctor> cursor;
+    private Doctor userMock1;
+    private Doctor userMock2;
+    private GenericDAO<Doctor> daoTestInstance;
     private static FakeApplication fakeApp;
 
 
@@ -46,7 +46,6 @@ public class GenericDaoTest {
     @Before
     public void setupMocks() {
 
-        jongoMock = mock(PlayJongo.class);
         collectionMock = mock(MongoCollection.class, RETURNS_DEEP_STUBS);
         cursor = mock(MongoCursor.class);
         userMock1 = mock(Doctor.class);

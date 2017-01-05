@@ -9,6 +9,10 @@ public class AdminDAOWrapper {
     private GenericDAO<Admin> adminDAO= null;
     private static AdminDAOWrapper instance = new AdminDAOWrapper();
 
+    public AdminDAOWrapper(GenericDAO<Admin> adminDAO){
+        this.adminDAO = adminDAO;
+    }
+
     private AdminDAOWrapper(){
         adminDAO = new GenericDAO<>(Admin.class);
     }

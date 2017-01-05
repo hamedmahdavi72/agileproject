@@ -9,6 +9,11 @@ public class CustomerDAOWrapper {
     private GenericDAO<Customer> customerDAO= null;
     private static CustomerDAOWrapper instance = new CustomerDAOWrapper();
 
+    //just use it for testing!!!!
+    public CustomerDAOWrapper(GenericDAO<Customer> customerDAO){
+        this.customerDAO = customerDAO;
+    }
+
     private CustomerDAOWrapper(){
         customerDAO = new GenericDAO<Customer>(Customer.class);
     }
