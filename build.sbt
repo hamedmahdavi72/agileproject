@@ -10,6 +10,7 @@ libraryDependencies ++= Seq( javaJdbc ,  cache , javaWs, "uk.co.panaxiom" %% "pl
   "org.mockito" % "mockito-all" % "1.10.8", "org.powermock" % "powermock-api-mockito" % "1.6.2",
   "org.powermock" % "powermock-module-junit4" % "1.6.2" )
 
+
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"

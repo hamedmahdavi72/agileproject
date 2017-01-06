@@ -19,6 +19,7 @@ public class Doctor extends User {
     private ArrayList<String> supportedInsuranceCompanies;
     private MongoLocation geoLocation;
     private String medicalOrgId;
+    private String clinicInfo;
 
     public Doctor(){
 
@@ -104,5 +105,14 @@ public class Doctor extends User {
 
     public String getMedicalOrgId() {
         return medicalOrgId;
+    }
+
+
+    public void setClinicInfo(String clinicInfo) {
+        this.clinicInfo = clinicInfo;
+    }
+
+    public String getClinicInfo() {
+        return clinicInfo;
     }
 }
