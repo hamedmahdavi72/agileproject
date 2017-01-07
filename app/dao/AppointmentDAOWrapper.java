@@ -25,7 +25,7 @@ public class AppointmentDAOWrapper {
         return appointmentDAO.findOneByFieldName("_id",id.toString());
     }
 
-    public MongoCursor<Appointment> getAppointmentsAfterSpecificDate(Date date){
+    public MongoCursor<Appointment> getAppointmentsAfterSpecificDate(String doctorUsername, Date date){
         return null;
     }
 
