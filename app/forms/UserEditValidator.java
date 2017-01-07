@@ -22,9 +22,6 @@ public abstract class UserEditValidator {
         validateNationalId();
         validatePassword();
 
-
-
-
     }
 
     public void validate(){
