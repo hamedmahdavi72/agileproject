@@ -14,7 +14,7 @@ import play.twirl.api.Content;
 public class DoctorsHandler extends Controller {
     public static Result doctorPageController(String username){
         if(User.isDoctor(username)){
-            return ok(views.html.user.doctorPageAsUser.render());
+            return ok(views.html.user.doctorPageAsUser.render(username));
         }
         else{
             return notFound();
