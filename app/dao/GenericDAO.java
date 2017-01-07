@@ -2,6 +2,7 @@ package dao;
 
 import models.JongoInstanceProvider;
 import models.JongoModel;
+import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
 import uk.co.panaxiom.playjongo.PlayJongo;
@@ -33,6 +34,7 @@ public class GenericDAO<T extends JongoModel> {
     public void remove(T model) {
         getCollection().remove(model.getId());
     }
+
 
 
     public   MongoCursor<T> findByFieldName(String fieldName,String fieldValue) {

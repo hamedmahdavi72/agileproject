@@ -15,6 +15,10 @@ public class Appointment extends JongoModel {
     private String customerUsername;
     private Date appointmentDate;
 
+    public Appointment(){
+
+    }
+
     public Appointment(String doctorUsername,String customerUsername, Date appointmentDate){
         this.doctorUsername = doctorUsername;
         this.customerUsername = customerUsername;
@@ -30,4 +34,27 @@ public class Appointment extends JongoModel {
 
     }
 
+    public void setCustomerUsername(String customerUsername) {
+        this.customerUsername = customerUsername;
+    }
+
+    public String getCustomerUsername() {
+        return customerUsername;
+    }
+
+    public void setDoctorUsername(String doctorUsername) {
+        this.doctorUsername = doctorUsername;
+    }
+
+    public String getDoctorUsername() {
+        return doctorUsername;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
 }
