@@ -60,4 +60,25 @@ public class SessionIdPool {
     public static HashMap<String, String> getUsernameToSessionIdMap() {
         return usernameToSessionIdMap;
     }
+
+    public static void setUsernameToSessionIdMap(HashMap<String, String> usernameToSessionIdMap) {
+        SessionIdPool.usernameToSessionIdMap = usernameToSessionIdMap;
+    }
+
+    public static void setSessionIdToUsernameMap(HashMap<String, String> sessionIdToUsernameMap) {
+        SessionIdPool.sessionIdToUsernameMap = sessionIdToUsernameMap;
+    }
+
+    public static HashMap<String, String> getSessionIdToUsernameMap() {
+        return sessionIdToUsernameMap;
+    }
+
+    public static void setGenerator(Random generator) {
+        SessionIdPool.generator = generator;
+    }
+
+    public static Random getGenerator() {
+        return generator;
+    }
 }
+
