@@ -53,3 +53,5 @@ GET     /base                       controllers.Application.base()
 GET     /doctors/page/:username     controllers.DoctorsHandler.doctorPageController(username:String)
 
 GET     /doctors/info/:username   controllers.DoctorsHandler.getDoctorInfo(username:String)
+
+POST    /convert/                 controllers.Utils.convertDateToMillisecond()

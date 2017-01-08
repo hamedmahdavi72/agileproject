@@ -47,7 +47,7 @@
 ' 28.09.2006    Hooman Behmanesh	Fix the Weekday bug
 ' 06.06.2008	Hooman Behmanesh	Completely redesigned with Fourmilab date algorithms
 *******************************************************************************/
-document.write("<scr" + "ipt src='assets/js/astro.js'></script>");
+document.write("<scr" + "ipt src='/assets/js/astro.js'></script>");
 
 var dkSolar = 0;
 var dkGregorian = 1;
