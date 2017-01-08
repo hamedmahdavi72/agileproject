@@ -11,8 +11,4 @@ libraryDependencies ++= Seq( javaJdbc ,  cache , javaWs, "uk.co.panaxiom" %% "pl
   "org.powermock" % "powermock-module-junit4" % "1.6.2" )
 
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
-
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
-
-herokuAppName in Compile := "calm-castle-63283"
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )

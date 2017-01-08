@@ -12,11 +12,8 @@ import java.util.Date;
 public class Utils extends Controller {
     public static Result convertDateToMillisecond(){
         String date = request().body().asJson().asText();
-        System.out.println(date);
         Date current = new Date(date);
-
         long milliseconds = current.getTime();
-        System.out.println(milliseconds);
         return ok(Json.toJson(milliseconds));
     }
 }
