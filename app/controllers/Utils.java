@@ -13,7 +13,6 @@ public class Utils extends Controller {
     public static Result convertDateToMillisecond(){
         String date = request().body().asJson().asText();
         Date current = new Date(date);
-
         long milliseconds = current.getTime();
         return ok(Json.toJson(milliseconds));
     }
