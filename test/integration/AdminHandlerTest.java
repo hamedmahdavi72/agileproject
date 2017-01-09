@@ -80,7 +80,7 @@ public class AdminHandlerTest {
 
     @Test
     public void testSuccessfulAdminLoginAndLogout(){
-        
+
         UserForm adminForm = new UserForm();
         adminForm.setPassword("sysadmin");
         adminForm.setUsername("sysadmin");
@@ -95,11 +95,11 @@ public class AdminHandlerTest {
 //        assertEquals(true, isLoggedIn);
 
         //logout
-        request = fakeRequest(GET, "/logout");
+        /*request = fakeRequest(GET, "/logout");
         HashMap<String,String> sessionMap = new HashMap<>();
         sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
         request.session(sessionMap);
-        result = route(request);
+        result = route(request);*/
 
 
 
