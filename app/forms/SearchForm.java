@@ -18,6 +18,8 @@ public class SearchForm {
 
     private String email;
 
+    private String clinicAddress;
+
     public SearchForm(){
 
     }
@@ -89,6 +91,14 @@ public class SearchForm {
         if(firstName == null)
             this.firstName = "";
 
+    }
+
+    public void setClinicAddress(String clinicAddress) {
+        this.clinicAddress = clinicAddress;
+    }
+
+    public String getClinicAddress() {
+        return clinicAddress;
     }
 
     public String getEmail() {

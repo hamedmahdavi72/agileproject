@@ -35,6 +35,7 @@ public class Search extends Controller {
                     searchForm1.setLastName(doctor.getLastName());
                     searchForm1.setSpeciality(doctor.getSpeciality());
                     searchForm1.setEmail(doctor.getEmail());
+                    searchForm1.setClinicAddress(doctor.getClinicAddress());
                     results.add(searchForm1);
                 }
 

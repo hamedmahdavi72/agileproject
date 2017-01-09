@@ -64,6 +64,7 @@ app.controller('searchapp',function($scope,$http, $window){
         else {
             $scope.canSearch = true;
             $scope.searchQuery.areaName = $scope.areaName;
+            $scope.error = "";
         }
 
        // console.log($scope.searchQuery);
