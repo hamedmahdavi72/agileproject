@@ -80,7 +80,7 @@ public class AdminHandlerTest {
 
     @Test
     public void testSuccessfulAdminLoginAndLogout(){
-        //here is fixed
+        
         UserForm adminForm = new UserForm();
         adminForm.setPassword("sysadmin");
         adminForm.setUsername("sysadmin");
