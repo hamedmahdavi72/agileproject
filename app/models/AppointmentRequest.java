@@ -9,9 +9,9 @@ public class AppointmentRequest extends JongoModel{
 
     private String customerUsername;
     private String doctorUsername;
-    private AppointmentInterval appointmentInterval;
+    private AppointmentInterval[] appointmentInterval;
 
-    public AppointmentRequest(String customerUsername, String doctorUsername, AppointmentInterval appointmentInterval){
+    public AppointmentRequest(String customerUsername, String doctorUsername, AppointmentInterval[] appointmentInterval){
         this.customerUsername = customerUsername;
         this.doctorUsername = doctorUsername;
         this.appointmentInterval = appointmentInterval;
@@ -33,11 +33,11 @@ public class AppointmentRequest extends JongoModel{
         return doctorUsername;
     }
 
-    public void setAppointmentInterval(AppointmentInterval appointmentInterval) {
+    public void setAppointmentInterval(AppointmentInterval[] appointmentInterval) {
         this.appointmentInterval = appointmentInterval;
     }
 
-    public AppointmentInterval getAppointmentInterval() {
+    public AppointmentInterval[] getAppointmentInterval() {
         return appointmentInterval;
     }
 }
