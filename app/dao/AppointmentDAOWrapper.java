@@ -48,5 +48,5 @@ public class AppointmentDAOWrapper {
     public void setAppointmentDAO(GenericDAO<Appointment> appointmentDAO) {
         this.appointmentDAO = appointmentDAO;
     }
-
+}
 
