@@ -98,9 +98,9 @@ public class AdminHandlerTest {
         //logout
         RequestBuilder logoutRequest = fakeRequest(GET, "/logout");
         assertNotNull(logoutRequest);
-       /* HashMap<String,String> sessionMap = new HashMap<>();
+        HashMap<String,String> sessionMap = new HashMap<>();
         sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
-        logoutRequest.session(sessionMap);
+        /*logoutRequest.session(sessionMap);
         route(request);*/
 
 
