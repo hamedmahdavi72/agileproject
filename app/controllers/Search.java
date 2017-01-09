@@ -3,6 +3,7 @@ package controllers;
 import dao.DoctorDAOWrapper;
 import forms.SearchForm;
 import models.Doctor;
+import models.User;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;

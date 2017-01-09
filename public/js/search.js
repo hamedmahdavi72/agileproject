@@ -6,7 +6,7 @@ var app = angular.module('search',["ngRoute","headerModule"]);
 
 
 
-app.controller('searchapp',function($scope,$http){
+app.controller('searchapp',function($scope,$http, $window){
 
     $scope.places= [];
     $scope.noResultsHide = true;
@@ -17,15 +17,17 @@ app.controller('searchapp',function($scope,$http){
     }
 
     $scope.goToDoctor = function(id){
-        console.log(id);
+        // console.log(id);
+        var uri = '/doctors/page/'+id;
+        // console.log(uri);
         $http({
-            url: '/doctorPage/',
-            method: "POST",
-            data: id
+            url: uri,
+            method: "GET"
         })
             .then(function (response) {
                     if (response.data != null) {
-                        console.log(response.data);
+                        $window.location.href=uri;
+                        // console.log(response.data);
                     }
                     //console.log(response.data);
                 },
