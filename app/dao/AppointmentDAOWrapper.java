@@ -12,6 +12,8 @@ import java.util.Date;
 public class AppointmentDAOWrapper {
     private GenericDAO<Appointment> appointmentDAO = null;
     private static AppointmentDAOWrapper instance = new AppointmentDAOWrapper();
+    private final String FIND_AFTER_SPECIFIC_DATE_QUERY = "{$and:[{appointmentDate: {$gte: #}},{doctorUsername: #}]}";
+
 
     private AppointmentDAOWrapper(){
         this.appointmentDAO = new GenericDAO<>(Appointment.class);
@@ -21,13 +23,21 @@ public class AppointmentDAOWrapper {
         return instance;
     }
 
-    public Appointment findById(ObjectId id){
-        return appointmentDAO.findOneByFieldName("_id",id.toString());
+
+
+    public MongoCursor<Appointment> findByCustomerUsername(String username){
+        return appointmentDAO.findByFieldName("customerUsername",username);
     }
 
-    public MongoCursor<Appointment> getAppointmentsAfterSpecificDate(String doctorUsername, Date date){
+    public MongoCursor<Appointment> findByDoctorUsername(String username){
+        return appointmentDAO.findByFieldName("doctorUsername",username);
+    }
 
-        return null;
+
+
+    public MongoCursor<Appointment> getAppointmentsAfterSpecificDate(String doctorUsername, Date date){
+        return appointmentDAO.getCollection().find(FIND_AFTER_SPECIFIC_DATE_QUERY,date,doctorUsername)
+                .as(Appointment.class);
     }
 
 
@@ -40,4 +50,3 @@ public class AppointmentDAOWrapper {
     }
 
 
-}
