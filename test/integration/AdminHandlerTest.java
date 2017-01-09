@@ -1,4 +1,4 @@
-package integration.AdminTest;
+package integration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import config.Messages;
@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import play.Application;
 import play.libs.Json;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.test.Helpers;
 
@@ -76,6 +77,39 @@ public class AdminHandlerTest {
 
         boolean isLoggedIn = SessionIdPool.isLoggedIn(adminForm.getUsername());
         assertEquals(false, isLoggedIn);
+    }
+
+    @Test
+    public void testSuccessfulAdminLoginAndLogout(){
+
+        UserForm adminForm = new UserForm();
+        adminForm.setPassword("sysadmin");
+        adminForm.setUsername("sysadmin");
+        JsonNode jsonBody = Json.toJson(adminForm);
+        RequestBuilder request = fakeRequest(POST,"/admin/").bodyJson(jsonBody);
+        Result result = route(request);
+        JsonNode response = Json.parse(contentAsString(result));
+        JsonNode expected = Messages.generateSuccessfulAdminLoginMessage().toJsonResponse();
+        assertEquals(expected, response);
+
+        System.out.println("tests started here");
+        SessionIdPool.getUsernameToSessionIdMap().forEach((key,value) -> System.out.println(key + " " + value));
+
+        boolean isLoggedIn = SessionIdPool.isLoggedIn(adminForm.getUsername());
+        assertEquals(true, isLoggedIn);
+
+        //logout
+        RequestBuilder logoutRequest = fakeRequest(GET, "/logout");
+
+        HashMap<String,String> sessionMap = new HashMap<>();
+        sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
+        logoutRequest.session(sessionMap);
+        route(logoutRequest);
+
+
+        assertEquals(false, SessionIdPool.isLoggedIn(adminForm.getUsername()));
+
+
     }
 
 
