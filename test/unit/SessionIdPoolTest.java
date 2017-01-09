@@ -35,10 +35,15 @@ public class SessionIdPoolTest {
 
     @AfterClass
     public static void stopApp(){
+        //for removing mock from static values
+        SessionIdPool.setGenerator(new Random());
+        SessionIdPool.setSessionIdToUsernameMap(new HashMap<>());
+        SessionIdPool.setUsernameToSessionIdMap(new HashMap<>());
         Helpers.stop(fakeApp);
+
     }
 
-    @Before
+   @Before
     public  void setUp(){
         id2UserMapMock = mock(HashMap.class);
         user2IdMapMock = mock(HashMap.class);
@@ -64,7 +69,7 @@ public class SessionIdPoolTest {
 
     }
 
-    @Test
+   @Test
     public void testIsSessionIdValid(){
         boolean result = sessionIdPoolIns.isSessionIdValid("1994ala");
         boolean result1 = sessionIdPoolIns.isSessionIdValid("94ala");
