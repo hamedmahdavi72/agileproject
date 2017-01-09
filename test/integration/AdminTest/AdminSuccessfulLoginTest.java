@@ -57,6 +57,7 @@ public class AdminSuccessfulLoginTest {
         JsonNode expected = Messages.generateSuccessfulAdminLoginMessage().toJsonResponse();
         assertEquals(expected, response);
 
+        System.out.println("tests started here");
         SessionIdPool.getUsernameToSessionIdMap().forEach((key,value) -> System.out.println(key + " " + value));
 
         boolean isLoggedIn = SessionIdPool.isLoggedIn(adminForm.getUsername());
