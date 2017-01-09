@@ -67,6 +67,7 @@ audio:not([controls]) {
 
 html {
   font-size: 100%;
+  font-family: "/assets/fonts/IRLotus.ttf";
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -223,7 +224,7 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "/assets/fonts/IRLotus.ttf", IRLotus;/*"Helvetica Neue", Helvetica, Arial, sans-serif;*/
   font-size: 14px;
   line-height: 20px;
   color: #333333;
