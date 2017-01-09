@@ -77,6 +77,7 @@ public class AdminHandlerTest {
         assertEquals(false, isLoggedIn);
     }
 
+
     @Test
     public void testSuccessfulAdminLoginAndLogout(){
         //here is fixed
