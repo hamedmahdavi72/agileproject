@@ -18,6 +18,7 @@ import play.test.Helpers;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static play.test.Helpers.fakeApplication;
 import static play.mvc.Http.RequestBuilder;
 import static play.test.Helpers.fakeRequest;
@@ -95,11 +96,12 @@ public class AdminHandlerTest {
 //        assertEquals(true, isLoggedIn);
 
         //logout
-        /*request = fakeRequest(GET, "/logout");
-        HashMap<String,String> sessionMap = new HashMap<>();
+        RequestBuilder logoutRequest = fakeRequest(GET, "/logout");
+        assertNotNull(logoutRequest);
+       /* HashMap<String,String> sessionMap = new HashMap<>();
         sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
-        request.session(sessionMap);
-        result = route(request);*/
+        logoutRequest.session(sessionMap);
+        route(request);*/
 
 
 
