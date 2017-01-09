@@ -100,8 +100,8 @@ public class AdminHandlerTest {
         assertNotNull(logoutRequest);
         HashMap<String,String> sessionMap = new HashMap<>();
         sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
-        /*logoutRequest.session(sessionMap);
-        route(request);*/
+        logoutRequest.session(sessionMap);
+        route(request);
 
 
 
