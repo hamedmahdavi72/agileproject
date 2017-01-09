@@ -1,4 +1,4 @@
-package integration;
+package integration.AdminTest;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import config.Messages;
@@ -79,36 +79,7 @@ public class AdminHandlerTest {
     }
 
 
-    @Test
-    public void testSuccessfulAdminLoginAndLogout(){
 
-        UserForm adminForm = new UserForm();
-        adminForm.setPassword("sysadmin");
-        adminForm.setUsername("sysadmin");
-        JsonNode jsonBody = Json.toJson(adminForm);
-        RequestBuilder request = fakeRequest(POST,"/admin/").bodyJson(jsonBody);
-        Result result = route(request);
-        JsonNode response = Json.parse(contentAsString(result));
-        JsonNode expected = Messages.generateSuccessfulAdminLoginMessage().toJsonResponse();
-        assertEquals(expected, response);
-
-//        boolean isLoggedIn = SessionIdPool.isLoggedIn(adminForm.getUsername());
-//        assertEquals(true, isLoggedIn);
-
-        //logout
-        RequestBuilder logoutRequest = fakeRequest(GET, "/logout");
-        assertNotNull(logoutRequest);
-        HashMap<String,String> sessionMap = new HashMap<>();
-        sessionMap.put("sessionId",SessionIdPool.getSessionId(adminForm.getUsername()));
-        logoutRequest.session(sessionMap);
-        route(request);
-
-
-
-        assertEquals(false, SessionIdPool.isLoggedIn(adminForm.getUsername()));
-
-
-    }
 
 
 

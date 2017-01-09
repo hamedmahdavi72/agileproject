@@ -41,20 +41,6 @@ public class UserRequest extends Controller {
 
     }
 
-    public static Messages loginAdminToSystem(Admin admin, UserForm userForm){
-        if(admin != null && admin.getPassword().equals(userForm.getPassword())){
-            session().clear();
-            session("sessionId", SessionIdPool.addUser(admin.getUsername()));
-            return Messages.generateSuccessfulAdminLoginMessage();
-        } else if (admin != null && !admin.getPassword().equals(userForm.getPassword())){
-
-            return Messages.generateWrongPasswordMessages();
-        } else{
-
-            return Messages.generateInvalidUsernameMessages();
-        }
-    }
-
 
     public static Result loginController() {
 

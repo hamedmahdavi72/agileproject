@@ -1,6 +1,7 @@
 package controllers;
 
 
+import config.Messages;
 import dao.AdminDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.UserForm;
@@ -21,7 +22,20 @@ import java.util.Map;
  */
 public class AdminHandler extends Controller {
 
-    static UserRequest userRequest = new UserRequest();
+    public static Messages loginAdminToSystem(Admin admin, UserForm userForm){
+        if(admin != null && admin.getPassword().equals(userForm.getPassword())){
+            session().clear();
+            session("sessionId", SessionIdPool.addUser(admin.getUsername()));
+            return Messages.generateSuccessfulAdminLoginMessage();
+        } else if (admin != null && !admin.getPassword().equals(userForm.getPassword())){
+
+            return Messages.generateWrongPasswordMessages();
+        } else{
+
+            return Messages.generateInvalidUsernameMessages();
+        }
+    }
+
     static Admin admin;
     public static Result adminLoginController(){
         if(request().method().equalsIgnoreCase("post")){
@@ -29,7 +43,7 @@ public class AdminHandler extends Controller {
             try{
                 UserForm userForm = form.get();
                 admin = AdminDAOWrapper.getInstance().findByUsername(userForm.getUsername());
-                return ok(userRequest.loginAdminToSystem(admin, userForm).toJsonResponse());
+                return ok(loginAdminToSystem(admin, userForm).toJsonResponse());
 
             }catch (IllegalStateException e){
                 return ok(form.errorsAsJson());
@@ -65,6 +79,7 @@ public class AdminHandler extends Controller {
         obj.put("pending", DoctorDAOWrapper.getInstance().findByAccepted(false));
         return ok(Json.toJson(obj));
     }
+
 
 
 }
