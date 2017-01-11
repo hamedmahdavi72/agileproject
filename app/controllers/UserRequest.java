@@ -209,13 +209,14 @@ public class UserRequest extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result saveAppointmentRequest() {
+
         if (User.isCustomer(getUsername())) {
 
             Form<AppointmentRequestForm> form = Form.form(AppointmentRequestForm.class).bindFromRequest();
             AppointmentRequestForm appointmentRequestForm = form.get();
             AppointmentRequest appointmentRequest = new AppointmentRequest(appointmentRequestForm,getUsername());
             AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appointmentRequest);
-            ok();
+            return ok();
         }
         else{
             return badRequest();
