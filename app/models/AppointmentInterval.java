@@ -7,13 +7,13 @@ import java.util.Date;
  */
 public class AppointmentInterval {
     private Date date;
-    private String startTime; //format sample 16:00
-    private String endTime; // //format sample 19:00
+    private int fromHour; //format sample 16:00
+    private int toHour; // //format sample 19:00
 
-    public AppointmentInterval(Date date, String startTime, String endTime){
+    public AppointmentInterval(Date date, int fromHour, int toHour){
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.fromHour = fromHour;
+        this.toHour = toHour;
     }
 
     public void setDate(Date date) {
@@ -24,19 +24,19 @@ public class AppointmentInterval {
         return date;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setFromHour(int fromHour) {
+        this.fromHour = fromHour;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public int getFromHour() {
+        return fromHour;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setToHour(int toHour) {
+        this.toHour = toHour;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public int getToHour() {
+        return toHour;
     }
 }
