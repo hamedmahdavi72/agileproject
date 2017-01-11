@@ -1,0 +1,58 @@
+ <div>
+        <div class="container span9" style="padding-top: 60px;">
+            <h1 class="page-header">ویرایش صفحه شخصی</h1>
+            <div class="row">
+                    <!-- edit form column -->
+                <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                    <h3>مشخصات فردی</h3>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">نام</label>
+                            <div class="col-lg-8">
+                                <input class="span4 form-control"  ng-model="firstName" placeholder={{firstNameValue}} type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">نام خانوادگی</label>
+                            <div class="col-lg-8">
+                                <input class="span4 form-control" ng-model="lastName" placeholder="{{lastNameValue}}" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">شماره تلفن همراه</label>
+                            <div class="col-lg-8">
+                                <input class="span4 form-control" ng-model="mobileNumber" placeholder="{{mobileNumberValue}}" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">کد ملی</label>
+                            <div class="col-lg-8">
+                                <input class="span4 form-control" ng-model="nationalId" placeholder="{{nationalIdValue}}" type="text">
+                                <p ng-model="nationalIdError" ng-Hide="hideErrorNationalId" style="color: red">{{ErrorvalueNationalId}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">گذرواژه</label>
+                            <div class="col-md-8">
+                                <input class="span4 form-control" ng-model="password" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">تکرار گذرواژه</label>
+                            <div class="col-md-8">
+                                <input class="span4 form-control"  ng-model="confirmPassword" type="password">
+                                <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input class="btn btn-primary" value="ذخیره تغییرات" type="button" ng-click="send()">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>

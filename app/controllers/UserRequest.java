@@ -211,7 +211,7 @@ public class UserRequest extends Controller {
     public static Result saveAppointmentRequest() {
 
         if (User.isCustomer(getUsername())) {
-
+            System.out.println(request().body().asJson());
             Form<AppointmentRequestForm> form = Form.form(AppointmentRequestForm.class).bindFromRequest();
             AppointmentRequestForm appointmentRequestForm = form.get();
             AppointmentRequest appointmentRequest = new AppointmentRequest(appointmentRequestForm,getUsername());
@@ -223,6 +223,16 @@ public class UserRequest extends Controller {
         }
 
 
+    }
+
+    public static Result docCalendar(){
+        Content html = views.html.user.doctor.dashboard.calendar.render();
+        return ok(html);
+    }
+
+    public static Result docInfo(){
+        Content html = views.html.user.doctor.dashboard.profile.render();
+        return ok(html);
     }
 }
 

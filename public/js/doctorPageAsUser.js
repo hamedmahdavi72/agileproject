@@ -3,12 +3,13 @@
  */
 var app = angular.module('drPageAsUser', ["ngRoute","headerModule"]);
 
-app.controller('reserve', function($scope, $http) {
+app.controller('reserve', function($scope, $http, $window) {
 
     $scope.reserved = true;
     $scope.message = false;
     var cursor = 0;
     var long = 0;
+    var doctorUsername = $window.infoURI.split("/")[3];
     $scope.choices = [{date:"",name:"false",id: 'درخواست1'}];
 
     $scope.appointments = [];
@@ -45,10 +46,17 @@ app.controller('reserve', function($scope, $http) {
             $scope.reserved = false;
             $scope.message = true;
             $scope.reservedMessage = "درخواست رزرو با موفقیت ثبت و ارسال شد.";
+
+            $scope.appointmentRequest = new Object();
+            $scope.appointmentRequest.interval = $scope.appointments;
+            $scope.appointmentRequest.doctorUsername = doctorUsername;
+
+            console.log($scope.appointmentRequest);
+
             $http({
-                url: '/reserve/',
+                url: '/saveAppointments/',
                 method: "POST",
-                data: $scope.appointments
+                data: angular.toJson($scope.appointmentRequest)
             })
                 .then(function(response) {
                     if(response.data != null){

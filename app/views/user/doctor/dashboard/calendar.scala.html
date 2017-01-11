@@ -1,0 +1,28 @@
+<h2>
+    تنظیم تقویم مراجعه کنندگان
+</h2>
+
+
+<hr>
+<P>لطفا بازه ی زمانی که ارائه به مراجعین در نظر دارید و زمانی که به برای هر مراجعه کننده اختصاص می دهید را مشخص
+  کنید.</P>
+
+
+<Form Name="myForm" Method="Post" Action="">
+  <input type="text" name="myFirstDate" size="30" placeholder="از این تاریخ" >
+  <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calFirstDate');
+  return false;"
+  HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
+  alt="Select Date">
+  </a>
+  <input type="text" name="mySecondDate" size="30" placeholder="تا این تاریخ" >
+  <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calSecondDate');
+  return false;"
+  HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
+  alt="Select Date">
+  </a>
+  زمان هر ویزیت: <input type="text" name="visitLength" size="30" placeholder="زمان به دقیقه">
+  <label>
+    <input type="submit" value="Submit">
+  </label>
+</Form>

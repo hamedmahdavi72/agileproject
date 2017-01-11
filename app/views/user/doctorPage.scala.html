@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <title>صفحه شخصی</title>
         <link rel="stylesheet" media="screen" href="/assets/css/bootstrap.css">
-        <link href="assets/css/simple-sidebar.css" rel="stylesheet">
+        <link href="/assets/css/simple-sidebar.css" rel="stylesheet">
         <script src="/assets/javascripts/angular.min.js" type="text/javascript"></script>
         <script src="/assets/js/doctorPage.js" type="text/javascript"></script>
-        <script src="assets/js/headerDirective.js" type="text/javascript"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+        <script src="/assets/js/headerDirective.js" type="text/javascript"></script>
+        <script src="/assets/javascripts/angular-route.js"></script>
+        <script src="/assets/javascripts/angular-route.js"></script>
 
             <!--calendar js-->
         <Script Language="JavaScript" Src="assets/js/dateScript.js"></Script>
@@ -79,10 +80,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">تقویم کاری</a>
+                            <a href="#docInfo">مشخصات فردی</a>
                         </li>
                         <li>
-                            <a href="#">قرار ملاقات</a>
+                            <a href="#docCalendar">تقویم کاری</a>
+                        </li>
+                        <li>
+                            <a href="#doctorAppointments">قرار ملاقات</a>
                         </li>
                         <li>
                             <a href="#">بیماران</a>
@@ -105,35 +109,9 @@
             </div>
 
 
-            <div>
-                <h2>
-    تنظیم تقویم مراجعه کنندگان
-                </h2>
+            <div ng-controller="panel" style="position:absolute;right: 25%" ng-view>
 
 
-                <hr>
-                <P>لطفا بازه ی زمانی که ارائه به مراجعین در نظر دارید و زمانی که به برای هر مراجعه کننده اختصاص می دهید را مشخص
-                    کنید.</P>
-
-
-                <Form Name="myForm" Method="Post" Action="">
-                    <input type="text" name="myFirstDate" size="30" placeholder="از این تاریخ" >
-                    <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calFirstDate');
-                    return false;"
-                    HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
-                    alt="Select Date">
-                    </a>
-                    <input type="text" name="mySecondDate" size="30" placeholder="تا این تاریخ" >
-                    <a href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('calSecondDate');
-                    return false;"
-                    HIDEFOCUS><img name="popcal" align="absmiddle" src="assets/img/calbtn.gif" mce_src="assets/img/calbtn.gif" border="0"
-                    alt="Select Date">
-                    </a>
-                    زمان هر ویزیت: <input type="text" name="visitLength" size="30" placeholder="زمان به دقیقه">
-                    <label>
-                        <input type="submit" value="Submit">
-                    </label>
-                </Form>
             </div>
 
             .

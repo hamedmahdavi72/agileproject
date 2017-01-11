@@ -1,0 +1,11 @@
+<div ng-repeat="user in appointments.users">
+        <div style="width: 300px; height: 400px; border: 2px solid white;background: #74ff78">
+            <div>نام بیمار:{{user.firstName}} {{user.lastName}}</div>
+            <div ng-repeat="appointment in appointments.appointment">
+                <div>از ساعت: {{appointment.fromHour}}</div>
+                <div>تا ساعت: {{appointment.toHour}}</div>
+                <div>تاریخ: {{appointment.date}}</div>
+                <div>***************</div>
+            </div>
+        </div>
+</div>
