@@ -45,7 +45,6 @@ app.controller('reserve', function($scope, $http, $window) {
             //console.log($scope.appointments);
             $scope.reserved = false;
             $scope.message = true;
-            $scope.reservedMessage = "درخواست رزرو با موفقیت ثبت و ارسال شد.";
 
             $scope.appointmentRequest = new Object();
             $scope.appointmentRequest.intervals = $scope.appointments;
@@ -60,10 +59,8 @@ app.controller('reserve', function($scope, $http, $window) {
             })
                 .then(function(response) {
                     if(response.data != null){
-                        if(response.data.status == "ok"){
-
+                        $scope.reservedMessage = "درخواست رزرو با موفقیت ثبت و ارسال شد.";
                         }
-                    }
                     },
                     function(response) { // optional
                         // failed
