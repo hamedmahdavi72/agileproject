@@ -4,10 +4,12 @@ import models.AppointmentInterval;
 
 import java.util.Date;
 
-class AppointmentIntervalForm {
-    long date;
-    int fromHour;
-    int toHour;
+public class AppointmentIntervalForm {
+    private long date;
+    private int fromHour;
+    private int toHour;
+
+    public AppointmentIntervalForm(){}
 
     public int getFromHour() {
         return fromHour;

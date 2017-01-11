@@ -5,6 +5,7 @@ import models.AppointmentInterval;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -12,9 +13,10 @@ import java.util.Date;
  */
 public class AppointmentRequestForm {
 
-    String doctorUsername;
-    ArrayList<AppointmentIntervalForm> intervals;
+    private String doctorUsername;
+    private ArrayList<AppointmentIntervalForm> intervals;
 
+    public AppointmentRequestForm(){}
 
     public void setDoctorUsername(String doctorUsername) {
         this.doctorUsername = doctorUsername;
@@ -31,7 +33,6 @@ public class AppointmentRequestForm {
     public ArrayList<AppointmentIntervalForm> getIntervals() {
         return intervals;
     }
-
 
     public ArrayList<AppointmentInterval> generateAppointmentIntervals(){
         ArrayList<AppointmentInterval> result = new ArrayList<>();
