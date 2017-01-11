@@ -48,7 +48,7 @@ app.controller('reserve', function($scope, $http, $window) {
             $scope.reservedMessage = "درخواست رزرو با موفقیت ثبت و ارسال شد.";
 
             $scope.appointmentRequest = new Object();
-            $scope.appointmentRequest.interval = $scope.appointments;
+            $scope.appointmentRequest.intervals = $scope.appointments;
             $scope.appointmentRequest.doctorUsername = doctorUsername;
 
             console.log($scope.appointmentRequest);
