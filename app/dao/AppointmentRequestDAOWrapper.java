@@ -2,6 +2,7 @@ package dao;
 
 import models.AppointmentRequest;
 import org.bson.types.ObjectId;
+import org.jongo.MongoCursor;
 
 /**
  * Created by hamed on 1/8/17 AD.
@@ -18,8 +19,8 @@ public class AppointmentRequestDAOWrapper {
         return instance;
     }
 
-    public AppointmentRequest findById(ObjectId id){
-        return appointmentRequestDAO.findOneByFieldName("_id",id.toString());
+    public MongoCursor<AppointmentRequest> findByDoctorUsername(String doctorUsername){
+        return appointmentRequestDAO.findByFieldName("doctorUsername",doctorUsername);
     }
 
     public void setAppointmentRequestDAO(GenericDAO<AppointmentRequest> appointmentRequestDAO) {

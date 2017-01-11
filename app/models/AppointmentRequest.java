@@ -1,6 +1,9 @@
 package models;
 
+import forms.AppointmentRequestForm;
 import org.joda.time.Interval;
+
+import java.util.ArrayList;
 
 /**
  * Created by HamedMahdavi on 1/7/2017.
@@ -9,12 +12,12 @@ public class AppointmentRequest extends JongoModel{
 
     private String customerUsername;
     private String doctorUsername;
-    private AppointmentInterval[] appointmentInterval;
+    private ArrayList<AppointmentInterval> appointmentInterval;
 
-    public AppointmentRequest(String customerUsername, String doctorUsername, AppointmentInterval[] appointmentInterval){
+    public AppointmentRequest(AppointmentRequestForm form,String customerUsername){
         this.customerUsername = customerUsername;
-        this.doctorUsername = doctorUsername;
-        this.appointmentInterval = appointmentInterval;
+        this.doctorUsername = form.getDoctorUsername();
+        this.appointmentInterval = form.generateAppointmentIntervals();
     }
 
     public void setCustomerUsername(String customerUsername) {
@@ -33,11 +36,11 @@ public class AppointmentRequest extends JongoModel{
         return doctorUsername;
     }
 
-    public void setAppointmentInterval(AppointmentInterval[] appointmentInterval) {
+    public void setAppointmentInterval(ArrayList<AppointmentInterval> appointmentInterval) {
         this.appointmentInterval = appointmentInterval;
     }
 
-    public AppointmentInterval[] getAppointmentInterval() {
+    public ArrayList<AppointmentInterval> getAppointmentInterval() {
         return appointmentInterval;
     }
 }

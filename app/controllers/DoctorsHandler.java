@@ -21,7 +21,7 @@ public class DoctorsHandler extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result doctorPageController(String username){
-        if(User.isDoctor(username)){
+        if(User.isCustomer(username)){
             return ok(views.html.user.doctorPageAsUser.render(username));
         }
         else{
@@ -36,16 +36,21 @@ public class DoctorsHandler extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result getDoctorAppointments(String username){
-        if(User.isDoctor(username)){
+    public static Result getDoctorAppointments(){
 
-            Date dateobj = new Date();
+        if(User.isDoctor(getUsername())){
+
+            Date nowDate = new Date();
             MongoCursor<Appointment> appointments = AppointmentDAOWrapper.getInstance().
-                    getAppointmentsAfterSpecificDate(username,dateobj);
+                    getAppointmentsAfterSpecificDate(getUsername(),nowDate);
             return ok(Json.toJson(appointments));
         }
         else
-            return null;
+            return notFound();
+    }
+
+    private static String getUsername() {
+        return SessionIdPool.getUsername(session().get("sessionId"));
     }
 
 
