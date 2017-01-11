@@ -13,11 +13,13 @@ public class AppointmentRequest extends JongoModel{
     private String customerUsername;
     private String doctorUsername;
     private ArrayList<AppointmentInterval> appointmentInterval;
+    private boolean isAnswered;
 
     public AppointmentRequest(AppointmentRequestForm form,String customerUsername){
         this.customerUsername = customerUsername;
         this.doctorUsername = form.getDoctorUsername();
         this.appointmentInterval = form.generateAppointmentIntervals();
+        this.isAnswered = false;
     }
 
     public void setCustomerUsername(String customerUsername) {
@@ -42,5 +44,13 @@ public class AppointmentRequest extends JongoModel{
 
     public ArrayList<AppointmentInterval> getAppointmentInterval() {
         return appointmentInterval;
+    }
+
+    public boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswered(boolean answered) {
+        isAnswered = answered;
     }
 }

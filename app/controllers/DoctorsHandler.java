@@ -1,9 +1,11 @@
 package controllers;
 
 import dao.AppointmentDAOWrapper;
+import dao.AppointmentRequestDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.DoctorInfoForm;
 import models.Appointment;
+import models.AppointmentRequest;
 import models.User;
 import org.jongo.MongoCursor;
 import play.libs.Json;
@@ -48,6 +50,19 @@ public class DoctorsHandler extends Controller {
         else
             return notFound();
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getDoctorAppointmentRequests(){
+        if(User.isDoctor(getUsername())){
+            MongoCursor<AppointmentRequest> result = AppointmentRequestDAOWrapper.getInstance()
+                    .findNotAnsweredRequests(getUsername());
+            return ok(Json.toJson(result));
+        }
+        else
+            return notFound();
+    }
+
+
 
     private static String getUsername() {
         return SessionIdPool.getUsername(session().get("sessionId"));

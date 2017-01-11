@@ -10,6 +10,7 @@ import org.jongo.MongoCursor;
 public class AppointmentRequestDAOWrapper {
     private GenericDAO<AppointmentRequest> appointmentRequestDAO = null;
     private static AppointmentRequestDAOWrapper instance = new AppointmentRequestDAOWrapper();
+    private String FIND_NOT_ANSWERED_QUERY = "{$and: [{doctorUsername : #}, {isAnswered: false}]}";
 
     private AppointmentRequestDAOWrapper(){
         this.appointmentRequestDAO = new GenericDAO<>(AppointmentRequest.class);
@@ -22,6 +23,13 @@ public class AppointmentRequestDAOWrapper {
     public MongoCursor<AppointmentRequest> findByDoctorUsername(String doctorUsername){
         return appointmentRequestDAO.findByFieldName("doctorUsername",doctorUsername);
     }
+
+    public MongoCursor<AppointmentRequest> findNotAnsweredRequests(String doctorUsername){
+        return appointmentRequestDAO.getCollection().find(FIND_NOT_ANSWERED_QUERY,doctorUsername)
+                .as(AppointmentRequest.class);
+    }
+
+
 
     public void setAppointmentRequestDAO(GenericDAO<AppointmentRequest> appointmentRequestDAO) {
         this.appointmentRequestDAO = appointmentRequestDAO;
