@@ -1,11 +1,15 @@
- <div style="display:inline-block; margin-left: 5px;font-size:16px;width: 300px; height: 200px; border: 2px solid white;background: #caffb9" ng-repeat="appointment in appointments">
-            <div style="position:relative;top:25%; right: 37%">
-                <div>نام بیمار:{{appointment.customerUsername}}</div>
-                <div ng-repeat="interval in appointment.appointmentInterval">
-                    <div>از ساعت: {{interval.fromHour}}</div>
-                    <div>تا ساعت: {{interval.toHour}}</div>
-                    <div>تاریخ: {{interval.date}}</div>
-                    <div><button class="btn btn-success">قبول</button> <button class="btn btn-danger">رد</button></div>
+<div>
+    <div style="display:inline-block; margin-left: 5px;font-size:16px;width: 300px; height: auto; border: 2px solid white;background: #a9a9a9" ng-repeat="appointment in appointments">
+                <div>
+                    <div><strong style="font-size: 24px">نام بیمار:{{appointment.customerUsername}}</strong></div>
+                    <div style="position: relative; background: white; width: inherit; height: auto; border: 1px dashed blue; margin-bottom: 1px;" ng-repeat="interval in appointment.appointmentInterval">
+                       <div style="position: relative; top: 5%; right: 37%;">
+                            <div>از ساعت: {{interval.fromHour}}</div>
+                            <div>تا ساعت: {{interval.toHour}}</div>
+                            <div>تاریخ: {{interval.date}}</div>
+                       </div>
+                    </div>
                 </div>
-            </div>
+         @*<div><button class="btn btn-success">قبول</button> <button class="btn btn-danger">رد</button></div>*@
+    </div>
 </div>
