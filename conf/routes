@@ -54,7 +54,7 @@ GET     /doctors/page/:username     controllers.DoctorsHandler.doctorPageControl
 
 GET     /doctors/info/:username   controllers.DoctorsHandler.getDoctorInfo(username:String)
 
-GET     /doctor/appointments       controllers.DoctorsHandler.getDoctorAppointments()
+GET     /doctor/appointments       controllers.DoctorsHandler.getDoctorAppointmentRequests()
 
 POST    /saveAppointments/          controllers.UserRequest.saveAppointmentRequest()
 
@@ -63,3 +63,5 @@ POST    /convert/                 controllers.Utils.convertDateToMillisecond()
 GET     /docInfo                    controllers.UserRequest.docInfo()
 
 GET     /docCalendar                controllers.UserRequest.docCalendar()
+
+GET     /doctorAppointments         controllers.DoctorsHandler.getAppointmentPanel()

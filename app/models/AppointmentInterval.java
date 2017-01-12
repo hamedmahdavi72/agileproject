@@ -10,6 +10,8 @@ public class AppointmentInterval {
     private int fromHour; //format sample 16:00
     private int toHour; // //format sample 19:00
 
+    public AppointmentInterval(){}
+
     public AppointmentInterval(Date date, int fromHour, int toHour){
         this.date = date;
         this.fromHour = fromHour;

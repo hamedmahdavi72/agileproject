@@ -63,6 +63,11 @@ public class DoctorsHandler extends Controller {
     }
 
 
+    @Security.Authenticated(Secured.class)
+    public static Result getAppointmentPanel(){
+        Content html = views.html.user.doctor.dashboard.appointments.render();
+        return  ok(html);
+    }
 
     private static String getUsername() {
         return SessionIdPool.getUsername(session().get("sessionId"));

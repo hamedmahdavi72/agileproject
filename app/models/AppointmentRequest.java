@@ -15,6 +15,8 @@ public class AppointmentRequest extends JongoModel{
     private ArrayList<AppointmentInterval> appointmentInterval;
     private boolean isAnswered;
 
+    public AppointmentRequest(){}
+
     public AppointmentRequest(AppointmentRequestForm form,String customerUsername){
         this.customerUsername = customerUsername;
         this.doctorUsername = form.getDoctorUsername();
