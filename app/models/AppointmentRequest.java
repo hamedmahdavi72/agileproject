@@ -1,7 +1,6 @@
 package models;
 
 import forms.AppointmentRequestForm;
-import org.joda.time.Interval;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ public class AppointmentRequest extends JongoModel{
     private String customerUsername;
     private String doctorUsername;
     private ArrayList<AppointmentInterval> appointmentInterval;
-    private boolean isAnswered;
+    private boolean answered;
 
     public AppointmentRequest(){}
 
@@ -21,7 +20,7 @@ public class AppointmentRequest extends JongoModel{
         this.customerUsername = customerUsername;
         this.doctorUsername = form.getDoctorUsername();
         this.appointmentInterval = form.generateAppointmentIntervals();
-        this.isAnswered = false;
+        this.answered = false;
     }
 
     public void setCustomerUsername(String customerUsername) {
@@ -49,10 +48,10 @@ public class AppointmentRequest extends JongoModel{
     }
 
     public boolean isAnswered() {
-        return isAnswered;
+        return answered;
     }
 
     public void setAnswered(boolean answered) {
-        isAnswered = answered;
+        this.answered = answered;
     }
 }

@@ -73,6 +73,9 @@ public class GenericDAO<T extends JongoModel> {
     }
 
 
+    public T findById(ObjectId id) {
+        return getCollection().findOne("{_id : #}",id).as(type);
+    }
 }
 
 

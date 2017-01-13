@@ -147,9 +147,6 @@ public class UserRequest extends Controller {
         } else return ok(Json.toJson("object is null"));
     }
 
-    private static String getUsername() {
-        return SessionIdPool.getUsername(session().get("sessionId"));
-    }
 
     @Security.Authenticated(Secured.class)
     public static Result editProfileController() {
@@ -211,7 +208,6 @@ public class UserRequest extends Controller {
     public static Result saveAppointmentRequest() {
 
         if (User.isCustomer(getUsername())) {
-            System.out.println(request().body().asJson());
             Form<AppointmentRequestForm> form = Form.form(AppointmentRequestForm.class).bindFromRequest();
             AppointmentRequestForm appointmentRequestForm = form.get();
             AppointmentRequest appointmentRequest = new AppointmentRequest(appointmentRequestForm,getUsername());
@@ -234,5 +230,10 @@ public class UserRequest extends Controller {
         Content html = views.html.user.doctor.dashboard.profile.render();
         return ok(html);
     }
+
+    private static String getUsername() {
+        return SessionIdPool.getUsername(session().get("sessionId"));
+    }
+
 }
 

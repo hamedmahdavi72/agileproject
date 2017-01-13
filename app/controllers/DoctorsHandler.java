@@ -3,11 +3,14 @@ package controllers;
 import dao.AppointmentDAOWrapper;
 import dao.AppointmentRequestDAOWrapper;
 import dao.DoctorDAOWrapper;
+import forms.AcceptAppointmentForm;
 import forms.DoctorInfoForm;
 import models.Appointment;
 import models.AppointmentRequest;
 import models.User;
+import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -62,6 +65,27 @@ public class DoctorsHandler extends Controller {
             return notFound();
     }
 
+    @Security.Authenticated(Secured.class)
+    public static  Result acceptAppointmentRequest(){
+        if(User.isDoctor(getUsername())){
+
+            AcceptAppointmentForm acceptAppointmentForm = Form.form(AcceptAppointmentForm.class)
+                    .bindFromRequest().get();
+
+            findAppointmentRequestAndSetAnsweredTrue(acceptAppointmentForm.getId());
+
+            //saves new appointment from request
+            Appointment appointment = new Appointment(getUsername(),acceptAppointmentForm);
+            AppointmentDAOWrapper.getInstance().getAppointmentDAO().save(appointment);
+
+            return ok();
+        }
+        else
+            return notFound();
+    }
+
+
+
 
     @Security.Authenticated(Secured.class)
     public static Result getAppointmentPanel(){
@@ -71,6 +95,13 @@ public class DoctorsHandler extends Controller {
 
     private static String getUsername() {
         return SessionIdPool.getUsername(session().get("sessionId"));
+    }
+
+    private static void findAppointmentRequestAndSetAnsweredTrue(ObjectId id) {
+        AppointmentRequest appointmentRequest = AppointmentRequestDAOWrapper.getInstance()
+                .findById(id);
+        appointmentRequest.setAnswered(true);
+        AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appointmentRequest);
     }
 
 

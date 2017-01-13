@@ -3,6 +3,7 @@ package models;
 import dao.AppointmentDAOWrapper;
 import dao.CustomerDAOWrapper;
 import dao.DoctorDAOWrapper;
+import forms.AcceptAppointmentForm;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -23,6 +24,10 @@ public class Appointment extends JongoModel {
         this.doctorUsername = doctorUsername;
         this.customerUsername = customerUsername;
         this.appointmentDate = appointmentDate;
+    }
+
+    public Appointment(String doctorUsername, AcceptAppointmentForm acceptAppointmentForm) {
+        this(doctorUsername,acceptAppointmentForm.getCustomerUsername(),acceptAppointmentForm.getDate());
     }
 
     public static Appointment generateAndSaveAppointment(String doctorUsername,String customerUsername,Date date){
