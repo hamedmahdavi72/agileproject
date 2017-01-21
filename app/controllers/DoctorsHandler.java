@@ -26,7 +26,7 @@ public class DoctorsHandler extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result doctorPageController(String username){
-        if(User.isCustomer(getUsername())){
+        if(User.isCustomer(getUsername()) && User.isDoctor(username)){
             return ok(views.html.user.doctorPageAsUser.render(username));
         }
         else{
