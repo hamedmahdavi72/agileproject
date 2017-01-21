@@ -47,13 +47,7 @@ public class DoctorsHandler extends Controller {
     public static Result getDoctorAppointments() throws ParseException {
 
         if(User.isDoctor(getUsername())){
-
-            String nowDate1 = "2011-01-18 00:00:00.0";
-
-            // *** note that it's "yyyy-MM-dd hh:mm:ss" not "yyyy-mm-dd hh:mm:ss"
-            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date nowDate;
-            nowDate = dt.parse(nowDate1);
+            Date nowDate = new Date();
             MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().getAppointmentsAfterSpecificDate(getUsername(),nowDate);
             JsonNode results = Json.toJson(acceptedAppointments);
             return ok(results);
