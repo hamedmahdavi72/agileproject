@@ -46,9 +46,9 @@ public class DoctorsHandler extends Controller {
         if(User.isDoctor(getUsername())){
 
             Date nowDate = new Date();
-            MongoCursor<Appointment> appointments = AppointmentDAOWrapper.getInstance().
+            MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().
                     getAppointmentsAfterSpecificDate(getUsername(),nowDate);
-            return ok(Json.toJson(appointments));
+            return ok(Json.toJson(acceptedAppointments));
         }
         else
             return notFound();
@@ -66,25 +66,35 @@ public class DoctorsHandler extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
-    public static  Result acceptAppointmentRequest(){
+    public static  Result acceptedAppointmentRequest(){
         if(User.isDoctor(getUsername())){
-
-            AcceptAppointmentForm acceptAppointmentForm = Form.form(AcceptAppointmentForm.class)
-                    .bindFromRequest().get();
-
-            findAppointmentRequestAndSetAnsweredTrue(acceptAppointmentForm.getId());
-
-            //saves new appointment from request
-            Appointment appointment = new Appointment(getUsername(),acceptAppointmentForm);
-            AppointmentDAOWrapper.getInstance().getAppointmentDAO().save(appointment);
-
-            return ok();
+                return ok(views.html.user.doctor.dashboard.acceptedAppointments.render());
         }
         else
             return notFound();
     }
 
+    public static Result acceptAppointmentRequest(){
+        if(User.isDoctor(getUsername())){
+            try {
+                AcceptAppointmentForm acceptAppointmentForm = Form.form(AcceptAppointmentForm.class)
+                        .bindFromRequest().get();
 
+                findAppointmentRequestAndSetAnsweredTrue(acceptAppointmentForm.getId());
+
+                //saves new appointment from request
+                Appointment appointment = new Appointment(getUsername(), acceptAppointmentForm);
+                AppointmentDAOWrapper.getInstance().getAppointmentDAO().save(appointment);
+
+                return ok();
+            }
+            catch (Exception e){
+                return badRequest();
+            }
+        }
+        else
+            return notFound();
+    }
 
 
     @Security.Authenticated(Secured.class)

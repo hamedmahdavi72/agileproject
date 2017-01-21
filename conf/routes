@@ -66,4 +66,6 @@ GET     /docCalendar                controllers.UserRequest.docCalendar()
 
 GET     /doctorAppointments         controllers.DoctorsHandler.getAppointmentPanel()
 
-POST    /acceptAppointmentRequest   controllers.DoctorsHandler.acceptAppointmentRequest()
+GET    /acceptedAppointmentRequest   controllers.DoctorsHandler.acceptedAppointmentRequest()
+
+GET     /doctor/getDoctorAppointments      controllers.DoctorsHandler.getDoctorAppointments()

@@ -5,6 +5,7 @@ var app = angular.module('doctorProfile', ["ngRoute","headerModule"]);
 
 app.controller('panel',function ($scope, $http, $filter) {
     $scope.appointments = [];
+    $scope.acceptedAppointments = [];
 
     $http.get("/doctor/appointments")
         .then(function (response) {
@@ -18,6 +19,15 @@ app.controller('panel',function ($scope, $http, $filter) {
                 // console.log($scope.appointments[0].appointmentInterval[0].fromHour);
             }
         );
+
+    $http.get("/doctor/getDoctorAppointments")
+        .then(function (response) {
+                $scope.acceptedAppointments = response.data;
+                for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
+                    $scope.acceptedAppointments[i].date = $filter('date')($scope.acceptedAppointments[i].date);
+                }
+                // console.log($scope.appointments[0].appointmentInterval[0].fromHour);
+        })
 
 });
 
@@ -34,5 +44,9 @@ app.config(function($routeProvider) {
         .when("/doctorAppointments", {
             restrict : 'A',
             templateUrl : "/doctorAppointments"
+        })
+        .when("/acceptedAppointmentRequest", {
+            restrict : 'A',
+            templateUrl : "/acceptedAppointmentRequest"
         });
 });

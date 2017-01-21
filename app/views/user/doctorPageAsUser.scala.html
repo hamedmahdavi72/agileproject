@@ -50,7 +50,7 @@
 <body class="body-prop" ng-app="drPageAsUser" ng-controller="doctorInfoController" >
 
     <script type="text/javascript">
-            var infoURI = "@routes.DoctorsHandler.getDoctorInfo(doctorUsername)";
+            var infoURI = "routes.DoctorsHandler.getDoctorInfo(doctorUsername)";
     </script>
 
     <div header></div>
@@ -119,7 +119,7 @@
                 سامانه رزرو وقت
                 <br>
                 <br>
-                <div class="container" ng-controller="reserve">
+                <div class="container" ng-controller="reserve" style="margin-right: 10%">
                     <div class="row"  ng-show="reserved">
                             <h3> رزرو وقت:</h3>
                             <button ng-click="send()" class="btn btn-info">ذخیره و ارسال</button>
