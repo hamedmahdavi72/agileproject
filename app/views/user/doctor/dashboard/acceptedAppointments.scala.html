@@ -1,8 +1,10 @@
-<div style="margin-right:20%;" ng-repeat="x in acceptedAppointments">
-    <div>
-            {{x.customerUsername}}
+<div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="x in acceptedAppointments">
+    <div style="position: relative; right: 37%">
+        <label><strong>نام کاربری بیمار</strong></label>
+        {{x.customerUsername}}
     </div>
-    <div>
-            {{x.date}}
+    <div style="position: relative; right: 37%">
+        <label><strong>روز و ساعت و تاریخ وقت</strong></label>
+        {{x.appointmentDate}}
     </div>
 </div>

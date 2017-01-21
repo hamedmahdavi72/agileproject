@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import dao.AppointmentDAOWrapper;
 import dao.AppointmentRequestDAOWrapper;
 import dao.DoctorDAOWrapper;
@@ -17,6 +18,8 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -41,14 +44,19 @@ public class DoctorsHandler extends Controller {
     }
 
     @Security.Authenticated(Secured.class)
-    public static Result getDoctorAppointments(){
+    public static Result getDoctorAppointments() throws ParseException {
 
         if(User.isDoctor(getUsername())){
 
-            Date nowDate = new Date();
-            MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().
-                    getAppointmentsAfterSpecificDate(getUsername(),nowDate);
-            return ok(Json.toJson(acceptedAppointments));
+            String nowDate1 = "2011-01-18 00:00:00.0";
+
+            // *** note that it's "yyyy-MM-dd hh:mm:ss" not "yyyy-mm-dd hh:mm:ss"
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Date nowDate;
+            nowDate = dt.parse(nowDate1);
+            MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().getAppointmentsAfterSpecificDate(getUsername(),nowDate);
+            JsonNode results = Json.toJson(acceptedAppointments);
+            return ok(results);
         }
         else
             return notFound();
