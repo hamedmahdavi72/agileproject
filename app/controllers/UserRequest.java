@@ -162,23 +162,40 @@ public class UserRequest extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result editCustomer() {
-        Form<CustomerProfileForm> form = Form.form(CustomerProfileForm.class).bindFromRequest();
         String username = getUsername();
-        Customer customer = CustomerDAOWrapper.getInstance().findByUsername(username);
+        if(User.isCustomer(username)) {
+            Form<CustomerProfileForm> form = Form.form(CustomerProfileForm.class).bindFromRequest();
+            Customer customer = CustomerDAOWrapper.getInstance().findByUsername(username);
 
-        try {
-            CustomerProfileForm customerProfileForm = form.get();
-            CustomerEditValidator validator = new CustomerEditValidator(customer, customerProfileForm);
-            validator.validate();
+            try {
+                CustomerProfileForm customerProfileForm = form.get();
+                CustomerEditValidator validator = new CustomerEditValidator(customer, customerProfileForm);
+                validator.validate();
 
-            if (validator.isSuccessful()) {
-                System.out.println("customer password " + customer.getPassword());
-                CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
+                if (validator.isSuccessful()) {
+                    System.out.println("customer password " + customer.getPassword());
+                    CustomerDAOWrapper.getInstance().getCustomerDAO().save(customer);
+                }
+                return ok(validator.getMessage().toJsonResponse());
+
+            } catch (IllegalStateException e) {
+                return ok(form.errorsAsJson());
             }
-            return ok(validator.getMessage().toJsonResponse());
-
-        } catch (IllegalStateException e) {
-            return ok(form.errorsAsJson());
+        }
+        else if(User.isDoctor(username)){
+            Form<DoctorProfileForm> form = Form.form(DoctorProfileForm.class).bindFromRequest();
+            Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(username);
+            try {
+                DoctorProfileForm doctorProfileForm = form.get();
+                DoctorEditValidator validator = new DoctorEditValidator(doctor, doctorProfileForm);
+                validator.validate();
+                if(validator.isSuccessful()){
+                    DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+                }
+                    return ok(validator.getMessage().toJsonResponse());
+            }catch (Exception e){
+                return ok(form.errorsAsJson());
+            }
         }
     }
 

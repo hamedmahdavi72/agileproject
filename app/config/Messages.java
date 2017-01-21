@@ -104,6 +104,12 @@ public class Messages {
                 MessageConstants.getInstance().getSuccessfulEdit());
         return msg;
     }
+    public static Messages generateSuccessfulDoctorEditMessage(){
+        Messages msg = new Messages(MessageConstants.getInstance().getDoctorEditProfileField());
+        msg.addMessagesToFieldName(MessageConstants.getInstance().getDoctorEditProfileField(),
+                MessageConstants.getInstance().getSuccessfulEdit());
+        return msg;
+    }
 
     public JsonNode toJsonResponse(){
         return Json.toJson(response);
