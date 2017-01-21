@@ -147,19 +147,6 @@ public class UserRequest extends Controller {
         } else return ok(Json.toJson("object is null"));
     }
 
-
-    @Security.Authenticated(Secured.class)
-    public static Result editProfileController() {
-        String username = getUsername();
-        if (User.isCustomer(username)) {
-            return editCustomer();
-        } else if (User.isDoctor(username)) {
-            //TODO Doctor edit profile
-        }
-        return ok();
-    }
-
-
     @Security.Authenticated(Secured.class)
     public static Result editCustomer() {
         String username = getUsername();
@@ -197,6 +184,7 @@ public class UserRequest extends Controller {
                 return ok(form.errorsAsJson());
             }
         }
+        return badRequest();
     }
 
     @Security.Authenticated(Secured.class)

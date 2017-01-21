@@ -34,8 +34,6 @@ GET     /getDoctors                 controllers.AdminHandler.loadAdmin()
 
 GET     /profile                    controllers.UserRequest.loadProfile()
 
-POST    /profile/                   controllers.UserRequest.editProfileController()
-
 GET     /getUser                    controllers.UserRequest.getUser()
 
 POST    /edit/                      controllers.UserRequest.editCustomer()

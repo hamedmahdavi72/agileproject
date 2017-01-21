@@ -17,6 +17,8 @@ public class DoctorProfileForm extends  UserProfileForm {
     private ArrayList<String> supportedInsuranceCompanies;
 
 
+    public DoctorProfileForm(){}
+
     public DoctorProfileForm(Doctor doctor) {
         super(doctor);
         this.clinicAddress = doctor.getClinicAddress();
