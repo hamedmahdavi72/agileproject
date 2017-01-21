@@ -94,13 +94,26 @@
                         <tr ng-repeat="x in objects">
                             <td>{{x.firstName}} {{x.lastName}}</td>
                             <td>{{x.email}}</td>
-                            <td>{{x.spc}}</td>
-                            <td><button class="btn-success">accept</button> <button class="btn-danger">reject</button></td>
+                            <td>{{x.speciality}}</td>
+                            <td><button class="btn-success" ng-click="acceptDoctor(x.email)">accept</button> <button class="btn-danger" ng-click="deleteDoctor(x.email)">reject</button></td>
                         </tr>
                     </table>
                 </div>
                 <div class="tab-pane" id="tab2">
-                    <p>واو، من در بخش ۲ هستم.</p>
+                    <table  class="table table-hover">
+                        <tr>
+                            <th>نام و نام خانوادگی</th>
+                            <th>نشانی الکترونیکی</th>
+                            <th>تخصص</th>
+                            <th style="align-content: center">عملیات</th>
+                        </tr>
+                        <tr ng-repeat="x in current">
+                            <td>{{x.firstName}} {{x.lastName}}</td>
+                            <td>{{x.email}}</td>
+                            <td>{{x.speciality}}</td>
+                            <td><button ng-click="rejectDoctor(x.email)" class="btn-danger">reject</button></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

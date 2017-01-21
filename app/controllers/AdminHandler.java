@@ -1,6 +1,7 @@
 package controllers;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
 import dao.AdminDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.UserForm;
@@ -13,6 +14,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
 
+import javax.print.Doc;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,11 +62,57 @@ public class AdminHandler extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result loadAdmin(){
-        Map<String, Iterable<Doctor>> obj = new HashMap<>();
-        obj.put("accepted", DoctorDAOWrapper.getInstance().findByAccepted(true));
-        obj.put("pending", DoctorDAOWrapper.getInstance().findByAccepted(false));
-        return ok(Json.toJson(obj));
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            Map<String, Iterable<Doctor>> obj = new HashMap<>();
+            obj.put("current", DoctorDAOWrapper.getInstance().findByAccepted(true));
+            obj.put("pending", DoctorDAOWrapper.getInstance().findByAccepted(false));
+            return ok(Json.toJson(obj));
+        }
+        else return redirect(routes.UserRequest.loginController());
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result rejectDoctor(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            JsonNode doctorUsername = request().body().asJson();
 
+            Doctor rejectedDoctor = DoctorDAOWrapper.getInstance().findByUsername(doctorUsername.textValue());
+            rejectedDoctor.setAccepted(false);
+            DoctorDAOWrapper.getInstance().getDoctorDAO().save(rejectedDoctor);
+
+            return ok("removed");
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result acceptDoctor(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            JsonNode doctorUsername = request().body().asJson();
+
+            Doctor acceptedDoctor = DoctorDAOWrapper.getInstance().findByUsername(doctorUsername.textValue());
+            acceptedDoctor.setAccepted(true);
+            DoctorDAOWrapper.getInstance().getDoctorDAO().save(acceptedDoctor);
+
+            return ok("accepted");
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result deleteDoctor(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            JsonNode doctorUsername = request().body().asJson();
+
+            Doctor deletedDoctor = DoctorDAOWrapper.getInstance().findByUsername(doctorUsername.textValue());
+            DoctorDAOWrapper.getInstance().getDoctorDAO().remove(deletedDoctor);
+
+            return ok("deleted");
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
 }

@@ -32,6 +32,12 @@ GET     /adminPanel                 controllers.AdminHandler.adminPanelControlle
 
 GET     /getDoctors                 controllers.AdminHandler.loadAdmin()
 
+POST    /rejectDoctor/              controllers.AdminHandler.rejectDoctor()
+
+POST   /acceptDoctor/               controllers.AdminHandler.acceptDoctor()
+
+POST   /deleteDoctor/               controllers.AdminHandler.deleteDoctor()
+
 GET     /profile                    controllers.UserRequest.loadProfile()
 
 GET     /getUser                    controllers.UserRequest.getUser()
