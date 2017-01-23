@@ -5,6 +5,21 @@ var app = angular.module('drPageAsUser', ["ngRoute","headerModule"]);
 
 app.controller('reserve', function($scope, $http, $window) {
 
+
+    $scope.days = [];
+
+    for(var i = 0 ; i < 31; i++){
+        $scope.days[i] = i+1;
+    }
+
+    $scope.months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد',
+                    'شهریور', 'مهر', 'آبان', 'آذر', 'دی',
+                    'بهمن', 'اسفند'];
+    $scope.years = [];
+
+    $scope.years[0] = new Date().getYear();
+    $scope.years[1] = new Date().getYear() + 1;
+
     $scope.reserved = true;
     $scope.message = false;
     var cursor = 0;
