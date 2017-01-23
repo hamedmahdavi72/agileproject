@@ -6,6 +6,7 @@ var app = angular.module('drPageAsUser', ["ngRoute","headerModule"]);
 app.controller('reserve', function($scope, $http, $window) {
 
 
+    $scope.canAdd = true;
     $scope.days = [];
 
     for(var i = 0 ; i < 31; i++){
@@ -17,20 +18,68 @@ app.controller('reserve', function($scope, $http, $window) {
                     'بهمن', 'اسفند'];
     $scope.years = [];
 
-    $scope.years[0] = new Date().getYear();
-    $scope.years[1] = new Date().getYear() + 1;
+    $scope.years[0] = '1395'; //new Date().getYear();
+    $scope.years[1] = '1396'; //new Date().getYear() + 1;
+
+    $scope.selectedDay = $scope.days[0];
+    $scope.selectedMonth = $scope.months[0];
+    $scope.selectedYear = $scope.years[0];
 
     $scope.reserved = true;
     $scope.message = false;
     var cursor = 0;
     var long = 0;
-    var doctorUsername = $window.infoURI.split("/")[3];
+    var doctorUsername = $window.location.pathname.split("/")[3];
     $scope.choices = [{date:"",name:"false",id: 'درخواست1'}];
 
     $scope.appointments = [];
-    $scope.saveChoice = function(choice) {
+    $scope.saveChoice = function(choice, year, month, day) {
         if(choice.from != null && choice.to != null && choice.date != null){
             //console.log(choice);
+            var numericMonth = 0;
+            switch (month) {
+                case 'فروردین':
+                    numericMonth = 1;
+                    break;
+                case 'اردیبهشت':
+                    numericMonth = 2;
+                    break;
+                case 'خرداد':
+                    numericMonth = 3;
+                    break;
+                case 'تیر':
+                    numericMonth = 4;
+                    break;
+                case 'مرداد':
+                    numericMonth = 5;
+                    break;
+                case 'شهریور':
+                    numericMonth = 6;
+                    break;
+                case 'مهر':
+                    numericMonth = 7;
+                    break;
+                case 'آبان':
+                    numericMonth = 8;
+                    break;
+                case 'آذر':
+                    numericMonth = 9;
+                    break;
+                case 'دی':
+                    numericMonth = 10;
+                    break;
+                case 'بهمن':
+                    numericMonth = 11;
+                    break;
+                case 'اسمفند':
+                    numericMonth = 12;
+                    break;
+                default:
+                    numericMonth = 0;
+
+            }
+
+            choice.date = year+"/"+numericMonth+"/"+day;
             $scope.appointment = new Object();
             $scope.appointment.fromHour = choice.from;
             $scope.appointment.toHour = choice.to;
@@ -44,9 +93,13 @@ app.controller('reserve', function($scope, $http, $window) {
     };
 
     $scope.addNewChoice = function() {
-        $scope.hide = false;
-        var newItemNo = $scope.choices.length+1;
-        $scope.choices.push({'id':'درخواست'+newItemNo,'name': 'false', 'date':""});
+        if($scope.choices.length <= 2){
+            $scope.hide = false;
+            var newItemNo = $scope.choices.length+1;
+            $scope.choices.push({'id':'درخواست'+newItemNo,'name': 'false', 'date':""});
+            if($scope.choices.length == 3)
+                $scope.canAdd = false;
+        }
     };
 
     $scope.removeChoice = function() {
@@ -109,7 +162,9 @@ app.controller('doctorInfoController', function($scope,$http,$window) {
 
     // $scope.days = [];
     // $scope.day_selected = $scope.days[0];
-   $http.get($window.infoURI).then(function (response) {
+    console.log();
+    var username = $window.location.pathname.split("/")[3];
+   $http.get("/doctors/info/"+username).then(function (response) {
         $scope.firstName = response.data.firstName;
         $scope.lastName = response.data.lastName;
         $scope.speciality = response.data.speciality;

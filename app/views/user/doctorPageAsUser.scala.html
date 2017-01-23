@@ -132,24 +132,24 @@
                                     </label>
                                     <input ng-disabled="!choice.name" type="text" ng-model="choice.from" name="" placeholder="از ساعت">
                                     <input ng-disabled="!choice.name" type="text" ng-model="choice.to" name="" placeholder="تا ساعت">
-                                    <input ng-disabled="!choice.name" type="text" ng-model="choice.date" name="درخواست1" size="30" placeholder="تاریخ">
+                                    <input ng-disabled="true" type="text" ng-model="choice.date" name="درخواست1" size="30" placeholder="تاریخ">
                                     @*<a ng-show="choice.name" href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('درخواست1');*@
                                     @*return false;"*@
                                 @*HIDEFOCUS><img name="popcal" align="absmiddle" src="/assets/img/calbtn.gif" mce_src="/assets/img/calbtn.gif" border="0"*@
                                     @*alt="Select Date">*@
                                     @*</a>*@
-                                    <div>
-                                        <select ng-model="selectedDay" ng-options="x for x in days"> </select>
-                                        <select ng-model="selectedMonth" ng-options="x for x in months"> </select>
-                                        <select ng-model="selectedYear" ng-options="x for x in years"> </select>
+                                    <div >
+                                        <select ng-disabled="!choice.name" ng-model="selectedDay" ng-options="x for x in days"> </select>
+                                        <select ng-disabled="!choice.name" ng-model="selectedMonth" ng-options="x for x in months"> </select>
+                                        <select ng-disabled="!choice.name" ng-model="selectedYear" ng-options="x for x in years"> </select>
                                     </div>
                                     <button style="border-radius: 50%" class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">-</button>
-                                <button ng-show="choice.name"style="border-radius: 4px" class="btn btn-success" ng-click="saveChoice(choice)">save</button>
+                                <button ng-show="choice.name"style="border-radius: 4px" class="btn btn-success" ng-click="saveChoice(choice, selectedYear, selectedMonth, selectedDay)">save</button>
                                 </fieldset>
-                                <button style="border-radius: 50%" class="btn btn-success" ng-click="addNewChoice()">+</button>
+                                <button ng-show="canAdd" style="border-radius: 50%" class="btn btn-success" ng-click="addNewChoice()">+</button>
                                 <hr>
-                                <div ng-repeat="choice in choices">
-                                    <div style="background-color:#00d2ff;height:120px; width: 400px; border: 2px solid black; border-radius: 3px; margin-bottom: 5px;" id="choicesDisplay">
+                                <div style="display:inline-block; margin-left: 5px;" ng-repeat="choice in choices">
+                                    <div style="background-color:#00d2ff;height:120px; width: 250px; border: 2px solid black; border-radius: 3px; margin-bottom: 5px;" id="choicesDisplay">
                                         <div style="color:white;position: relative; right:37.5%;">
                                             <div style="color: black">
                                                 <h4>{{ choice.id }}</h4>

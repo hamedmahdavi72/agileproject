@@ -217,7 +217,7 @@ public class UserRequest extends Controller {
             AppointmentRequestForm appointmentRequestForm = form.get();
             AppointmentRequest appointmentRequest = new AppointmentRequest(appointmentRequestForm,getUsername());
             AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appointmentRequest);
-            return ok();
+            return ok("ok");
         }
         else{
             return badRequest();
