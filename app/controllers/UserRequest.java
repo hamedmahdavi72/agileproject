@@ -179,7 +179,7 @@ public class UserRequest extends Controller {
                 if(validator.isSuccessful()){
                     DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
                 }
-                    return ok(validator.getMessage().toJsonResponse());
+                return ok(validator.getMessage().toJsonResponse());
             }catch (Exception e){
                 return ok(form.errorsAsJson());
             }

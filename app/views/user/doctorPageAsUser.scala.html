@@ -133,11 +133,16 @@
                                     <input ng-disabled="!choice.name" type="text" ng-model="choice.from" name="" placeholder="از ساعت">
                                     <input ng-disabled="!choice.name" type="text" ng-model="choice.to" name="" placeholder="تا ساعت">
                                     <input ng-disabled="!choice.name" type="text" ng-model="choice.date" name="درخواست1" size="30" placeholder="تاریخ">
-                                    <a ng-show="choice.name" href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('درخواست1');
-                                    return false;"
-                                HIDEFOCUS><img name="popcal" align="absmiddle" src="/assets/img/calbtn.gif" mce_src="/assets/img/calbtn.gif" border="0"
-                                    alt="Select Date">
-                                    </a>
+                                    @*<a ng-show="choice.name" href="javascript:void(0)" mce_href="javascript:void(0)" onclick="showCal('درخواست1');*@
+                                    @*return false;"*@
+                                @*HIDEFOCUS><img name="popcal" align="absmiddle" src="/assets/img/calbtn.gif" mce_src="/assets/img/calbtn.gif" border="0"*@
+                                    @*alt="Select Date">*@
+                                    @*</a>*@
+                                    <div>
+                                        <select ng-model="selectedDay" ng-options="x for x in days"> </select>
+                                        <select ng-model="selectedMonth" ng-options="x for x in months"> </select>
+                                        <select ng-model="selectedYear" ng-options="x for x in years"> </select>
+                                    </div>
                                     <button style="border-radius: 50%" class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">-</button>
                                 <button ng-show="choice.name"style="border-radius: 4px" class="btn btn-success" ng-click="saveChoice(choice)">save</button>
                                 </fieldset>
