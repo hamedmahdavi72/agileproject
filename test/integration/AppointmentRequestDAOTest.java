@@ -25,9 +25,9 @@ public class AppointmentRequestDAOTest {
     public static void initApp(){
         fakeApp = Helpers.fakeApplication();
         Helpers.start(fakeApp);
-        appInt = new AppointmentInterval(DateUtils.addDays(new Date(),-1), "14:00", "17:00");
-        appReq = new AppointmentRequest("ala","hashemi",appInt);
-        AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appReq);
+        appInt = new AppointmentInterval(DateUtils.addDays(new Date(),-1), 14, 17);
+       // appReq = new AppointmentRequest("ala","hashemi",appInt);
+       // AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appReq);
 
     }
 

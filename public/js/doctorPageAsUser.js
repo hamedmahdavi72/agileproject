@@ -1,11 +1,11 @@
 /**
  * Created by HamedMahdavi on 1/7/2017.
  */
-var app = angular.module('drPageAsUser', ["ngRoute","headerModule"]);
+var app = angular.module('drPageAsUser', ["ngRoute","headerModule","dateConvertorModule"]);
 
-app.controller('reserve', function($scope, $http, $window) {
+app.controller('reserve', function($scope, $http, $window, convertDate) {
 
-
+    console.log(new Date("1/25/2017").getTime())
     $scope.canAdd = true;
     $scope.days = [];
 
@@ -79,13 +79,15 @@ app.controller('reserve', function($scope, $http, $window) {
 
             }
 
-            choice.date = year+"/"+numericMonth+"/"+day;
+            var gregorianDate = convertDate.jalaliToGregorian(parseInt(year),numericMonth,parseInt(day));
+
+            choice.jalaliDate = year + "/"+numericMonth+"/"+day;
+            choice.date = new Date(gregorianDate[1]+"/"+gregorianDate[2]+"/"+gregorianDate[0]);
             $scope.appointment = new Object();
             $scope.appointment.fromHour = choice.from;
             $scope.appointment.toHour = choice.to;
-            $scope.appointment.date = choice.date;
+            $scope.appointment.date = choice.date.getTime();
             $scope.appointments.push($scope.appointment);
-            $scope.dateToMillisecond(choice.date, cursor);
 
             choice.name = false;
             cursor = cursor + 1;
@@ -136,25 +138,7 @@ app.controller('reserve', function($scope, $http, $window) {
         }
     };
 
-    $scope.dateToMillisecond = function(date, cursor){
-        console.log(date);
-        $http({
-            url: '/convert/',
-            method: "POST",
-            data: JSON.stringify(date)
-        })
-            .then(function(response) {
-                    if(response.data != null){
-                        long = response.data;
-                        $scope.appointments[cursor].date = long;
-                        console.log($scope.appointments[cursor]);//.date=long;
-                        return long;
-                        }
-                },
-                function(response) { // optional
-                    // failed
-                });
-    };
+
 
 });
 

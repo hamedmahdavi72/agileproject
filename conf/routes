@@ -58,7 +58,7 @@ GET     /doctors/page/:username     controllers.DoctorsHandler.doctorPageControl
 
 GET     /doctors/info/:username   controllers.DoctorsHandler.getDoctorInfo(username:String)
 
-GET     /doctor/appointments       controllers.DoctorsHandler.getDoctorAppointmentRequests()
+GET     /doctor/appointmentRequests       controllers.DoctorsHandler.getDoctorAppointmentRequests()
 
 POST    /saveAppointments/          controllers.UserRequest.saveAppointmentRequest()
 
