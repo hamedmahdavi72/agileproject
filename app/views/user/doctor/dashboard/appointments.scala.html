@@ -6,7 +6,8 @@
 <hr>
 
 <div>
-    <div style="display:inline-block; margin-left: 5px;font-size:16px;width: 300px; height: auto; border: 2px solid white;background: #a9a9a9" ng-repeat="appointment in appointments">
+    <div style="display:inline-block;
+        margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;font-size:16px;width: 300px; height: auto; border: 2px solid white;background: #a9a9a9" ng-repeat="appointment in appointments">
                 <div>
                     <div><strong style="font-size: 24px">نام بیمار:{{appointment.customerUsername}}</strong></div>
                     <div style="position: relative; background: white; width: inherit; height: auto; border: 1px dashed blue; margin-bottom: 1px;" ng-repeat="interval in appointment.appointmentInterval">
