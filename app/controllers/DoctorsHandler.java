@@ -8,6 +8,7 @@ import forms.AcceptAppointmentForm;
 import forms.DoctorInfoForm;
 import models.Appointment;
 import models.AppointmentRequest;
+import models.Doctor;
 import models.User;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
@@ -18,9 +19,12 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
 
+import javax.print.Doc;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by HamedMahdavi on 1/6/2017.
@@ -41,6 +45,15 @@ public class DoctorsHandler extends Controller {
     public static Result getDoctorInfo(String username) {
         DoctorInfoForm doctorInfo = new DoctorInfoForm(DoctorDAOWrapper.getInstance().findByUsername(username));
         return ok(Json.toJson(doctorInfo));
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getDoctorFullInfo() {
+        if(User.isDoctor(getUsername())){
+            DoctorInfoForm doctorInfo = new DoctorInfoForm(DoctorDAOWrapper.getInstance().findByUsername(getUsername()));
+            return ok(Json.toJson(doctorInfo));
+        }
+        else return badRequest();
     }
 
     @Security.Authenticated(Secured.class)
@@ -116,5 +129,19 @@ public class DoctorsHandler extends Controller {
         AppointmentRequestDAOWrapper.getInstance().getAppointmentRequestDAO().save(appointmentRequest);
     }
 
-
+    @Security.Authenticated(Secured.class)
+    public static Result saveDoctorInsurance() {
+        if(User.isDoctor(getUsername())){
+            Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(getUsername());
+            ArrayList<String> insurances = new ArrayList<>();
+            JsonNode req = request().body().asJson();
+            for(int i = 0 ; i < req.size(); i++){
+                insurances.add(req.get(i).toString());
+            }
+            doctor.setSupportedInsuranceCompanies(insurances);
+            DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+            return ok();
+        }
+        else return badRequest();
+    }
 }

@@ -53,12 +53,23 @@ app.controller('edit',function ($scope, $http, $window) {
     $scope.hideErrorNationalId = true;
 
     $scope.slist =[];
+    $scope.insuranceCompanies = [];
     $http.get("/getUser")
         .then(function (response) {$scope.slist = response.data;
                 $scope.firstNameValue = $scope.slist.firstName;
                 $scope.lastNameValue = $scope.slist.lastName;
                 $scope.mobileNumberValue = $scope.slist.mobileNumber;
+                console.log($scope.slist);
                 user_lastname = $scope.slist.lastName;
+            }
+        );
+
+    $scope.list =[];
+
+    $http.get("/doctors/info")
+        .then(function (response) {$scope.list = response.data;
+                $scope.insuranceCompanies = $scope.list.supportedInsuranceCompanies;
+                console.log($scope.list);
             }
         );
 

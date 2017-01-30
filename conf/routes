@@ -58,9 +58,13 @@ GET     /doctors/page/:username     controllers.DoctorsHandler.doctorPageControl
 
 GET     /doctors/info/:username   controllers.DoctorsHandler.getDoctorInfo(username:String)
 
+GET     /doctors/info              controllers.DoctorsHandler.getDoctorFullInfo()
+
 GET     /doctor/appointmentRequests       controllers.DoctorsHandler.getDoctorAppointmentRequests()
 
 POST    /saveAppointments/          controllers.UserRequest.saveAppointmentRequest()
+
+POST    /saveInsurance/             controllers.DoctorsHandler.saveDoctorInsurance()
 
 POST    /convert/                 controllers.Utils.convertDateToMillisecond()
 
