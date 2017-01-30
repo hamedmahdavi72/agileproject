@@ -117,6 +117,17 @@ app.controller('edit',function ($scope, $http, $window) {
     };
 });
 
+app.controller('callDoc',function($scope,$http){
+
+    $http.get("/getUser").
+    then(function (response) {$scope.slist = response.data;
+        $scope.lastName = $scope.slist.lastName;
+    }
+        );
+
+
+});
+
 app.config(function($routeProvider) {
     $routeProvider
         .when("/docInfo", {
