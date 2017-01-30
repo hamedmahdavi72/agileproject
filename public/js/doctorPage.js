@@ -1,8 +1,8 @@
 /**
  * Created by HamedMahdavi on 12/31/2016.
  */
-var app = angular.module('doctorProfile', ["ngRoute","headerModule","dateConvertorModule"]);
-
+var app = angular.module('doctorProfile', ["ngRoute","headerModule","dateConvertorModule", "checklist-model"]);
+var user_lastname;
 app.controller('panel',function ($scope, $http, $filter,convertDate) {
     $scope.appointments = [];
     $scope.acceptedAppointments = [];
@@ -58,6 +58,7 @@ app.controller('edit',function ($scope, $http, $window) {
                 $scope.firstNameValue = $scope.slist.firstName;
                 $scope.lastNameValue = $scope.slist.lastName;
                 $scope.mobileNumberValue = $scope.slist.mobileNumber;
+                user_lastname = $scope.slist.lastName;
             }
         );
 
@@ -115,6 +116,61 @@ app.controller('edit',function ($scope, $http, $window) {
                     });
         }
     };
+});
+
+app.controller('callDoc', function($scope, $http) {
+    $http.get("/getUser")
+        .then(function (response) {$scope.slist = response.data;
+                user_lastname = $scope.slist.lastName;
+                console.log(user_lastname);
+                $scope.lastName = user_lastname;
+            }
+        );
+});
+
+app.controller('DemoCtrl', function($scope, $http) {
+    $scope.roles = [
+        {id: 1, text: 'پارسیان'},
+        {id: 2, text: 'سپه'},
+        {id: 3, text: 'تامین اجتماعی'},
+        {id: 4, text: 'بانک صادرات'}
+    ];
+    $scope.user = {
+        roles: []
+    };
+    $scope.checkAll = function() {
+        $scope.user.roles = $scope.roles.map(function(item) { return item.id; });
+    };
+    $scope.uncheckAll = function() {
+        $scope.user.roles = [];
+    };
+    $scope.checkFirst = function() {
+        $scope.user.roles.splice(0, $scope.user.roles.length);
+        $scope.user.roles.push(1);
+    };
+    
+    $scope.saveInsurance = function () {
+        var insurances = [];
+        for(var i = 0 ; i < $scope.user.roles.length; i++){
+            insurances.push($scope.roles[$scope.user.roles[i]-1].text);
+        }
+        console.log(insurances);
+
+        $http({
+            url: '/saveInsurance/',
+            method: "POST",
+            data: insurances
+        })
+            .then(function (response) {
+                    //console.log(response.data);
+                    if (response.data != null) {
+                    }
+                },
+                function (response) { // optional
+                    // failed
+                });
+    }
+
 });
 
 app.config(function($routeProvider) {
