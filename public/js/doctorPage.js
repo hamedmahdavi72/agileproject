@@ -3,10 +3,11 @@
  */
 var app = angular.module('doctorProfile', ["ngRoute","headerModule","dateConvertorModule", "checklist-model"]);
 var user_lastname;
+var insuranceCompanies = [];
+var insuranceIDs = [];
 app.controller('panel',function ($scope, $http, $filter,convertDate) {
     $scope.appointments = [];
     $scope.acceptedAppointments = [];
-
 
     $scope.loadAppointments = function () {
         $http.get("/doctor/appointmentRequests")
@@ -52,8 +53,8 @@ app.controller('edit',function ($scope, $http, $window) {
     $scope.hideErrorPassword = true;
     $scope.hideErrorNationalId = true;
 
-    $scope.slist =[];
     $scope.insuranceCompanies = [];
+    $scope.slist =[];
     $http.get("/getUser")
         .then(function (response) {$scope.slist = response.data;
                 $scope.firstNameValue = $scope.slist.firstName;
@@ -68,8 +69,24 @@ app.controller('edit',function ($scope, $http, $window) {
 
     $http.get("/doctors/info")
         .then(function (response) {$scope.list = response.data;
-                $scope.insuranceCompanies = $scope.list.supportedInsuranceCompanies;
-                console.log($scope.list);
+            insuranceCompanies = $scope.list.supportedInsuranceCompanies;
+            $scope.insuranceCompanies = insuranceCompanies;
+            console.log(insuranceCompanies[0]);
+
+                for (var i = 0 ; i < 4 ; i++){
+                    if(insuranceCompanies[i] == '"پارسیان"'){
+                        insuranceIDs.push(1);
+                    }
+                    if(insuranceCompanies[i] == '"سپه"'){
+                        insuranceIDs.push(2);
+                    }
+                    if(insuranceCompanies[i] == '"تامین اجتماعی"'){
+                        insuranceIDs.push(3);
+                    }
+                    if(insuranceCompanies[i] == '"بانک صادرات"'){
+                        insuranceIDs.push(4);
+                    }
+                }
             }
         );
 
@@ -149,6 +166,11 @@ app.controller('DemoCtrl', function($scope, $http) {
     $scope.user = {
         roles: []
     };
+
+
+
+    $scope.user.roles = insuranceIDs;
+
     $scope.checkAll = function() {
         $scope.user.roles = $scope.roles.map(function(item) { return item.id; });
     };
