@@ -46,6 +46,23 @@
                     </form>
                 </div>
             </div>
+            <br><br>
+                <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                    <h3>بیمه ها</h3>
+                    <div style="margin-bottom: 3%;" ng-controller="DemoCtrl">
+                        <label ng-repeat="role in roles">
+                            <input type="checkbox" checklist-model="user.roles" checklist-value="role.id">
+                            <strong>{{role.text}}</strong>
+                        </label>
+                        <br>
+                        <button class="btn btn-primary" ng-click="checkAll()">انتخاب همه</button>
+                        <button class="btn btn-primary" ng-click="uncheckAll()">عدم انتخاب همه</button>
+                        @*<button ng-click="checkFirst()">انتخاب نخستین مورد</button>*@
+                        <br><br>
+                        <button class="btn btn-success" ng-click="saveInsurance()">ثبت بیمه ها</button>
+                    </div>
+                </div>
+            </div>
+            <br><br>
             <hr>
-        </div>
     </div>
