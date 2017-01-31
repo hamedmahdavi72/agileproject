@@ -1,8 +1,8 @@
 /**
  * Created by ARYA on 12/23/2016.
  */
-var app = angular.module('search',["ngRoute","headerModule"]);
-
+var app = angular.module('search',["ngRoute","headerModule", "checklist-model"]);
+var insurances = [];
 
 
 
@@ -34,6 +34,28 @@ app.controller('searchapp',function($scope,$http, $window){
                 function (response) { // optional
                     // failed
                 });
+    };
+
+    $scope.roles = [
+        {id: 1, text: 'پارسیان'},
+        {id: 2, text: 'سپه'},
+        {id: 3, text: 'تامین اجتماعی'},
+        {id: 4, text: 'بانک صادرات'}
+    ];
+    $scope.user = {
+        roles: []
+    };
+
+
+    $scope.checkAll = function() {
+        $scope.user.roles = $scope.roles.map(function(item) { return item.id; });
+    };
+    $scope.uncheckAll = function() {
+        $scope.user.roles = [];
+    };
+    $scope.checkFirst = function() {
+        $scope.user.roles.splice(0, $scope.user.roles.length);
+        $scope.user.roles.push(1);
     };
 
     $scope.search = function () {
@@ -68,6 +90,15 @@ app.controller('searchapp',function($scope,$http, $window){
         }
 
        // console.log($scope.searchQuery);
+
+
+        for(var i = 0 ; i < $scope.user.roles.length; i++){
+            insurances.push($scope.roles[$scope.user.roles[i]-1].text);
+        }
+
+        $scope.searchQuery.insuranceCompanies = insurances;
+
+        console.log($scope.searchQuery);
 
         if($scope.canSearch){
             $http({
