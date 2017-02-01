@@ -76,4 +76,6 @@ GET     /doctorAppointments         controllers.DoctorsHandler.getAppointmentPan
 
 GET    /acceptedAppointmentRequest   controllers.DoctorsHandler.acceptedAppointmentRequest()
 
+POST    /doctor/acceptAppointmentRequest/    controllers.DoctorsHandler.acceptAppointmentRequest()
+
 GET     /doctor/getDoctorAppointments      controllers.DoctorsHandler.getDoctorAppointments()

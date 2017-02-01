@@ -19,12 +19,9 @@ import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
 
-import javax.print.Doc;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by HamedMahdavi on 1/6/2017.
@@ -74,6 +71,7 @@ public class DoctorsHandler extends Controller {
         if(User.isDoctor(getUsername())){
             MongoCursor<AppointmentRequest> result = AppointmentRequestDAOWrapper.getInstance()
                     .findNotAnsweredRequests(getUsername());
+
             return ok(Json.toJson(result));
         }
         else
@@ -90,10 +88,14 @@ public class DoctorsHandler extends Controller {
     }
 
     public static Result acceptAppointmentRequest(){
+
         if(User.isDoctor(getUsername())){
             try {
                 AcceptAppointmentForm acceptAppointmentForm = Form.form(AcceptAppointmentForm.class)
                         .bindFromRequest().get();
+
+                acceptAppointmentForm.reviseId(request().body().asJson().get("id"));
+
 
                 findAppointmentRequestAndSetAnsweredTrue(acceptAppointmentForm.getId());
 
@@ -104,6 +106,7 @@ public class DoctorsHandler extends Controller {
                 return ok();
             }
             catch (Exception e){
+                e.printStackTrace();
                 return badRequest();
             }
         }

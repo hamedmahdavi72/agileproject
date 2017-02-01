@@ -5,7 +5,6 @@ var app = angular.module('drPageAsUser', ["ngRoute","headerModule","dateConverto
 
 app.controller('reserve', function($scope, $http, $window, convertDate) {
 
-    console.log(new Date("1/25/2017").getTime())
     $scope.canAdd = true;
     $scope.days = [];
 

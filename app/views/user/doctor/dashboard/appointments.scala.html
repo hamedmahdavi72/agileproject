@@ -6,18 +6,48 @@
 <hr>
 
 <div>
-    <div style="display:inline-block;
-        margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;font-size:16px;width: 300px; height: auto; border: 2px solid white;background: #a9a9a9" ng-repeat="appointment in appointments">
-                <div>
-                    <div><strong style="font-size: 24px">نام بیمار:{{appointment.customerUsername}}</strong></div>
-                    <div style="position: relative; background: white; width: inherit; height: auto; border: 1px dashed blue; margin-bottom: 1px;" ng-repeat="interval in appointment.appointmentInterval">
-                       <div style="position: relative; top: 5%; right: 37%;">
-                            <div>از ساعت: {{interval.fromHour}}</div>
-                            <div>تا ساعت: {{interval.toHour}}</div>
-                            <div>تاریخ: {{interval.jalaliDate}}</div>
-                       </div>
-                    </div>
+    <div style="display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        margin-left: 5px;
+        font-size: 16px;
+        width: 300px;
+        height: auto;
+        border: 2px solid white;
+        background: #a9a9a9" ng-repeat="appointment in appointments">
+        <div>
+            <div><strong style="font-size: 24px">نام بیمار:{{appointment.customerUsername}}</strong></div>
+            <div style="position: relative;
+                background: white;
+                width: inherit;
+                height: auto;
+                border: 1px dashed blue;
+                margin-bottom: 1px;" ng-repeat="interval in appointment.appointmentInterval">
+                <div style="position: relative;
+                    top: 5%;
+                    right: 37%;">
+                    <div>از ساعت: {{interval.fromHour}}</div>
+                    <div>تا ساعت: {{interval.toHour}}</div>
+                    <div>تاریخ: {{interval.jalaliDate}}</div>
                 </div>
-         @*<div><button class="btn btn-success">قبول</button> <button class="btn btn-danger">رد</button></div>*@
+            </div>
+
+            روز:
+            <select style="width: 15%;" ng-model="selectedDay" ng-options="x for x in days"> </select>
+            ماه:
+            <select style="width: 15%;" ng-model="selectedMonth" ng-options="x for x in months"> </select>
+            سال:
+            <select style="width: 25%;" ng-model="selectedYear" ng-options="x for x in years"> </select>
+            ساعت:
+            <input type="time" ng-model="selectedTime">
+            <br>
+
+
+            <button ng-hide="appointments[$index].isHandled" class="btn btn-success" ng-click = "sendAppointment($index,selectedYear,selectedMonth,selectedDay,selectedTime)">ثبت نوبت</button>
+            <p ng-show="appointments[$index].isHandled" style="color: green">درخواست با موفقیت ثبت شد</p>
+
     </div>
+
 </div>
+

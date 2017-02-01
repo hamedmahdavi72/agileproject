@@ -1,6 +1,7 @@
 package models;
 
 import forms.AppointmentRequestForm;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,14 @@ public class AppointmentRequest extends JongoModel{
         this.doctorUsername = form.getDoctorUsername();
         this.appointmentInterval = form.generateAppointmentIntervals();
         this.answered = false;
+    }
+
+    public AppointmentRequest(String customerUsername, String doctorUsername, AppointmentInterval appInt) {
+        this.id = new ObjectId();
+        this.customerUsername = customerUsername;
+        this.doctorUsername = doctorUsername;
+        this.appointmentInterval = new ArrayList<>();
+        appointmentInterval.add(appInt);
     }
 
     public void setCustomerUsername(String customerUsername) {

@@ -6,6 +6,22 @@ var user_lastname;
 var insuranceCompanies = [];
 var insuranceIDs = [];
 app.controller('panel',function ($scope, $http, $filter,convertDate) {
+    $scope.days = [];
+    for(var i = 0 ; i < 31; i++){
+        $scope.days[i] = i+1;
+    }
+    $scope.months = [];
+
+    for(var i = 0 ; i < 12; i++){
+        $scope.months[i] = i+1;
+    }
+
+    $scope.years = [];
+
+    $scope.years[0] = '1395';
+    $scope.years[1] = '1396';
+
+
     $scope.appointments = [];
     $scope.acceptedAppointments = [];
 
@@ -16,6 +32,8 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
                     $scope.appointments = response.data;
                     for(var i = 0 ; i < $scope.appointments.length; i++){
                         for(var j = 0; j < $scope.appointments[i].appointmentInterval.length; j++){
+
+                            //setting interval jalali dates
                             tempDate = new Date($scope.appointments[i].appointmentInterval[j].date);
                             intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
                                 tempDate.getMonth()+1,tempDate.getDate());
@@ -23,6 +41,9 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
                             "/"+intervalJalaliDate[2];
 
                         }
+
+                        //setting isHandled
+                        $scope.appointments[i].isHandled = false;
                     }
 
                 }
@@ -41,8 +62,26 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
                     $scope.acceptedAppointments[i].appointmentDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
                         "/"+intervalJalaliDate[2];
                 }
-                // console.log($scope.appointments[0].appointmentInterval[0].fromHour);
+
             });
+    };
+
+    $scope.sendAppointment = function(index,selectedYear,selectedMonth,selectedDay,selectedTime){
+      var gregorianDate = convertDate.jalaliToGregorian(selectedYear,selectedMonth,selectedDay)
+        var date = new Date(gregorianDate[0],gregorianDate[1],gregorianDate[2],selectedTime.getHours(),selectedTime.getMinutes());
+        var appointmentData = {
+            "date": date,
+            "id": $scope.appointments[index].id,
+            "customerUsername": $scope.appointments[index].customerUsername
+        };
+
+       $http.post("/doctor/acceptAppointmentRequest/",appointmentData).success(function(data, status) {
+           $scope.appointments[index].isHandled = true;
+           $scope.loadAcceptedAppointments();
+
+        })
+
+
     };
 
     $scope.loadAcceptedAppointments();

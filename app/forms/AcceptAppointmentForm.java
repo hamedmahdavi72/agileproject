@@ -1,5 +1,6 @@
 package forms;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -8,9 +9,9 @@ import java.util.Date;
  * Created by HamedMahdavi on 1/13/2017.
  */
 public class AcceptAppointmentForm {
-    ObjectId id;
-    String customerUsername;
-    Date date;
+    private ObjectId id;
+    private String customerUsername;
+    private Date date;
 
     public void setDate(Date date) {
         this.date = date;
@@ -22,6 +23,11 @@ public class AcceptAppointmentForm {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public void reviseId(JsonNode id){
+        this.id = new ObjectId(id.get("timestamp").asInt(), id.get("machineIdentifier").asInt(),
+                id.get("processIdentifier").shortValue(),id.get("counter").asInt());
     }
 
     public ObjectId getId() {
