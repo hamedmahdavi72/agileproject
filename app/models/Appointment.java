@@ -27,7 +27,7 @@ public class Appointment extends JongoModel {
     }
 
     public Appointment(String doctorUsername, AcceptAppointmentForm acceptAppointmentForm) {
-        this(doctorUsername,acceptAppointmentForm.getCustomerUsername(),acceptAppointmentForm.getDate());
+        this(doctorUsername,acceptAppointmentForm.getCustomerUsername(),new Date(acceptAppointmentForm.getDate()));
     }
 
     public static Appointment generateAndSaveAppointment(String doctorUsername,String customerUsername,Date date){

@@ -57,20 +57,22 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
 
                 for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
                     tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
+                    // console.log(tempDate);
                     intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
-                        tempDate.getMonth()+1,tempDate.getDate());
+                        tempDate.getMonth()+1,tempDate.getDate(), tempDate.getHours());
                     $scope.acceptedAppointments[i].appointmentDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
-                        "/"+intervalJalaliDate[2];
+                        "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
+                    // console.log(new Date(2017, 0, 1, 7, 0, 0, 0));
                 }
 
             });
     };
 
     $scope.sendAppointment = function(index,selectedYear,selectedMonth,selectedDay,selectedTime){
-      var gregorianDate = convertDate.jalaliToGregorian(selectedYear,selectedMonth,selectedDay)
-        var date = new Date(gregorianDate[0],gregorianDate[1],gregorianDate[2],selectedTime.getHours(),selectedTime.getMinutes());
+      var gregorianDate = convertDate.jalaliToGregorian(selectedYear,selectedMonth,selectedDay);
+        var date = new Date(gregorianDate[0],gregorianDate[1] - 1,gregorianDate[2],selectedTime.getHours(),selectedTime.getMinutes(), 0, 0);
         var appointmentData = {
-            "date": date,
+            "date": date.getTime(),
             "id": $scope.appointments[index].id,
             "customerUsername": $scope.appointments[index].customerUsername
         };

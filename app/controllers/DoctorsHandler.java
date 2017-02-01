@@ -99,6 +99,9 @@ public class DoctorsHandler extends Controller {
 
                 findAppointmentRequestAndSetAnsweredTrue(acceptAppointmentForm.getId());
 
+                System.out.println(request().body().asJson());
+//                System.out.println(new Date(request().body().asJson().get("date").toString()));
+
                 //saves new appointment from request
                 Appointment appointment = new Appointment(getUsername(), acceptAppointmentForm);
                 AppointmentDAOWrapper.getInstance().getAppointmentDAO().save(appointment);
