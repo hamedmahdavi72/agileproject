@@ -24,7 +24,17 @@ public class DoctorProfileForm extends  UserProfileForm {
         this.clinicAddress = doctor.getClinicAddress();
         this.clinicPhoneNumber = doctor.getClinicPhoneNumber();
         this.supportedInsuranceCompanies = doctor.getSupportedInsuranceCompanies();
+    }
 
+    public String getClinicAddress() {
+        return clinicAddress;
+    }
 
+    public ArrayList<String> getSupportedInsuranceCompanies() {
+        return supportedInsuranceCompanies;
+    }
+
+    public String getClinicPhoneNumber() {
+        return clinicPhoneNumber;
     }
 }

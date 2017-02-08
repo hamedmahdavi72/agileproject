@@ -143,7 +143,8 @@ public class UserRequest extends Controller {
             return ok(Json.toJson(new CustomerProfileForm(customer)));
         } else if (User.isDoctor(username)) {
             Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(username);
-            return ok(Json.toJson(new DoctorProfileForm(doctor)));
+            DoctorProfileForm doctorProfileForm = new DoctorProfileForm(doctor);
+            return ok(Json.toJson(doctorProfileForm));
         } else return ok(Json.toJson("object is null"));
     }
 
