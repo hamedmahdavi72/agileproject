@@ -4,7 +4,19 @@
 /**
  * Created by ARYA on 12/20/2016.
  */
-var app = angular.module('edit', ["ngRoute","headerModule"]);
+var app = angular.module('customerProfile', ["ngRoute","headerModule","dateConvertorModule"]);
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when("/customerInfo", {
+            restrict : 'A',
+            templateUrl : "/customerInfo"
+        })
+        .when("/customerAppointments", {
+            restrict : 'A',
+            templateUrl : "/customerAppointments"
+        });
+});
 
 
 
