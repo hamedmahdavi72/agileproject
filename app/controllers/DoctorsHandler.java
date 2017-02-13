@@ -150,4 +150,24 @@ public class DoctorsHandler extends Controller {
         }
         else return badRequest();
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getPatients() {
+        if(User.isDoctor(getUsername())){
+            Content html = views.html.user.doctor.dashboard.patients.render();
+            return ok(html);
+        }
+        else return badRequest();
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result doctorPatients() {
+        if(User.isDoctor(getUsername())){
+            Date zeroDate = new Date(0L);
+            MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().getAppointmentsAfterSpecificDate(getUsername(),zeroDate);
+            JsonNode results = Json.toJson(acceptedAppointments);
+            return ok(results);
+        }
+        else return badRequest();
+    }
 }
