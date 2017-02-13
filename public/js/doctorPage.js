@@ -197,6 +197,12 @@ app.controller('callDoc', function($scope, $http) {
         );
 });
 
+app.controller('patients', function($scope, $http) {
+    $http.get("/doctorPatients")
+        .then(function (response) {$scope.patients = response.data;}
+        );
+});
+
 app.controller('DemoCtrl', function($scope, $http) {
     $scope.roles = [
         {id: 1, text: 'پارسیان'},
@@ -264,5 +270,9 @@ app.config(function($routeProvider) {
         .when("/acceptedAppointmentRequest", {
             restrict : 'A',
             templateUrl : "/acceptedAppointmentRequest"
+        })
+        .when("/patients", {
+            restrict : 'A',
+            templateUrl : "/patients"
         });
 });

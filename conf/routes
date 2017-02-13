@@ -79,3 +79,7 @@ GET    /acceptedAppointmentRequest   controllers.DoctorsHandler.acceptedAppointm
 POST    /doctor/acceptAppointmentRequest/    controllers.DoctorsHandler.acceptAppointmentRequest()
 
 GET     /doctor/getDoctorAppointments      controllers.DoctorsHandler.getDoctorAppointments()
+
+GET     /patients                          controllers.DoctorsHandler.getPatients()
+
+GET     /doctorPatients      controllers.DoctorsHandler.doctorPatients()
