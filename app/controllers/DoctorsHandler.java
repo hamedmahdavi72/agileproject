@@ -3,13 +3,11 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import dao.AppointmentDAOWrapper;
 import dao.AppointmentRequestDAOWrapper;
+import dao.CustomerDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.AcceptAppointmentForm;
 import forms.DoctorInfoForm;
-import models.Appointment;
-import models.AppointmentRequest;
-import models.Doctor;
-import models.User;
+import models.*;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
 import play.data.Form;
@@ -22,6 +20,7 @@ import play.twirl.api.Content;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by HamedMahdavi on 1/6/2017.
@@ -165,6 +164,11 @@ public class DoctorsHandler extends Controller {
         if(User.isDoctor(getUsername())){
             Date zeroDate = new Date(0L);
             MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().getAppointmentsAfterSpecificDate(getUsername(),zeroDate);
+            MongoCursor<Customer> allCustomers = CustomerDAOWrapper.getInstance().findAll();
+
+            for(Appointment appointment : acceptedAppointments){
+
+            }
             JsonNode results = Json.toJson(acceptedAppointments);
             return ok(results);
         }
