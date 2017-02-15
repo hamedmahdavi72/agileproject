@@ -18,6 +18,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.twirl.api.Content;
+import queryresult.AppointmentsData;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -163,10 +164,10 @@ public class DoctorsHandler extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result doctorPatients() {
         if(User.isDoctor(getUsername())){
-            Date zeroDate = new Date(0L);
-            MongoCursor<Appointment> acceptedAppointments = AppointmentDAOWrapper.getInstance().getAppointmentsAfterSpecificDate(getUsername(),zeroDate);
-            JsonNode results = Json.toJson(acceptedAppointments);
-            return ok(results);
+            return ok(Json.toJson(AppointmentDAOWrapper.getInstance().getCustomersData(getUsername())
+                    .stream()
+                    .map(AppointmentsData::getCustomerAppointmentsDataForm)
+                    .toArray()));
         }
         else return badRequest();
     }

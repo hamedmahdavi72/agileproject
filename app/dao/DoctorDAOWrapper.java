@@ -1,10 +1,13 @@
 package dao;
 
 import forms.SearchForm;
-import models.Customer;
+
 import models.Doctor;
 import org.jongo.MongoCursor;
+import play.api.libs.json.Json;
+import queryresult.AppointmentsData;
 
+import java.util.ArrayList;
 
 
 /**
@@ -17,6 +20,9 @@ public class DoctorDAOWrapper {
             "{speciality : {$regex : #}}," +
             "{geoLocation :{ $near :{ $geometry :{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}}," +
             "{accepted: true}]}";
+
+
+
 
     private final double MAX_DISTANCE = 3700;
 
@@ -54,6 +60,10 @@ public class DoctorDAOWrapper {
         return doctors;
 
     }
+
+
+
+
 
 
 
