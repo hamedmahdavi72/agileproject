@@ -58,7 +58,7 @@
                     <div style="margin-bottom: 3%;" ng-controller="DemoCtrl">
                         <h3>ویرایش بیمه ها (بیمه های انتخاب شده نمایانگر بیمه های فعلی است)</h3>
                         <label ng-repeat="role in roles">
-                            <input type="checkbox" checklist-model="user.roles" checklist-value="role._id">
+                            <input type="checkbox" checklist-model="user.roles" checklist-value="role.id">
                             <strong>{{role.text}}</strong>
                         </label>
                         <br>
@@ -71,5 +71,4 @@
                 </div>
             </div>
             <br><br>
-            <hr>
     </div>

@@ -101,7 +101,7 @@ app.controller('edit',function ($scope, $http, $window) {
                 $scope.firstNameValue = $scope.slist.firstName;
                 $scope.lastNameValue = $scope.slist.lastName;
                 $scope.mobileNumberValue = $scope.slist.mobileNumber;
-                console.log($scope.slist);
+                // console.log($scope.slist);
                 user_lastname = $scope.slist.lastName;
             }
         );
@@ -112,7 +112,7 @@ app.controller('edit',function ($scope, $http, $window) {
         .then(function (response) {$scope.list = response.data;
             insuranceCompanies = $scope.list.supportedInsuranceCompanies;
             $scope.insuranceCompanies = insuranceCompanies;
-            console.log(insuranceCompanies[0]);
+            // console.log(insuranceCompanies);
 
                 for (var i = 0 ; i < 4 ; i++){
                     if(insuranceCompanies[i] == '"پارسیان"'){
@@ -142,7 +142,7 @@ app.controller('edit',function ($scope, $http, $window) {
         $scope.user.firstName = $scope.firstName;
         $scope.user.lastName = $scope.lastName;
 
-        console.log($scope.user);
+        // console.log($scope.user);
 
 
         $scope.hideErrorPassword = true;
@@ -191,16 +191,27 @@ app.controller('callDoc', function($scope, $http) {
     $http.get("/getUser")
         .then(function (response) {$scope.slist = response.data;
                 user_lastname = $scope.slist.lastName;
-                console.log(user_lastname);
+                // console.log(user_lastname);
                 $scope.lastName = user_lastname;
             }
         );
 });
 
-app.controller('patients', function($scope, $http) {
+app.controller('patients', function($scope, $http, convertDate) {
+
+    var temp_patients = [];
     $http.get("/doctorPatients")
-        .then(function (response) {$scope.patients = response.data;
-            console.log($scope.patients);
+        .then(function (response) {temp_patients = response.data;
+            for(var i = 0 ; i < temp_patients.length ; i++){
+                    for(var j = 0 ; j < temp_patients[i].appointmentsDate.length; j++){
+                        tempDate = new Date(temp_patients[i].appointmentsDate[j]);
+                        intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
+                            tempDate.getMonth()+1,tempDate.getDate());
+                        temp_patients[i].appointmentsDate[j] = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
+                            "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
+                    }
+                }
+                $scope.patients = temp_patients;
         }
         );
 });
@@ -236,7 +247,7 @@ app.controller('DemoCtrl', function($scope, $http) {
         for(var i = 0 ; i < $scope.user.roles.length; i++){
             insurances.push($scope.roles[$scope.user.roles[i]-1].text);
         }
-        console.log(insurances);
+        // console.log(insurances);
 
         $http({
             url: '/saveInsurance/',
