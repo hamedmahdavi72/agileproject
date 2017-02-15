@@ -199,7 +199,9 @@ app.controller('callDoc', function($scope, $http) {
 
 app.controller('patients', function($scope, $http) {
     $http.get("/doctorPatients")
-        .then(function (response) {$scope.patients = response.data;}
+        .then(function (response) {$scope.patients = response.data;
+            console.log($scope.patients);
+        }
         );
 });
 

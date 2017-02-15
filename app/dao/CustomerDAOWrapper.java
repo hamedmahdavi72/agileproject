@@ -1,6 +1,9 @@
 package dao;
 
 import models.Customer;
+import org.jongo.MongoCursor;
+
+import java.util.List;
 
 /**
  * Created by ARYA on 12/18/2016.
@@ -28,5 +31,9 @@ public class CustomerDAOWrapper {
 
     public Customer findByUsername(String username){
         return  customerDAO.findOneByFieldName("username", username);
+    }
+
+    public MongoCursor<Customer> findAll(){
+        return  customerDAO.findAll();
     }
 }
