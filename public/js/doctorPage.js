@@ -25,6 +25,11 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
     $scope.appointments = [];
     $scope.acceptedAppointments = [];
 
+    $scope.hasFiltered = false;
+    $scope.selectedDay = $scope.days[0];
+    $scope.selectedMonth = $scope.months[0];
+    $scope.selectedYear = $scope.years[0];
+
     $scope.loadAppointments = function () {
         $http.get("/doctor/appointmentRequests")
             .then(function (response) {
@@ -56,16 +61,19 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
                 $scope.acceptedAppointments = response.data;
 
                 for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
-                    tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
-                    // console.log(tempDate);
-                    intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
+                    var tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
+                    $scope.acceptedAppointments[i].appointmentDate = tempDate;
+                    var intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
                         tempDate.getMonth()+1,tempDate.getDate(), tempDate.getHours());
-                    $scope.acceptedAppointments[i].appointmentDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
+                    $scope.acceptedAppointments[i].appointmentJalaliDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
                         "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
                     // console.log(new Date(2017, 0, 1, 7, 0, 0, 0));
                 }
 
+                $scope.filterAppointments(false,0,0,0);
+
             });
+
     };
 
     $scope.sendAppointment = function(index,selectedYear,selectedMonth,selectedDay,selectedTime){
@@ -85,6 +93,26 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
 
 
     };
+
+    $scope.filterAppointments = function(hasFiltered, selectedYear,selectedMonth,selectedDay){
+        if (!hasFiltered)
+            $scope.filteredAcceptedAppointments = $scope.acceptedAppointments;
+        else{
+            var gregDateArray = convertDate.jalaliToGregorian(selectedYear, selectedMonth, selectedDay);
+            $scope.filteredAcceptedAppointments = [];
+            for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
+                console.log($scope.acceptedAppointments[i].appointmentDate.getM)
+                if(gregDateArray[0] == $scope.acceptedAppointments[i].appointmentDate.getFullYear() &&
+                    gregDateArray[1] == ($scope.acceptedAppointments[i].appointmentDate.getMonth()+1) &&
+                    gregDateArray[2] == $scope.acceptedAppointments[i].appointmentDate.getDate() )
+                    $scope.filteredAcceptedAppointments.push($scope.acceptedAppointments[i]);
+
+            }
+
+        }
+    };
+
+
 
     $scope.loadAcceptedAppointments();
     $scope.loadAppointments();

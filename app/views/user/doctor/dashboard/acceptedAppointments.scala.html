@@ -2,15 +2,34 @@
     ملاقات های تایید شده
 </h2>
 
+<div>
+
+    <div>
+        <strong>سال</strong>
+        <select ng-model="selectedYear"  ng-options="x for x in years"></select>
+        <strong>ماه</strong>
+        <select ng-model="selectedMonth" ng-options="x for x in months"></select>
+        <strong>روز</strong>
+        <select ng-model="selectedDay" ng-options="x for x in days"></select>
+    </div>
+
+    <div style="margin: 0% 4%">
+        <strong>اعمال فیلتر</strong>
+        <input  type="checkbox" ng-model="hasFiltered">
+        <button style="margin: 0% 4%" class="btn btn-success" ng-click = "filterAppointments(hasFiltered,selectedYear,selectedMonth,selectedDay)">نمایش نوبت ها</button>
+    </div>
+
+
+</div>
 
 <hr>
-<div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="x in acceptedAppointments">
+<div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="x in filteredAcceptedAppointments">
     <div style="position: relative; right: 37%">
         <label><strong>نام کاربری بیمار</strong></label>
         {{x.customerUsername}}
     </div>
     <div style="position: relative; right: 37%">
         <label><strong>روز و ساعت و تاریخ وقت</strong></label>
-        {{x.appointmentDate}}
+        {{x.appointmentJalaliDate}}
     </div>
 </div>
