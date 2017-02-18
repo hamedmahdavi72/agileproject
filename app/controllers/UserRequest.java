@@ -247,16 +247,11 @@ public class UserRequest extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result getIssues(){
 
-        if(User.isCustomer(getUsername()) || User.isDoctor(getUsername())) {
-            Form<IssueForm> form = Form.form(IssueForm.class).bindFromRequest();
+        Form<IssueForm> form = Form.form(IssueForm.class).bindFromRequest();
             IssueForm issueForm = form.get();
             Issue issue = new Issue(issueForm, getUsername());
             IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
-            return ok("ok");
-        }
-        else{
-            return badRequest();
-        }
+            return ok();
 
     }
 
