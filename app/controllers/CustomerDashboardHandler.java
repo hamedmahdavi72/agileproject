@@ -42,7 +42,17 @@ public class CustomerDashboardHandler extends Controller {
         return SessionIdPool.getUsername(session().get("sessionId"));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result customerInfo() {
         return ok(views.html.user.customer.dashboard.profile.render());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result customerAppointmentsTemplate(){
+        if(User.isCustomer(getUsername())){
+            Content html = views.html.user.customer.dashboard.appointments.render();
+            return ok(html);
+        }
+        else return badRequest();
     }
 }

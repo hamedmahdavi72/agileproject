@@ -20,6 +20,26 @@ app.config(function($routeProvider) {
 
 
 
+app.controller('customerAppointments', function($scope, $http, convertDate) {
+
+    $scope.acceptedAppointments = [];
+    $http.get("/customer/appointments")
+        .then(function (response) {
+                $scope.acceptedAppointments = response.data;
+            for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
+                tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
+                // console.log(tempDate);
+                intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
+                    tempDate.getMonth()+1,tempDate.getDate(), tempDate.getHours());
+                $scope.acceptedAppointments[i].appointmentDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
+                    "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
+                // console.log(new Date(2017, 0, 1, 7, 0, 0, 0));
+            }
+            }
+        );
+});
+
+
 
 app.controller('editapp', function($scope, $http, $window) {
 

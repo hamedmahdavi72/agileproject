@@ -87,3 +87,5 @@ GET     /doctorPatients      controllers.DoctorsHandler.doctorPatients()
 GET     /customer/appointments controllers.CustomerDashboardHandler.getUserAppoinments()
 
 GET     /customerInfo               controllers.CustomerDashboardHandler.customerInfo()
+
+GET     /customerAppointments       controllers.CustomerDashboardHandler.customerAppointmentsTemplate()
