@@ -5,8 +5,10 @@ import config.Messages;
 import dao.AppointmentRequestDAOWrapper;
 import dao.CustomerDAOWrapper;
 import dao.DoctorDAOWrapper;
+import dao.IssueDAOWrapper;
 import forms.*;
 import models.*;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -15,6 +17,7 @@ import play.mvc.Security;
 import play.twirl.api.Content;
 
 import javax.print.Doc;
+import java.util.Date;
 
 /**
  * Created by ARYA on 12/17/2016.
@@ -240,6 +243,24 @@ public class UserRequest extends Controller {
     private static String getUsername() {
         return SessionIdPool.getUsername(session().get("sessionId"));
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getIssues(){
+
+        if(User.isCustomer(getUsername()) || User.isDoctor(getUsername())) {
+            Form<IssueForm> form = Form.form(IssueForm.class).bindFromRequest();
+            IssueForm issueForm = form.get();
+            Issue issue = new Issue(issueForm, getUsername());
+            IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
+            return ok("ok");
+        }
+        else{
+            return badRequest();
+        }
+
+    }
+
+
 
 }
 

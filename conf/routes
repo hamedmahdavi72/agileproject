@@ -89,3 +89,5 @@ GET     /customer/appointments controllers.CustomerDashboardHandler.getUserAppoi
 GET     /customerInfo               controllers.CustomerDashboardHandler.customerInfo()
 
 GET     /customerAppointments       controllers.CustomerDashboardHandler.customerAppointmentsTemplate()
+
+POST    /issueReport/               controllers.UserRequest.getIssues()
