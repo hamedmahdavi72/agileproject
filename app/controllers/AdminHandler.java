@@ -4,9 +4,12 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import dao.AdminDAOWrapper;
 import dao.DoctorDAOWrapper;
+import dao.IssueDAOWrapper;
 import forms.UserForm;
 import models.Admin;
 import models.Doctor;
+import models.Issue;
+import org.jongo.MongoCursor;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.data.Form;
@@ -115,4 +118,16 @@ public class AdminHandler extends Controller {
         }
         else return redirect(routes.UserRequest.loginController());
     }
+
+
+    @Security.Authenticated(Secured.class)
+    public static Result getIssues(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findAll();
+            return ok(Json.toJson(issues));
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
 }

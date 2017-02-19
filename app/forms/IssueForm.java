@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class IssueForm {
     private String issueReport;
-    private Date issueDate;
+    private String issueDate;
     private String subject;
 
     public IssueForm(){}
@@ -20,11 +20,11 @@ public class IssueForm {
         return issueReport;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
-    public Date getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 

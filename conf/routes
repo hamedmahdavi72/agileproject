@@ -91,3 +91,7 @@ GET     /customerInfo               controllers.CustomerDashboardHandler.custome
 GET     /customerAppointments       controllers.CustomerDashboardHandler.customerAppointmentsTemplate()
 
 POST    /issueReport/               controllers.UserRequest.getIssues()
+
+GET    /issues              controllers.UserRequest.issuesTemplate()
+
+GET     /getIssues          controllers.AdminHandler.getIssues()

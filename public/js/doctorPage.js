@@ -244,6 +244,44 @@ app.controller('patients', function($scope, $http, convertDate) {
         );
 });
 
+app.controller('issueController', function($scope, $http, convertDate) {
+    $scope.subjects = ["ورود و خروج به حساب کاربری", "دیگر", "ملاقات های تایید شده", "رزرو وقت"];
+    $scope.response = false;
+
+    $scope.reportIssue = function () {
+
+        $scope.response = false;
+
+        var issue = new Object();
+
+        issue.issueReport = $scope.issueDesc;
+        issue.subject = $scope.issueSubject;
+        issue.issueDate = new Date();
+        var persianDate = convertDate.gregorianToJalali(issue.issueDate.getFullYear(),
+            issue.issueDate.getMonth()+1,issue.issueDate.getDate());
+        issue.issueDate = persianDate[0]+"/"+persianDate[1]+
+            "/"+persianDate[2]+" --- زمان: "+issue.issueDate.getHours()+":"+issue.issueDate.getMinutes();
+
+        var jsonObjectIssue = JSON.stringify(issue);
+
+        $http({
+            url: '/issueReport/',
+            method: "POST",
+            data: jsonObjectIssue
+        })
+            .then(function (response) {
+                    //console.log(response.data);
+                    if (response.data != null) {
+                        $scope.response = true;
+                    }
+                },
+                function (response) { // optional
+                    // failed
+                });
+    }
+});
+
+
 app.controller('DemoCtrl', function($scope, $http) {
     $scope.roles = [
         {id: 1, text: 'پارسیان'},
@@ -315,5 +353,9 @@ app.config(function($routeProvider) {
         .when("/patients", {
             restrict : 'A',
             templateUrl : "/patients"
+        })
+        .when("/issues", {
+            restrict : 'A',
+            templateUrl : "/issues"
         });
 });

@@ -2,6 +2,7 @@ package dao;
 
 import models.Issue;
 import org.bson.types.ObjectId;
+import org.jongo.MongoCursor;
 
 /**
  * Created by hamed on 2/18/17 AD.
@@ -25,6 +26,8 @@ public class IssueDAOWrapper {
     public GenericDAO<Issue> getIssueDAO() {
         return issueDAO;
     }
+
+    public MongoCursor<Issue> findAll(){return issueDAO.findAll();}
 
     public void setIssueDAO(GenericDAO<Issue> issueDAO) {
         this.issueDAO = issueDAO;

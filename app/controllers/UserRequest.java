@@ -248,11 +248,17 @@ public class UserRequest extends Controller {
     public static Result getIssues(){
 
         Form<IssueForm> form = Form.form(IssueForm.class).bindFromRequest();
-            IssueForm issueForm = form.get();
-            Issue issue = new Issue(issueForm, getUsername());
-            IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
-            return ok();
+        IssueForm issueForm = form.get();
+        Issue issue = new Issue(issueForm, getUsername());
+        IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
+        return ok("200");
 
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result issuesTemplate(){
+        Content html = views.html.user.issueReport.render();
+        return ok(html);
     }
 
 

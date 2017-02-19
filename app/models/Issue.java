@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Issue extends JongoModel {
     private String issueReport;
-    private Date issueDate;
+    private String issueDate;
     private String custormerUsername;
     private String subject;
 
@@ -20,6 +20,10 @@ public class Issue extends JongoModel {
         this.custormerUsername = custormerUsername;
     }
 
+    public Issue(){
+
+    }
+
     public void setIssueReport(String issueReport) {
         this.issueReport = issueReport;
     }
@@ -28,11 +32,11 @@ public class Issue extends JongoModel {
         return issueReport;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
-    public Date getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
