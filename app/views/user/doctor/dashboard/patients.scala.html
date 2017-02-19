@@ -18,7 +18,7 @@
     </div>
         <div style="position: relative; right: 25%">
             <label><strong>روز و ساعت و تاریخ وقت</strong></label>
-          <div ng-repeat="x1 in x.appointmentsDate">
+          <div ng-repeat="x1 in x.appointmentsDate | orderBy">
             {{x1}}
           </div>
         </div>
