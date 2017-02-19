@@ -140,7 +140,7 @@ public class AdminHandler extends Controller {
     public static Result getIssuesId(){
         if(admin != null &&
                 SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
-            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findAll();
+            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findBySolved(false);
             List<String> ids = new ArrayList<>();
             for(Issue issue : issues){
                ids.add(issue.getId().toString());

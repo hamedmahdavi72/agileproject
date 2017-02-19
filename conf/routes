@@ -99,3 +99,7 @@ GET     /getIssues          controllers.AdminHandler.getIssues()
 GET    /getIssuesId         controllers.AdminHandler.getIssuesId()
 
 POST    /solveIssue/         controllers.AdminHandler.solveIssue()
+
+GET     /messages           controllers.UserRequest.messagesTemplate()
+
+GET     /getMessages        controllers.UserRequest.getMessages()

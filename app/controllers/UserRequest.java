@@ -8,6 +8,7 @@ import dao.DoctorDAOWrapper;
 import dao.IssueDAOWrapper;
 import forms.*;
 import models.*;
+import org.jongo.MongoCursor;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -17,7 +18,9 @@ import play.mvc.Security;
 import play.twirl.api.Content;
 
 import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ARYA on 12/17/2016.
@@ -261,7 +264,22 @@ public class UserRequest extends Controller {
         return ok(html);
     }
 
+    @Security.Authenticated(Secured.class)
+    public static Result messagesTemplate(){
+        Content html = views.html.user.messages.render();
+        return ok(html);
+    }
 
+    @Security.Authenticated(Secured.class)
+    public static Result getMessages(){
+        MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findByUsername(getUsername());
+        List<Issue> solved = new ArrayList<>();
+        for(Issue issue : issues){
+            if(issue.isSolved())
+                solved.add(issue);
+        }
+        return ok(Json.toJson(solved));
+    }
 
 }
 

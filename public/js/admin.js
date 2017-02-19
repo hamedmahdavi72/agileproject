@@ -23,7 +23,7 @@ app.controller('admin-ctr',function($scope,$http, $window, convertDate){
 
         var issueSolved = new Object();
         issueSolved.customerUsername = customerUsername;
-        issueSolved.solveMessage = solveMessage;
+        issueSolved.issueReport = solveMessage;
         issueSolved.subject = subject;
         issueSolved.objectId = issueIds[index];
         issueSolved.issueDate = new Date();
@@ -33,7 +33,7 @@ app.controller('admin-ctr',function($scope,$http, $window, convertDate){
             "/"+persianDate[2]+" --- زمان: "+issueSolved.issueDate.getHours()+":"+issueSolved.issueDate.getMinutes();
         console.log(JSON.stringify(issueSolved));
 
-        $http({
+       $http({
             url: '/solveIssue/',
             method: "POST",
             data: JSON.stringify(issueSolved)

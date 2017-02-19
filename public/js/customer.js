@@ -19,6 +19,10 @@ app.config(function($routeProvider) {
         .when("/issues", {
             restrict : 'A',
             templateUrl : "/issues"
+        })
+        .when("/messages", {
+            restrict : 'A',
+            templateUrl : "/messages"
         });
 });
 
@@ -58,6 +62,13 @@ app.controller('issueController', function($scope, $http, convertDate) {
                     // failed
                 });
     }
+});
+
+app.controller('customerMessages', function($scope, $http) {
+    $http.get("/getMessages")
+        .then(function (response) {$scope.messages = response.data;
+            }
+        );
 });
 
 
