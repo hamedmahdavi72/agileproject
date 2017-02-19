@@ -130,7 +130,7 @@ public class AdminHandler extends Controller {
     public static Result getIssues(){
         if(admin != null &&
                 SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
-            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findAll();
+            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findBySolved(false);
             return ok(Json.toJson(issues));
         }
         else return redirect(routes.UserRequest.loginController());
@@ -156,7 +156,6 @@ public class AdminHandler extends Controller {
                 SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
                 Form<SolveForm> solveFormForm = Form.form(SolveForm.class).bindFromRequest();
                 SolveForm newSolveForm = solveFormForm.get();
-                //TODO save
                 Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
                 issue.setSolved(true);
                 issue.setIssueReport(newSolveForm.getIssueReport());
