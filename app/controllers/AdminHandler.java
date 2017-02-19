@@ -158,7 +158,8 @@ public class AdminHandler extends Controller {
                 SolveForm newSolveForm = solveFormForm.get();
                 //TODO save
                 Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
-                IssueDAOWrapper.getInstance().getIssueDAO().remove(issue);
+                issue.setSolved(true);
+                issue.setIssueReport(newSolveForm.getIssueReport());
             return ok();
         }
         else return redirect(routes.UserRequest.loginController());
