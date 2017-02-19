@@ -225,6 +225,13 @@ app.controller('callDoc', function($scope, $http) {
         );
 });
 
+app.controller('customerMessages', function($scope, $http) {
+    $http.get("/getMessages")
+        .then(function (response) {$scope.messages = response.data;
+            }
+        );
+});
+
 app.controller('patients', function($scope, $http, convertDate) {
 
     var temp_patients = [];
@@ -357,5 +364,9 @@ app.config(function($routeProvider) {
         .when("/issues", {
             restrict : 'A',
             templateUrl : "/issues"
+        })
+        .when("/messages", {
+            restrict : 'A',
+            templateUrl : "/messages"
         });
 });

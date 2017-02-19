@@ -29,6 +29,8 @@ public class IssueDAOWrapper {
 
     public MongoCursor<Issue> findAll(){return issueDAO.findAll();}
 
+    public MongoCursor<Issue> findByUsername(String customerUsername){return issueDAO.findByFieldName("custormerUsername", customerUsername);}
+
     public void setIssueDAO(GenericDAO<Issue> issueDAO) {
         this.issueDAO = issueDAO;
     }
