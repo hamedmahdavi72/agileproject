@@ -12,6 +12,7 @@ public class Issue extends JongoModel {
     private String issueDate;
     private String custormerUsername;
     private String subject;
+    private boolean isSolved = false;
 
     public Issue(IssueForm issueForm, String custormerUsername){
         this.issueReport = issueForm.getIssueReport();
@@ -54,5 +55,13 @@ public class Issue extends JongoModel {
 
     public String getSubject() {
         return subject;
+    }
+
+    public void setSolved(boolean solved) {
+        isSolved = solved;
+    }
+
+    public boolean isSolved() {
+        return isSolved;
     }
 }

@@ -36,4 +36,9 @@ public class IssueDAOWrapper {
     public Issue findById(ObjectId id){
         return issueDAO.findById(id);
     }
+
+    public MongoCursor<Issue> findBySolved(boolean value){
+        MongoCursor<Issue> issues = issueDAO.findByFieldName("isSolved",value);
+        return issues;
+    }
 }
