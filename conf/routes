@@ -95,3 +95,7 @@ POST    /issueReport/               controllers.UserRequest.getIssues()
 GET    /issues              controllers.UserRequest.issuesTemplate()
 
 GET     /getIssues          controllers.AdminHandler.getIssues()
+
+GET    /getIssuesId         controllers.AdminHandler.getIssuesId()
+
+POST    /solveIssue/         controllers.AdminHandler.solveIssue()
