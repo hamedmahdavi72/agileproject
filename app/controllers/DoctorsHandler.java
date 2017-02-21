@@ -173,4 +173,13 @@ public class DoctorsHandler extends Controller {
     }
 
 
+    @Security.Authenticated(Secured.class)
+    public static Result advertiseTemplate() {
+        if(User.isDoctor(getUsername())){
+            Content html = views.html.user.doctor.dashboard.advertiseRequest.render();
+            return ok(html);
+        }
+        else return badRequest();
+    }
+
 }

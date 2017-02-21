@@ -103,3 +103,5 @@ POST    /solveIssue/         controllers.AdminHandler.solveIssue()
 GET     /messages           controllers.UserRequest.messagesTemplate()
 
 GET     /getMessages        controllers.UserRequest.getMessages()
+
+GET     /advertise          controllers.DoctorsHandler.advertiseTemplate()

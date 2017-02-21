@@ -289,6 +289,30 @@ app.controller('issueController', function($scope, $http, convertDate) {
 });
 
 
+app.controller('advertise', function($scope, $http) {
+    $scope.ads =["10هزار تا کلیک - یک میلیون تومان", "30هزار کلیک - 3 میلیون تومان", "50هزار کلیک - 5 میلیون تومان"];
+    $scope.advertiseModel = $scope.ads[0];
+
+    $scope.requestAdvertise = function () {
+            var adPlan = $scope.advertiseModel;
+
+            $http({
+                url: '/sendAdRequest/',
+                method: "POST",
+                data: JSON.stringify(adPlan)
+            })
+                .then(function (response) {
+                        //console.log(response.data);
+                        if (response.data != null) {
+                        }
+                    },
+                    function (response) { // optional
+                        // failed
+                    });
+        }
+});
+
+
 app.controller('DemoCtrl', function($scope, $http) {
     $scope.roles = [
         {id: 1, text: 'پارسیان'},
@@ -368,5 +392,9 @@ app.config(function($routeProvider) {
         .when("/messages", {
             restrict : 'A',
             templateUrl : "/messages"
+        })
+        .when("/advertise", {
+            restrict : 'A',
+            templateUrl : "/advertise"
         });
 });
