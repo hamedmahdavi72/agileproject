@@ -113,6 +113,7 @@ app.controller('searchapp',function($scope,$http, $window){
                                 $scope.resulthide = false;
                                 $scope.noResultsHide = true;
                                 $scope.results = response.data.results;
+                                // $scope.advertisedResults = response.data.advertisedResults;
                             }
                         else {
                                 $scope.resulthide = true;

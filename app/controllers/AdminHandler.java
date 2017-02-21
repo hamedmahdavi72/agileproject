@@ -160,7 +160,7 @@ public class AdminHandler extends Controller {
             issue.setSolved(true);
             issue.setIssueReport(newSolveForm.getIssueReport());
             IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
-            if(newSolveForm.getSubject() == "Advertisement Request"){
+            if(newSolveForm.getSubject().equalsIgnoreCase("Advertisement Request")){
                 Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(issue.getCustormerUsername());
                 doctor.setAdvertised(true);
                 DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);

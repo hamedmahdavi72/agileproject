@@ -28,11 +28,7 @@ public class Search extends Controller {
                 SearchForm searchForm = form.get();
                 searchForm.eliminateNulls();
                 Iterable<Doctor> doctors = DoctorDAOWrapper.getInstance().search(searchForm);
-                List<SearchForm> results = new ArrayList<>();
-                for(Doctor doctor : doctors){
-                    SearchForm searchForm1 = new SearchForm();
-                    results.add(createSearchForm(searchForm1,doctor));
-                }
+                List<SearchForm> results = searchAdvertise(doctors);
                 Map<String, List<SearchForm>> obj = new HashMap<>();
                 obj.put("results", results);
                 return ok(Json.toJson(obj));
@@ -47,19 +43,23 @@ public class Search extends Controller {
 
     }
 
-    public static Result searchAdvertise(SearchForm searchForm, Iterable<Doctor> doctors){
-            searchForm.eliminateNulls();
-            Iterable<Doctor> allAdvertisedDoctors = DoctorDAOWrapper.getInstance().findByAdvertise(true);
-            List<Doctor> advertisedDoctors = intersection(((List<Doctor>) doctors), ((List<Doctor>) allAdvertisedDoctors));
-            List<Doctor> selectedDoctorsForTopShow=getToptoShow(advertisedDoctors);//this is the doctors to put in top of the result page
-            List<SearchForm> advertiseResults = new ArrayList<>();
-            for(Doctor doctor : selectedDoctorsForTopShow){
-                SearchForm searchForm1 = new SearchForm();
-                advertiseResults.add(createSearchForm(searchForm1,doctor));
+    public static List<SearchForm> searchAdvertise(Iterable<Doctor> doctors){
+            List<SearchForm> results = new ArrayList<>();
+        List<Doctor> all = new ArrayList<>();
+        for(Doctor doctor : doctors){
+            all.add(doctor);
+        }
+
+
+        Collections.sort(all, Comparator.comparing(Doctor::getTopShowedNum).reversed());
+
+            for(Doctor doctor : all){
+                SearchForm searchForm = new SearchForm();
+                results.add(createSearchForm(searchForm, doctor));
             }
-            Map<String, List<SearchForm>> obj = new HashMap<>();
-            obj.put("advertiseResults", advertiseResults);
-            return ok(Json.toJson(obj));
+            getToptoShow(all);
+
+            return results;
     }
 
     public static SearchForm createSearchForm(SearchForm searchForm, Doctor doctor){
@@ -71,18 +71,6 @@ public class Search extends Controller {
         return searchForm;
     }
 
-    public static <T> List<T> intersection(List<T> list1, List<T> list2) {
-        List<T> list = new ArrayList<T>();
-
-        for (T t : list1) {
-            if(list2.contains(t)) {
-                list.add(t);
-            }
-        }
-
-        return list;
-    }
-
     public static List<Doctor> getToptoShow(List<Doctor> list){
         List<Doctor> samples = new ArrayList<Doctor>();
         Collections.shuffle(list);
@@ -90,7 +78,7 @@ public class Search extends Controller {
         while (counter<3 && counter<list.size()){
             Doctor doc =list.get(counter);
             doc.countDown();
-            if(doc.getTopShowedNum()==0){
+            if(doc.getTopShowedNum()==0 && doc.isAdvertised()){
                 doc.setAdvertised(false);
                 Issue issue = new Issue();
                 issue.setIssueDate(new Date().toString());
