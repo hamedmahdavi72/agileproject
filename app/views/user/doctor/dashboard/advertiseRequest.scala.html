@@ -1,0 +1,13 @@
+<h3>درخواست تبلیغات</h3>
+<hr>
+<div ng-controller="advertise">
+  <div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%">
+    <div style="position: relative; right: 5%">
+      <label><strong>طرح تبلیغ</strong></label>
+      <select ng-options="ad for ad in ads" ng-model="advertiseModel"></select>
+      <div>
+        <button ng-click="requestAdvertise()">ارسال</button>
+      </div>
+    </div>
+  </div>
+</div>
