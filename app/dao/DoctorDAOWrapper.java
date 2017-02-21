@@ -62,6 +62,11 @@ public class DoctorDAOWrapper {
     }
 
 
+    public MongoCursor<Doctor> findByAdvertise(boolean value){
+        MongoCursor<Doctor> doctors = doctorDAO.findByFieldName("isAdvertised",value);
+        return doctors;
+    }
+
 
 
 

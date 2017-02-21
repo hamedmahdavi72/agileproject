@@ -159,10 +159,12 @@ public class AdminHandler extends Controller {
                 Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
                 issue.setSolved(true);
                 issue.setIssueReport(newSolveForm.getIssueReport());
-                IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
             return ok();
         }
         else return redirect(routes.UserRequest.loginController());
     }
+
+    
+
 
 }

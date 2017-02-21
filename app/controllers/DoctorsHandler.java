@@ -5,6 +5,7 @@ import dao.AppointmentDAOWrapper;
 import dao.AppointmentRequestDAOWrapper;
 import dao.DoctorDAOWrapper;
 import forms.AcceptAppointmentForm;
+import forms.AdvertiseForm;
 import forms.DoctorInfoForm;
 import models.Appointment;
 import models.AppointmentRequest;
@@ -180,6 +181,18 @@ public class DoctorsHandler extends Controller {
             return ok(html);
         }
         else return badRequest();
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getAdvertise(){
+        if(User.isDoctor(getUsername())){
+            Form<AdvertiseForm> form = Form.form(AdvertiseForm.class).bindFromRequest();
+            AdvertiseForm advertiseForm = form.get();
+            DoctorDAOWrapper.getInstance().findByUsername(getUsername()).setTopShowedNum(advertiseForm);
+            return ok();
+        }
+        else
+            return badRequest();
     }
 
 }

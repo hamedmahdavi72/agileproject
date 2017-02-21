@@ -10,10 +10,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.twirl.api.Content;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.print.Doc;
+import java.util.*;
 
 /**
  * Created by ARYA on 12/23/2016.
@@ -31,19 +29,13 @@ public class Search extends Controller {
                 List<SearchForm> results = new ArrayList<>();
                 for(Doctor doctor : doctors){
                     SearchForm searchForm1 = new SearchForm();
-                    searchForm1.setFirstName(doctor.getFirstName());
-                    searchForm1.setLastName(doctor.getLastName());
-                    searchForm1.setSpeciality(doctor.getSpeciality());
-                    searchForm1.setEmail(doctor.getEmail());
-                    searchForm1.setClinicAddress(doctor.getClinicAddress());
-                    results.add(searchForm1);
+                    results.add(createSearchForm(searchForm1,doctor));
                 }
-
                 Map<String, List<SearchForm>> obj = new HashMap<>();
                 obj.put("results", results);
                 return ok(Json.toJson(obj));
-
-            } catch (IllegalStateException e) {
+            }
+            catch (IllegalStateException e) {
                 return ok(form.errorsAsJson());
             }
         }
@@ -52,4 +44,57 @@ public class Search extends Controller {
         return ok(html);
 
     }
+
+    public static Result searchAdvertise(SearchForm searchForm, Iterable<Doctor> doctors){
+            searchForm.eliminateNulls();
+            Iterable<Doctor> allAdvertisedDoctors = DoctorDAOWrapper.getInstance().findByAdvertise(true);
+            List<Doctor> advertisedDoctors = intersection(((List<Doctor>) doctors), ((List<Doctor>) allAdvertisedDoctors));
+            List<Doctor> selectedDoctorsForTopShow=getToptoShow(advertisedDoctors);//this is the doctors to put in top of the result page
+            List<SearchForm> advertiseResults = new ArrayList<>();
+            for(Doctor doctor : selectedDoctorsForTopShow){
+                SearchForm searchForm1 = new SearchForm();
+                advertiseResults.add(createSearchForm(searchForm1,doctor));
+            }
+            Map<String, List<SearchForm>> obj = new HashMap<>();
+            obj.put("advertiseResults", advertiseResults);
+            return ok(Json.toJson(obj));
+    }
+
+    public static SearchForm createSearchForm(SearchForm searchForm, Doctor doctor){
+        searchForm.setFirstName(doctor.getFirstName());
+        searchForm.setLastName(doctor.getLastName());
+        searchForm.setSpeciality(doctor.getSpeciality());
+        searchForm.setEmail(doctor.getEmail());
+        searchForm.setClinicAddress(doctor.getClinicAddress());
+        return searchForm;
+    }
+
+    public static <T> List<T> intersection(List<T> list1, List<T> list2) {
+        List<T> list = new ArrayList<T>();
+
+        for (T t : list1) {
+            if(list2.contains(t)) {
+                list.add(t);
+            }
+        }
+
+        return list;
+    }
+
+    public static List<Doctor> getToptoShow(List<Doctor> list){
+        List<Doctor> samples = new ArrayList<Doctor>();
+        Collections.shuffle(list);
+        int counter =0;
+        while (counter<3 && counter<list.size()){
+            Doctor doc =list.get(counter);
+            doc.countDown();
+            if(doc.getTopShowedNum()==0){
+                doc.setAdvertised(false);
+            }
+            samples.add(doc);
+            counter++;
+        }
+        return samples;
+    }
+
 }
