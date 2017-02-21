@@ -5,16 +5,16 @@ package forms;
  */
 public class AdvertiseForm {
 
-private String advertiseModel;
+    private String adPlan;
 
     public AdvertiseForm(){
     }
 
-    public void setAdvertiseModel(String advertiseModel) {
-        this.advertiseModel = advertiseModel;
+    public void setAdPlan(String advertiseModel) {
+        this.adPlan = advertiseModel;
     }
 
-    public String getAdvertiseModel() {
-        return advertiseModel;
+    public String getAdPlan() {
+        return adPlan;
     }
 }

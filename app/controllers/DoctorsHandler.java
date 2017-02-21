@@ -4,13 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import dao.AppointmentDAOWrapper;
 import dao.AppointmentRequestDAOWrapper;
 import dao.DoctorDAOWrapper;
+import dao.IssueDAOWrapper;
 import forms.AcceptAppointmentForm;
 import forms.AdvertiseForm;
 import forms.DoctorInfoForm;
-import models.Appointment;
-import models.AppointmentRequest;
-import models.Doctor;
-import models.User;
+import models.*;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCursor;
 import play.data.Form;
@@ -188,7 +186,16 @@ public class DoctorsHandler extends Controller {
         if(User.isDoctor(getUsername())){
             Form<AdvertiseForm> form = Form.form(AdvertiseForm.class).bindFromRequest();
             AdvertiseForm advertiseForm = form.get();
-            DoctorDAOWrapper.getInstance().findByUsername(getUsername()).setTopShowedNum(advertiseForm);
+            Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(getUsername());
+            doctor.setTopShowedNum(advertiseForm);
+            DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+            Issue issue = new Issue();
+            issue.setCustormerUsername(getUsername());
+            issue.setSubject("Advertisement Request");
+            issue.setIssueReport("Advertisement Plan: "+advertiseForm.getAdPlan());
+            issue.setSolved(false);
+            issue.setIssueDate(new Date().toString());
+            IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
             return ok();
         }
         else

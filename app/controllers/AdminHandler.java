@@ -154,11 +154,17 @@ public class AdminHandler extends Controller {
     public static Result solveIssue(){
         if(admin != null &&
                 SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
-                Form<SolveForm> solveFormForm = Form.form(SolveForm.class).bindFromRequest();
-                SolveForm newSolveForm = solveFormForm.get();
-                Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
-                issue.setSolved(true);
-                issue.setIssueReport(newSolveForm.getIssueReport());
+            Form<SolveForm> solveFormForm = Form.form(SolveForm.class).bindFromRequest();
+            SolveForm newSolveForm = solveFormForm.get();
+            Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
+            issue.setSolved(true);
+            issue.setIssueReport(newSolveForm.getIssueReport());
+            IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
+            if(newSolveForm.getSubject() == "Advertisement Request"){
+                Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(issue.getCustormerUsername());
+                doctor.setAdvertised(true);
+                DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+            }
             return ok();
         }
         else return redirect(routes.UserRequest.loginController());

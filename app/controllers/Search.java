@@ -1,8 +1,10 @@
 package controllers;
 
 import dao.DoctorDAOWrapper;
+import dao.IssueDAOWrapper;
 import forms.SearchForm;
 import models.Doctor;
+import models.Issue;
 import models.User;
 import play.data.Form;
 import play.libs.Json;
@@ -90,9 +92,17 @@ public class Search extends Controller {
             doc.countDown();
             if(doc.getTopShowedNum()==0){
                 doc.setAdvertised(false);
+                Issue issue = new Issue();
+                issue.setIssueDate(new Date().toString());
+                issue.setCustormerUsername(doc.getUsername());
+                issue.setSolved(false);
+                issue.setSubject("Advertisement Finished");
+                issue.setIssueReport("Advertisement Reached Maximum click threshold");
+                IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
             }
             samples.add(doc);
             counter++;
+            DoctorDAOWrapper.getInstance().getDoctorDAO().save(doc);
         }
         return samples;
     }

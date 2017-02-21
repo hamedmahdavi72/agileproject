@@ -294,7 +294,11 @@ app.controller('advertise', function($scope, $http) {
     $scope.advertiseModel = $scope.ads[0];
 
     $scope.requestAdvertise = function () {
-            var adPlan = $scope.advertiseModel;
+            var adPlan = new Object();
+            adPlan.adPlan = $scope.advertiseModel;
+
+            // var string = "{ 'adPlan' : " + "'"+adPlan+"'}";
+            console.log(JSON.stringify(adPlan));
 
             $http({
                 url: '/sendAdRequest/',
