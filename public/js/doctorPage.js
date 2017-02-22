@@ -94,21 +94,25 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
 
     };
 
-    $scope.filterAppointments = function(hasFiltered, selectedYear,selectedMonth,selectedDay){
-        if (!hasFiltered)
-            $scope.filteredAcceptedAppointments = $scope.acceptedAppointments;
-        else{
-            var gregDateArray = convertDate.jalaliToGregorian(selectedYear, selectedMonth, selectedDay);
-            $scope.filteredAcceptedAppointments = [];
-            for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
-                if(gregDateArray[0] == $scope.acceptedAppointments[i].appointmentDate.getFullYear() &&
-                    gregDateArray[1] == ($scope.acceptedAppointments[i].appointmentDate.getMonth()+1) &&
-                    gregDateArray[2] == $scope.acceptedAppointments[i].appointmentDate.getDate() )
-                    $scope.filteredAcceptedAppointments.push($scope.acceptedAppointments[i]);
+    $scope.filterAppointments = function (filteredYear, filteredMonth,
+                                          filteredDay, selectedYear, selectedMonth, selectedDay) {
 
-            }
+        $scope.filteredAcceptedAppointments = [];
+
+        for (var i = 0; i < $scope.acceptedAppointments.length; i++) {
+            var appointmentJalaliDate = convertDate.gregorianToJalali($scope.acceptedAppointments[i]
+                    .appointmentDate.getFullYear(),
+                $scope.acceptedAppointments[i].appointmentDate.getMonth() + 1,
+                $scope.acceptedAppointments[i].appointmentDate.getDate());
+
+            if (((!filteredYear)||(selectedYear == appointmentJalaliDate[0])) &&
+                ((!filteredMonth)||(selectedMonth == appointmentJalaliDate[1])) &&
+                ((!filteredDay)||(selectedDay == appointmentJalaliDate[2])))
+                $scope.filteredAcceptedAppointments.push($scope.acceptedAppointments[i]);
 
         }
+
+
     };
 
 

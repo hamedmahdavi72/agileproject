@@ -92,6 +92,7 @@ public class DoctorsHandler extends Controller {
 
         if(User.isDoctor(getUsername())){
             try {
+                System.out.println(request().body().asJson());
                 AcceptAppointmentForm acceptAppointmentForm = Form.form(AcceptAppointmentForm.class)
                         .bindFromRequest().get();
 

@@ -6,17 +6,19 @@
 
     <div>
         <strong>سال</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredYear">
         <select ng-model="selectedYear"  ng-options="x for x in years"></select>
         <strong>ماه</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredMonth">
         <select ng-model="selectedMonth" ng-options="x for x in months"></select>
         <strong>روز</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredDay">
         <select ng-model="selectedDay" ng-options="x for x in days"></select>
     </div>
 
     <div style="margin: 0% 4%">
-        <strong>اعمال فیلتر</strong>
-        <input  type="checkbox" ng-model="hasFiltered">
-        <button style="margin: 0% 4%" class="btn btn-success" ng-click = "filterAppointments(hasFiltered,selectedYear,selectedMonth,selectedDay)">نمایش نوبت ها</button>
+        <button style="margin: 0% 4%" class="btn btn-success" ng-click = "filterAppointments(filteredYear, filteredMonth,
+         filteredDay,selectedYear,selectedMonth,selectedDay)">نمایش نوبت ها</button>
     </div>
 
 
