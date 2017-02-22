@@ -44,7 +44,7 @@ public class Search extends Controller {
     }
 
     public static List<SearchForm> searchAdvertise(Iterable<Doctor> doctors){
-            List<SearchForm> results = new ArrayList<>();
+        List<SearchForm> results = new ArrayList<>();
         List<Doctor> all = new ArrayList<>();
         for(Doctor doctor : doctors){
             all.add(doctor);
