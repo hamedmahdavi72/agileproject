@@ -83,7 +83,7 @@ public class Search extends Controller {
                 Issue issue = new Issue();
                 issue.setIssueDate(new Date().toString());
                 issue.setCustormerUsername(doc.getUsername());
-                issue.setSolved(false);
+                issue.setSolved(true);
                 issue.setSubject("Advertisement Finished");
                 issue.setIssueReport("Advertisement Reached Maximum click threshold");
                 IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
