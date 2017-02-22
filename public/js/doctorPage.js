@@ -33,7 +33,7 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
     $scope.loadAppointments = function () {
         $http.get("/doctor/appointmentRequests")
             .then(function (response) {
-                     // console.log(response.data);
+                     console.log(response.data);
                     $scope.appointments = response.data;
                     for(var i = 0 ; i < $scope.appointments.length; i++){
                         for(var j = 0; j < $scope.appointments[i].appointmentInterval.length; j++){
@@ -101,7 +101,6 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
             var gregDateArray = convertDate.jalaliToGregorian(selectedYear, selectedMonth, selectedDay);
             $scope.filteredAcceptedAppointments = [];
             for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
-                console.log($scope.acceptedAppointments[i].appointmentDate.getM)
                 if(gregDateArray[0] == $scope.acceptedAppointments[i].appointmentDate.getFullYear() &&
                     gregDateArray[1] == ($scope.acceptedAppointments[i].appointmentDate.getMonth()+1) &&
                     gregDateArray[2] == $scope.acceptedAppointments[i].appointmentDate.getDate() )

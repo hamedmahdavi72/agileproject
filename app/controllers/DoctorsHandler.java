@@ -87,6 +87,7 @@ public class DoctorsHandler extends Controller {
             return notFound();
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result acceptAppointmentRequest(){
 
         if(User.isDoctor(getUsername())){
