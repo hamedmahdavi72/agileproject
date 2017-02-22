@@ -12,6 +12,9 @@ import static org.junit.Assert.*;
 import play.Application;
 import play.test.Helpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static play.test.Helpers.fakeApplication;
 
 /**
@@ -43,7 +46,8 @@ public class DoctorDaoTest {
             searchForm.setFirstName("");
             searchForm.setLastName("mahdavi");
             searchForm.setSpeciality("ارتودنسی");
-
+            List<String> insuranceCompanies = new ArrayList<String>();
+            searchForm.setInsuranceCompanies(insuranceCompanies);
             searchForm.setAreaName("1");
 
     }

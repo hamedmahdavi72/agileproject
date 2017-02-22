@@ -52,6 +52,7 @@ app.controller('searchapp',function($scope,$http, $window){
     };
     $scope.uncheckAll = function() {
         $scope.user.roles = [];
+        insurances = [];
     };
     $scope.checkFirst = function() {
         $scope.user.roles.splice(0, $scope.user.roles.length);
@@ -98,8 +99,6 @@ app.controller('searchapp',function($scope,$http, $window){
 
         $scope.searchQuery.insuranceCompanies = insurances;
 
-        console.log($scope.searchQuery);
-
         if($scope.canSearch){
             $http({
                 url: '/search/',
@@ -113,6 +112,7 @@ app.controller('searchapp',function($scope,$http, $window){
                                 $scope.resulthide = false;
                                 $scope.noResultsHide = true;
                                 $scope.results = response.data.results;
+                                // $scope.advertisedResults = response.data.advertisedResults;
                             }
                         else {
                                 $scope.resulthide = true;

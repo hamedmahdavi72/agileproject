@@ -7,6 +7,7 @@ import models.AppointmentInterval;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Created by HamedMahdavi on 1/11/2017.
@@ -35,9 +36,11 @@ public class AppointmentRequestForm {
     }
 
     public ArrayList<AppointmentInterval> generateAppointmentIntervals(){
-        ArrayList<AppointmentInterval> result = new ArrayList<>();
-        intervals.forEach(interval -> result.add(interval.generateAppointmentInterval()));
-        return result;
+        return intervals
+                .stream()
+                .map(AppointmentIntervalForm::generateAppointmentInterval)
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 
 }

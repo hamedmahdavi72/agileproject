@@ -1,10 +1,13 @@
 package dao;
 
 import forms.SearchForm;
-import models.Customer;
+
 import models.Doctor;
 import org.jongo.MongoCursor;
+import play.api.libs.json.Json;
+import queryresult.AppointmentsData;
 
+import java.util.ArrayList;
 
 
 /**
@@ -14,9 +17,17 @@ public class DoctorDAOWrapper {
     private GenericDAO<Doctor> doctorDAO = null;
     private static DoctorDAOWrapper instance = new DoctorDAOWrapper();
     private final String SEARCH_DOCTORS_QUERY = "{$and:[{firstName : {$regex : #}},{lastName : {$regex : #}}," +
-            "{speciality : {$regex : #}}," +
+            "{speciality : {$regex : #}},"+
             "{geoLocation :{ $near :{ $geometry :{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}}," +
             "{accepted: true}]}";
+
+    private final String SEARCH_DOCTORS_QUERY2 = "{$and:[{firstName : {$regex : #}},{lastName : {$regex : #}}," +
+            "{speciality : {$regex : #}}," + "{supportedInsuranceCompanies: {$in : #}}," +
+            "{geoLocation :{ $near :{ $geometry :{type : \"Point\" ,coordinates : [#,#] },$maxDistance :#}}}," +
+            "{accepted: true}]}";
+
+
+
 
     private final double MAX_DISTANCE = 3700;
 
@@ -56,12 +67,29 @@ public class DoctorDAOWrapper {
     }
 
 
+    public MongoCursor<Doctor> findByAdvertise(boolean value){
+        MongoCursor<Doctor> doctors = doctorDAO.findByFieldName("isAdvertised",value);
+        return doctors;
+    }
+
+
+
+
+
 
     public MongoCursor<Doctor> search(SearchForm searchForm) {
-        return doctorDAO.getCollection().find(SEARCH_DOCTORS_QUERY,
-                searchForm.getFirstName(),searchForm.getLastName(),searchForm.getSpeciality(),
-                searchForm.findLatitude(),searchForm.findLongitude(),MAX_DISTANCE
-                ).as(Doctor.class);
+        if(searchForm.getInsuranceCompanies().size() == 0){
+            return doctorDAO.getCollection().find(SEARCH_DOCTORS_QUERY,
+                    searchForm.getFirstName(),searchForm.getLastName(),searchForm.getSpeciality(),
+                    searchForm.findLatitude(),searchForm.findLongitude(),MAX_DISTANCE
+            ).as(Doctor.class);
+        }
+        else{
+            return doctorDAO.getCollection().find(SEARCH_DOCTORS_QUERY2,
+                    searchForm.getFirstName(),searchForm.getLastName(),searchForm.getSpeciality(), searchForm.getInsuranceCompanies(),
+                    searchForm.findLatitude(),searchForm.findLongitude(),MAX_DISTANCE
+            ).as(Doctor.class);
+        }
     }
 
 }

@@ -80,6 +80,30 @@ POST    /doctor/acceptAppointmentRequest/    controllers.DoctorsHandler.acceptAp
 
 GET     /doctor/getDoctorAppointments      controllers.DoctorsHandler.getDoctorAppointments()
 
-GET     /patients                           controllers.DoctorsHandler.getPatients()
+GET     /patients                          controllers.DoctorsHandler.getPatients()
 
-GET     /doctorPatients                     controllers.DoctorsHandler.doctorPatients()
+GET     /doctorPatients      controllers.DoctorsHandler.doctorPatients()
+
+GET     /customer/appointments controllers.CustomerDashboardHandler.getUserAppoinments()
+
+GET     /customerInfo               controllers.CustomerDashboardHandler.customerInfo()
+
+GET     /customerAppointments       controllers.CustomerDashboardHandler.customerAppointmentsTemplate()
+
+POST    /issueReport/               controllers.UserRequest.getIssues()
+
+GET    /issues              controllers.UserRequest.issuesTemplate()
+
+GET     /getIssues          controllers.AdminHandler.getIssues()
+
+GET    /getIssuesId         controllers.AdminHandler.getIssuesId()
+
+POST    /solveIssue/         controllers.AdminHandler.solveIssue()
+
+GET     /messages           controllers.UserRequest.messagesTemplate()
+
+GET     /getMessages        controllers.UserRequest.getMessages()
+
+GET     /advertise          controllers.DoctorsHandler.advertiseTemplate()
+
+POST   /sendAdRequest/      controllers.DoctorsHandler.getAdvertise()

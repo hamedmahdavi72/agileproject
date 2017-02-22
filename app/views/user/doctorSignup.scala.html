@@ -44,45 +44,45 @@
     <form class="form-area span10 farsi">
         <div class="form-group">
             <label><strong style="color: red"> * </strong> <strong style="font-size: large;">نام و نام خانوادگی</strong></label>
-            <input ng-model="lastName" class="farsi" required placeholder="نام [فاصله] نام خانوادگی." type="text" class="form-control" id="lastName">
+            <input ng-model="lastName" class="farsi" required placeholder="نام [فاصله] نام خانوادگی." type="text" class="form-control" _id="lastName">
             <p ng-model="firstnameError" ng-Hide="hideErrorFirstName" style="color: red">{{ErrorvalueFirstName}}</p>
             <p ng-model="lastnameError" ng-Hide="hideErrorLastName" style="color: red">{{ErrorvalueLastName}}</p>
         </div>
 
         <div class="form-group">
             <label for="pwd"><span style="color: red"> * </span><strong style="font-size: large;">رمز عبور</strong></label>
-            <input ng-model="password" class="farsi" required placeholder="رمز عبور با بیش از 6 کاراکتر وارد کنید." type="password" class="form-control" id="pwd">
+            <input ng-model="password" class="farsi" required placeholder="رمز عبور با بیش از 6 کاراکتر وارد کنید." type="password" class="form-control" _id="pwd">
             <p ng-model="passwordError" ng-Hide="hideErrorPassword" style="color: red">{{ErrorvaluePassword}}</p>
         </div>
         <div class="form-group">
             <label ><strong style="font-size: large;">شماره موبایل</strong></label>
-            <input ng-model="mobileNumber" class="farsi" placeholder="09xxxxxxxxx" type="text" class="form-control" id="mobileNumber">
+            <input ng-model="mobileNumber" class="farsi" placeholder="09xxxxxxxxx" type="text" class="form-control" _id="mobileNumber">
         </div>
         <div class="form-group">
             <label ><span style="color: red"> * </span><strong style="font-size: large;">پست الکترونیکی</strong></label>
-            <input ng-model="email" class="farsi" required placeholder="example[at]example.com" type="text" class="form-control" id="email">
+            <input ng-model="email" class="farsi" required placeholder="example[at]example.com" type="text" class="form-control" _id="email">
             <p ng-model="emailError" ng-Hide="hideErrorEmail" style="color: red">{{ErrorvalueEmail}}</p>
         </div>
         <div class="form-group">
             <label ><span style="color: red"> * </span><strong style="font-size: large;">شماره‌ی نظام پزشکی</strong></label>
-            <input ng-model="medicalOrgId" class="farsi" required placeholder="شماره‌ی نظام پزشکی خود را وارد کنید." type="text" class="form-control" id="medicalOrgId">
+            <input ng-model="medicalOrgId" class="farsi" required placeholder="شماره‌ی نظام پزشکی خود را وارد کنید." type="text" class="form-control" _id="medicalOrgId">
             <p ng-model="medicalOrgIdError" ng-Hide="hideErrorMedicalOrgId" style="color: red">{{ErrorvalueMedicalOrgId}}</p>
         </div>
         <div class="form-group">
             <label ><span style="color: red"> * </span><strong style="font-size: large;">تخصص</strong></label>
-            <input ng-model="speciality" class="farsi" required placeholder="تخصص خود را وارد کنید." type="text" class="form-control" id="speciality">
+            <input ng-model="speciality" class="farsi" required placeholder="تخصص خود را وارد کنید." type="text" class="form-control" _id="speciality">
             <p ng-model="specialityError" ng-Hide="hideErrorSpeciality" style="color: red">{{ErrorvalueSpeciality}}</p>
         </div>
 
         <div class="form-group">
             <label><span style="color: red"> * </span><strong style="font-size: large;">آدرس مطب</strong></label>
-            <input ng-model="clinicAddress" class="farsi" required placeholder="آدرس مطب خود را وارد کنید." type="text" class="form-control" id="clinicAddress">
+            <input ng-model="clinicAddress" class="farsi" required placeholder="آدرس مطب خود را وارد کنید." type="text" class="form-control" _id="clinicAddress">
             <p ng-model="clinicAddressError" ng-Hide="hideErrorClinicAddress" style="color: red">{{ErrorvalueClinicAddress}}</p>
         </div>
 
         <div class="form-group">
             <label><span style="color: red"> * </span><strong style="font-size: large;">شماره تلفن مطب</strong></label>
-            <input ng-model="clinicPhoneNumber" class="farsi" required placeholder="شماره تلفن مطب خود را وارد کنید." type="text" class="form-control" id="clinicPhoneNumber">
+            <input ng-model="clinicPhoneNumber" class="farsi" required placeholder="شماره تلفن مطب خود را وارد کنید." type="text" class="form-control" _id="clinicPhoneNumber">
             <p ng-model="clinicPhoneNumberError" ng-Hide="hideErrorClinicPhoneNumber" style="color: red">{{ErrorvalueClinicPhoneNumber}}</p>
         </div>
 

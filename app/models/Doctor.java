@@ -1,6 +1,8 @@
 package models;
 
+import forms.AdvertiseForm;
 import forms.DoctorSignUpForm;
+import org.bson.codecs.IntegerCodec;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class Doctor extends User {
     private MongoLocation geoLocation;
     private String medicalOrgId;
     private String clinicInfo;
+    private boolean isAdvertised = false;
+    private int topShowedNum;
 
     public Doctor(){
 
@@ -38,6 +42,8 @@ public class Doctor extends User {
         this.setUsername(this.email);
         this.accepted = false;
         geoLocation = new MongoLocation();
+        this.isAdvertised = false;
+        this.topShowedNum = 0;
     }
 
     public String getClinicAddress() {
@@ -114,5 +120,30 @@ public class Doctor extends User {
 
     public String getClinicInfo() {
         return clinicInfo;
+    }
+
+    public void setAdvertised(boolean advertised) {
+        isAdvertised = advertised;
+    }
+
+    public boolean isAdvertised() {
+        return isAdvertised;
+    }
+
+    public int getTopShowedNum() {
+        return topShowedNum;
+    }
+
+    public void setTopShowedNum(int topShowedNum) {
+        this.topShowedNum = topShowedNum;
+    }
+
+    public void setTopShowedNum(AdvertiseForm advertiseForm){
+        this.topShowedNum = this.getTopShowedNum() + Integer.parseInt(advertiseForm.getAdPlan().substring(0,2))*1000;
+    }
+
+    public void countDown(){
+        if(getTopShowedNum() > 0)
+            setTopShowedNum(getTopShowedNum()-1);
     }
 }

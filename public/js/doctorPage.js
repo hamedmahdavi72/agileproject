@@ -25,10 +25,15 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
     $scope.appointments = [];
     $scope.acceptedAppointments = [];
 
+    $scope.hasFiltered = false;
+    $scope.selectedDay = $scope.days[0];
+    $scope.selectedMonth = $scope.months[0];
+    $scope.selectedYear = $scope.years[0];
+
     $scope.loadAppointments = function () {
         $http.get("/doctor/appointmentRequests")
             .then(function (response) {
-                     // console.log(response.data);
+                     console.log(response.data);
                     $scope.appointments = response.data;
                     for(var i = 0 ; i < $scope.appointments.length; i++){
                         for(var j = 0; j < $scope.appointments[i].appointmentInterval.length; j++){
@@ -56,16 +61,19 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
                 $scope.acceptedAppointments = response.data;
 
                 for(var i = 0 ; i < $scope.acceptedAppointments.length; i++){
-                    tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
-                    // console.log(tempDate);
-                    intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
+                    var tempDate = new Date($scope.acceptedAppointments[i].appointmentDate);
+                    $scope.acceptedAppointments[i].appointmentDate = tempDate;
+                    var intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
                         tempDate.getMonth()+1,tempDate.getDate(), tempDate.getHours());
-                    $scope.acceptedAppointments[i].appointmentDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
+                    $scope.acceptedAppointments[i].appointmentJalaliDate = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
                         "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
                     // console.log(new Date(2017, 0, 1, 7, 0, 0, 0));
                 }
 
+                $scope.filterAppointments(false,0,0,0);
+
             });
+
     };
 
     $scope.sendAppointment = function(index,selectedYear,selectedMonth,selectedDay,selectedTime){
@@ -86,6 +94,29 @@ app.controller('panel',function ($scope, $http, $filter,convertDate) {
 
     };
 
+    $scope.filterAppointments = function (filteredYear, filteredMonth,
+                                          filteredDay, selectedYear, selectedMonth, selectedDay) {
+
+        $scope.filteredAcceptedAppointments = [];
+
+        for (var i = 0; i < $scope.acceptedAppointments.length; i++) {
+            var appointmentJalaliDate = convertDate.gregorianToJalali($scope.acceptedAppointments[i]
+                    .appointmentDate.getFullYear(),
+                $scope.acceptedAppointments[i].appointmentDate.getMonth() + 1,
+                $scope.acceptedAppointments[i].appointmentDate.getDate());
+
+            if (((!filteredYear)||(selectedYear == appointmentJalaliDate[0])) &&
+                ((!filteredMonth)||(selectedMonth == appointmentJalaliDate[1])) &&
+                ((!filteredDay)||(selectedDay == appointmentJalaliDate[2])))
+                $scope.filteredAcceptedAppointments.push($scope.acceptedAppointments[i]);
+
+        }
+
+
+    };
+
+
+
     $scope.loadAcceptedAppointments();
     $scope.loadAppointments();
 });
@@ -101,7 +132,7 @@ app.controller('edit',function ($scope, $http, $window) {
                 $scope.firstNameValue = $scope.slist.firstName;
                 $scope.lastNameValue = $scope.slist.lastName;
                 $scope.mobileNumberValue = $scope.slist.mobileNumber;
-                console.log($scope.slist);
+                // console.log($scope.slist);
                 user_lastname = $scope.slist.lastName;
             }
         );
@@ -112,7 +143,7 @@ app.controller('edit',function ($scope, $http, $window) {
         .then(function (response) {$scope.list = response.data;
             insuranceCompanies = $scope.list.supportedInsuranceCompanies;
             $scope.insuranceCompanies = insuranceCompanies;
-            console.log(insuranceCompanies[0]);
+            // console.log(insuranceCompanies);
 
                 for (var i = 0 ; i < 4 ; i++){
                     if(insuranceCompanies[i] == '"پارسیان"'){
@@ -142,7 +173,7 @@ app.controller('edit',function ($scope, $http, $window) {
         $scope.user.firstName = $scope.firstName;
         $scope.user.lastName = $scope.lastName;
 
-        console.log($scope.user);
+        // console.log($scope.user);
 
 
         $scope.hideErrorPassword = true;
@@ -191,18 +222,103 @@ app.controller('callDoc', function($scope, $http) {
     $http.get("/getUser")
         .then(function (response) {$scope.slist = response.data;
                 user_lastname = $scope.slist.lastName;
-                console.log(user_lastname);
+                // console.log(user_lastname);
                 $scope.lastName = user_lastname;
             }
         );
 });
 
-app.controller('patients', function($scope, $http) {
-    $http.get("/doctorPatients")
-        .then(function (response) {$scope.patients = response.data;
+app.controller('customerMessages', function($scope, $http) {
+    $http.get("/getMessages")
+        .then(function (response) {$scope.messages = response.data;
             }
         );
 });
+
+app.controller('patients', function($scope, $http, convertDate) {
+
+    var temp_patients = [];
+    $http.get("/doctorPatients")
+        .then(function (response) {temp_patients = response.data;
+            for(var i = 0 ; i < temp_patients.length ; i++){
+                    for(var j = 0 ; j < temp_patients[i].appointmentsDate.length; j++){
+                        tempDate = new Date(temp_patients[i].appointmentsDate[j]);
+                        intervalJalaliDate = convertDate.gregorianToJalali(tempDate.getFullYear(),
+                            tempDate.getMonth()+1,tempDate.getDate());
+                        temp_patients[i].appointmentsDate[j] = intervalJalaliDate[0]+"/"+intervalJalaliDate[1]+
+                            "/"+intervalJalaliDate[2]+" --- زمان: "+tempDate.getHours()+":"+tempDate.getMinutes();
+                    }
+                }
+                $scope.patients = temp_patients;
+        }
+        );
+});
+
+app.controller('issueController', function($scope, $http, convertDate) {
+    $scope.subjects = ["ورود و خروج به حساب کاربری", "دیگر", "ملاقات های تایید شده", "رزرو وقت"];
+    $scope.response = false;
+
+    $scope.reportIssue = function () {
+
+        $scope.response = false;
+
+        var issue = new Object();
+
+        issue.issueReport = $scope.issueDesc;
+        issue.subject = $scope.issueSubject;
+        issue.issueDate = new Date();
+        var persianDate = convertDate.gregorianToJalali(issue.issueDate.getFullYear(),
+            issue.issueDate.getMonth()+1,issue.issueDate.getDate());
+        issue.issueDate = persianDate[0]+"/"+persianDate[1]+
+            "/"+persianDate[2]+" --- زمان: "+issue.issueDate.getHours()+":"+issue.issueDate.getMinutes();
+
+        var jsonObjectIssue = JSON.stringify(issue);
+
+        $http({
+            url: '/issueReport/',
+            method: "POST",
+            data: jsonObjectIssue
+        })
+            .then(function (response) {
+                    //console.log(response.data);
+                    if (response.data != null) {
+                        $scope.response = true;
+                    }
+                },
+                function (response) { // optional
+                    // failed
+                });
+    }
+});
+
+
+app.controller('advertise', function($scope, $http) {
+    $scope.ads =["10هزار تا کلیک - یک میلیون تومان", "30هزار کلیک - 3 میلیون تومان", "50هزار کلیک - 5 میلیون تومان"];
+    $scope.advertiseModel = $scope.ads[0];
+
+    $scope.requestAdvertise = function () {
+            var adPlan = new Object();
+            adPlan.adPlan = $scope.advertiseModel;
+
+            // var string = "{ 'adPlan' : " + "'"+adPlan+"'}";
+            console.log(JSON.stringify(adPlan));
+
+            $http({
+                url: '/sendAdRequest/',
+                method: "POST",
+                data: JSON.stringify(adPlan)
+            })
+                .then(function (response) {
+                        //console.log(response.data);
+                        if (response.data != null) {
+                        }
+                    },
+                    function (response) { // optional
+                        // failed
+                    });
+        }
+});
+
 
 app.controller('DemoCtrl', function($scope, $http) {
     $scope.roles = [
@@ -235,7 +351,7 @@ app.controller('DemoCtrl', function($scope, $http) {
         for(var i = 0 ; i < $scope.user.roles.length; i++){
             insurances.push($scope.roles[$scope.user.roles[i]-1].text);
         }
-        console.log(insurances);
+        // console.log(insurances);
 
         $http({
             url: '/saveInsurance/',
@@ -273,7 +389,19 @@ app.config(function($routeProvider) {
             templateUrl : "/acceptedAppointmentRequest"
         })
         .when("/patients", {
-        restrict : 'A',
-        templateUrl : "/patients"
-    });
+            restrict : 'A',
+            templateUrl : "/patients"
+        })
+        .when("/issues", {
+            restrict : 'A',
+            templateUrl : "/issues"
+        })
+        .when("/messages", {
+            restrict : 'A',
+            templateUrl : "/messages"
+        })
+        .when("/advertise", {
+            restrict : 'A',
+            templateUrl : "/advertise"
+        });
 });

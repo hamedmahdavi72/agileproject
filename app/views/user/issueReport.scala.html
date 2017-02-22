@@ -1,0 +1,28 @@
+<br>
+<br>
+<br>
+
+<h2>
+گزارش مشکلات
+</h2>
+
+<hr>
+<div ng-controller="issueController" style="margin-top: 2%; background: whitesmoke;margin-left: 0.5%">
+  <div style="right:5%; position: relative">
+      <div>
+           <label><strong>موضوع</strong></label>
+          <select ng-options="subject for subject in subjects" ng-model="issueSubject"></select>
+      </div>
+      <div>
+          <label><strong>توضیحات</strong></label>
+          <textarea ng-model="issueDesc" rows="10" maxlength="140">
+          </textarea>
+      </div>
+      <div>
+          <button class="btn btn-success" ng-click="reportIssue()">ارسال</button>
+      </div>
+      <div>
+          <p ng-show="response"><strong style="color: green">گزارش مشکل با موفقیت ارسال گردید.</strong></p>
+      </div>
+  </div>
+</div>

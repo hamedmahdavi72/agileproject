@@ -2,15 +2,36 @@
     ملاقات های تایید شده
 </h2>
 
+<div>
+
+    <div>
+        <strong>سال</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredYear">
+        <select ng-model="selectedYear"  ng-options="x for x in years"></select>
+        <strong>ماه</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredMonth">
+        <select ng-model="selectedMonth" ng-options="x for x in months"></select>
+        <strong>روز</strong>
+        <input  style="margin: 0% 4%" type="checkbox" ng-model="filteredDay">
+        <select ng-model="selectedDay" ng-options="x for x in days"></select>
+    </div>
+
+    <div style="margin: 0% 4%">
+        <button style="margin: 0% 4%" class="btn btn-success" ng-click = "filterAppointments(filteredYear, filteredMonth,
+         filteredDay,selectedYear,selectedMonth,selectedDay)">نمایش نوبت ها</button>
+    </div>
+
+
+</div>
 
 <hr>
-<div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="x in acceptedAppointments">
+<div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto; display: inline-block; border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="x in filteredAcceptedAppointments | orderBy : '+appointmentDate'">
     <div style="position: relative; right: 37%">
         <label><strong>نام کاربری بیمار</strong></label>
         {{x.customerUsername}}
     </div>
     <div style="position: relative; right: 37%">
         <label><strong>روز و ساعت و تاریخ وقت</strong></label>
-        {{x.appointmentDate}}
+        {{x.appointmentJalaliDate}}
     </div>
 </div>

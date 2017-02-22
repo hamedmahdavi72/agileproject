@@ -3,6 +3,9 @@ package forms;
 import config.Areas;
 import models.MongoLocation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by ARYA on 12/23/2016.
  */
@@ -20,6 +23,7 @@ public class SearchForm {
 
     private String clinicAddress;
 
+    private List<String> insuranceCompanies;
     public SearchForm(){
 
     }
@@ -90,6 +94,9 @@ public class SearchForm {
             this.lastName = "";
         if(firstName == null)
             this.firstName = "";
+        if(insuranceCompanies == null){
+            insuranceCompanies = new ArrayList<>();
+        }
 
     }
 
@@ -107,5 +114,15 @@ public class SearchForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<String> getInsuranceCompanies() {
+        return insuranceCompanies;
+    }
+
+    public void setInsuranceCompanies(List<String> supportedInsuranceCompanies) {
+        if(supportedInsuranceCompanies.size() > 0)
+            this.insuranceCompanies = supportedInsuranceCompanies;
+        else this.insuranceCompanies = new ArrayList<>();
     }
 }

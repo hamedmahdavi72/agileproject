@@ -52,6 +52,10 @@ public class GenericDAO<T extends JongoModel> {
         return getCollection().find("{#: #}",fieldName, fieldValue).as(type);
     }
 
+    public MongoCursor<T> findAll(){
+        return getCollection().find().as(type);
+    }
+
     private String getTypeName() {
         return type.getName();
     }
