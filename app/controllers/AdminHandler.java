@@ -4,9 +4,16 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import dao.AdminDAOWrapper;
 import dao.DoctorDAOWrapper;
+import dao.IssueDAOWrapper;
+import forms.IssueForm;
+import forms.SolveForm;
 import forms.UserForm;
 import models.Admin;
 import models.Doctor;
+import models.Issue;
+import org.bson.types.ObjectId;
+import org.hamcrest.core.Is;
+import org.jongo.MongoCursor;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.data.Form;
@@ -15,7 +22,9 @@ import play.mvc.Security;
 import play.twirl.api.Content;
 
 import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -115,4 +124,53 @@ public class AdminHandler extends Controller {
         }
         else return redirect(routes.UserRequest.loginController());
     }
+
+
+    @Security.Authenticated(Secured.class)
+    public static Result getIssues(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findBySolved(false);
+            return ok(Json.toJson(issues));
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result getIssuesId(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            MongoCursor<Issue> issues = IssueDAOWrapper.getInstance().findBySolved(false);
+            List<String> ids = new ArrayList<>();
+            for(Issue issue : issues){
+               ids.add(issue.getId().toString());
+            }
+            return ok(Json.toJson(ids));
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result solveIssue(){
+        if(admin != null &&
+                SessionIdPool.getUsername(session().get("sessionId")).equals(admin.getUsername())) {
+            Form<SolveForm> solveFormForm = Form.form(SolveForm.class).bindFromRequest();
+            SolveForm newSolveForm = solveFormForm.get();
+            Issue issue = IssueDAOWrapper.getInstance().findById(new ObjectId(newSolveForm.getObjectId()));
+            issue.setSolved(true);
+            issue.setIssueReport(newSolveForm.getIssueReport());
+            IssueDAOWrapper.getInstance().getIssueDAO().save(issue);
+            if(newSolveForm.getSubject().equalsIgnoreCase("Advertisement Request")){
+                Doctor doctor = DoctorDAOWrapper.getInstance().findByUsername(issue.getCustormerUsername());
+                doctor.setAdvertised(true);
+                DoctorDAOWrapper.getInstance().getDoctorDAO().save(doctor);
+            }
+            return ok();
+        }
+        else return redirect(routes.UserRequest.loginController());
+    }
+
+    
+
+
 }

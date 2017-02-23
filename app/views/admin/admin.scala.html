@@ -11,6 +11,7 @@
     <script src="assets/javascripts/jquery-1.9.0.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="@routes.Assets.at("javascripts/angular.min.js")" type="text/javascript"></script>
+    <script src="/assets/js/dateConvertor.js" type="text/javascript"></script>
     <script src="@routes.Assets.at("js/admin.js")" type="text/javascript"></script>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
@@ -80,7 +81,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">پزشکان تائید نشده</a></li>
                 <li><a href="#tab2" data-toggle="tab">پزشکان حاضر در سامانه</a></li>
-                <li><a href="#tab3" data-toggle="tab">پزشکان حاضر در سامانه تبلیغاتی</a></li>
+                <li><a href="#tab3" data-toggle="tab">مشکلات گزارش شده</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab1">
@@ -112,6 +113,22 @@
                             <td>{{x.email}}</td>
                             <td>{{x.speciality}}</td>
                             <td><button ng-click="rejectDoctor(x.email)" class="btn-danger">reject</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="tab3">
+                    <table  class="table table-hover">
+                        <tr>
+                            <th>نام کاربری</th>
+                            <th>موضوع</th>
+                            <th>توضحیات</th>
+                            <th style="align-content: center">عملیات</th>
+                        </tr>
+                        <tr ng-repeat="x in issues">
+                            <td>{{x.custormerUsername}}</td>
+                            <td>{{x.subject}}</td>
+                            <td>{{x.issueReport}}</td>
+                            <td><textarea ng-model="x._id"></textarea><button ng-click="solve(x.custormerUsername, x._id, x.subject, $index)" class="btn-primary">solve</button></td>
                         </tr>
                     </table>
                 </div>

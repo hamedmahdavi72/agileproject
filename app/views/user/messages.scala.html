@@ -1,0 +1,16 @@
+<div style="top: 10%; position: absolute; margin-right: 5%">
+    <h3>پیام های شما</h3>
+    <hr>
+  <div ng-controller="customerMessages" style="display: inline-block;">
+    <div style="margin-top: 2%; margin-right:20%; width: 300px; height: auto;border: 1px solid black; background: whitesmoke;margin-left: 0.5%" ng-repeat="message in messages">
+      <div style="position: relative; margin-right: 2%">
+        <label><strong>موضوع</strong></label>
+        <h4>{{message.subject}}</h4>
+      </div>
+      <div style="position: relative;margin-right: 2%">
+        <label><strong>توضیحات</strong></label>
+        <h4 style="overflow: auto;">{{message.issueReport}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
